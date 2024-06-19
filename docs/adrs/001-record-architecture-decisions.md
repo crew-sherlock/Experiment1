@@ -1,4 +1,4 @@
-# 1. Sample Record architecture decisions
+# 1. Record architecture decisions
 
 Date: 2024-06-19
 
