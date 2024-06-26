@@ -6,6 +6,13 @@ Thank you for your interest in contributing to the AI Generation Accelerator (AI
 
 To contribute to the AIGA, please follow the steps below:
 
+1. Install the following pre-requisites:
+
+    - [Python 3.9-3.11](https://www.python.org/downloads/)
+    - [Node.js](https://nodejs.org/en/download/)
+    - [pre-commit](https://pre-commit.com/#install)
+    - [Git](https://git-scm.com/downloads)
+
 1. Clone the repository
 
     ```bash

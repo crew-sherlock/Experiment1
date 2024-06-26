@@ -18,4 +18,3 @@ This will allow for better management of the container images used across the se
 ## Consequences
 
 A single Azure Container Registry is provisioned with AIGA reference architecture, and configuration is updated to use it for the Azure Machine Learning workspaces in all stages (Dev, UAT, Prod) and all the other AIGA services that are using containers.
-

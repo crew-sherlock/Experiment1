@@ -51,7 +51,7 @@ A clone of the *AIGA Template* repository, with project-specific configuration, 
 | Term | Definition |
 | ---- | --- |
 | Agents | A software entity used to augment, or orchestrate, the capabilities of an Large Language Model (LLM) to perform a complex task. |
-| [DAG Flow](https://microsoft.github.io/promptflow/concepts/concept-flows.html#dag-flow) | A Directed Acyclic Graph (DAG) of function calls, expressed in YAML. These functions, or "tools", are connected via input/output dependencies and executed based on the topology.
+| [DAG Flow](https://microsoft.github.io/promptflow/concepts/concept-flows.html#dag-flow) | A Directed Acyclic Graph (DAG) of function calls, expressed in YAML. These functions, or "tools", are connected via input/output dependencies and executed based on the topology. |
 | Ground Truth | Well-established answers or knowledge document chunks in a dataset corresponding to a known input. |
 | [RAG](https://learn.microsoft.com/en-us/azure/search/retrieval-augmented-generation-overview) | An architecture that augments the capabilities of a Large Language Model (LLM) by adding an information retrieval system that provides grounding data. |
 | [Skills](https://learn.microsoft.com/en-us/azure/search/cognitive-search-predefined-skills) | A concept of Azure AI Search. An atomic operation that transforms content, recognizes or extracts text, or reshapes a previous enrichment. It could be built-in, custom, or a utility. |
