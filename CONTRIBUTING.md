@@ -20,10 +20,16 @@ To contribute to the AIGA, please follow the steps below:
     cd AIGA
     ```
 
-1. Enable `pre-commit` hooks
+1. Install [poetry](https://python-poetry.org/). For example
 
     ```bash
-    pre-commit install
+    pip install poetry
+    ```
+
+1. Setup dev environment
+
+    ```bash
+    make setup
     ```
 
 1. Create a new branch

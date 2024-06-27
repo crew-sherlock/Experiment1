@@ -1,0 +1,22 @@
+site_name: AIGA Template
+site_description: A documentation site for the AIGA Template
+
+theme:
+  name: material
+  features:
+    - navigation.instant
+    - content.tabs.link
+    - content.code.copy
+  
+nav:
+  - Home: 'README.md'
+  - Architecture:
+    - Reference Architecture: 'design/aiga-infrastructure.md'
+    - Decision Log: Decision-Log.md
+
+copyright: "&copy; GSK"
+
+extra:
+  social:
+    - icon: fontawesome/brands/github
+      link: https://github.com/gsk-tech

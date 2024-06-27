@@ -1,0 +1,10 @@
+services:
+  docs:
+    image: squidfunk/mkdocs-material
+    ports:
+      - "8090:8000"
+    volumes:
+      - ../:/docs
+    command: ["serve", "-a", "0.0.0.0:8000"]
+    profiles:
+      - docs
