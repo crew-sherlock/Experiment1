@@ -12,11 +12,11 @@ The AI Generation Accelerator (AIGA) will comprise a collection of artefacts, pr
 
 ## AIGA Components
 
-## Reference Architecture
+## AIGA Reference Architecture
 
 A high-level repeatable blueprint for building the infrastructure of a Generative AI applications. The architecture and components described will be pre-approved as an *Architecture Pattern* within GSC (Global Supply Chain) to expedite ARB approval for new projects.
 
-## Template
+## AIGA Template
 
 A Git repository template designed to bootstrap and facilitate building, evaluating, and deploying Generative AI capabilities - with a particular focus on Retrieval Augmented Generation (RAG) pattern.
 
@@ -24,25 +24,25 @@ A Git repository template designed to bootstrap and facilitate building, evaluat
 - The template will contain executable [flows](https://microsoft.github.io/promptflow/concepts/concept-flows.html), [tools](https://microsoft.github.io/promptflow/concepts/concept-tools.html), [skills](https://learn.microsoft.com/en-us/azure/search/cognitive-search-predefined-skills), and configuration.
 - The template will contain documentation artefacts:
   - **Contribution Guides** *(CONTRIBUTING.md)* - To support the contribution of code, documentation, and other artefacts to the **template**.
-  - **Getting Started Guides** - To support the project team get up and running with their *AIGA Instance*.
+  - **Getting Started Guides** - To support the project team get up and running with their *AIGA Project*.
   - **Project Documentation** - To support the project lifecycle, along with artefacts to expedite ARB approval and infrastructure requests.
 - The template will include [workspace settings](https://code.visualstudio.com/docs/getstarted/settings#_workspace-settings) for VSCode, support for [Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers), and [pipelines](https://learn.microsoft.com/en-us/azure/devops/pipelines/get-started/what-is-azure-pipelines) for CI/CD.
 
 The template structure is defined in [ADR-002](./adrs/002-code-repository-structure.md).
 
-### Starter
+### AIGA Starter
 
-A tool, or collection of processes, that will capture key project information and orchestrate the creation of an *AIGA Instance*, based on an *AIGA Template*.
+A tool, or collection of processes, that will capture key project information and orchestrate the creation of an *AIGA Project*, based on an *AIGA Template*.
 
-### AIGA Instance
+### AIGA Project
 
-A project-specific instance created by the *AIGA Starter*. An *AIGA Instance* is scoped to a project, and has a one-to-one relationship with a *CIID*. It encapsulates any necessary infrastructure and a project-owned repository.
+A project-specific instance created by the *AIGA Starter*. An *AIGA Project* is scoped to a project and has a one-to-one relationship with a *CIID*. It encapsulates a project-owned repository, along with the necessary code, automation, and documentation to support the project. Once created the *AIGA Project* will be owned by the product team.
 
-#### AIGA Infrastructure
+#### Environments
 
 One, or more, deployed environments containing the infrastructure required to support the application - as described in the *AIGA Reference Architecture*.
 
-#### Instance Repository
+#### Project Repository
 
 A clone of the *AIGA Template* repository, with project-specific configuration, code, and documentation. This repository will be owned by the project team.
 
