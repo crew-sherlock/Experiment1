@@ -1,6 +1,7 @@
 # Decision Log
 
-This document is used to track key decisions that are made during the course of the project. This can be used at a later stage to understand why decisions were made and by whom.
+This document is used to track key decisions that are made during the course of the project. This can be used at a later
+stage to understand why decisions were made and by whom.
 
 | **Decision**             | **Date**    | **Alternatives Considered** | **Reasoning** | **Detailed doc**                                                             | **Made By** | **Work Required** |
 |--------------------------|-------------|-----------------------------|---------------|------------------------------------------------------------------------------|-------------|------------------|
@@ -10,3 +11,4 @@ This document is used to track key decisions that are made during the course of 
 | Use single Azure Container Registry for all AIGA services across environments | 20-Jun-2024 | Use the default AML container registry | Easier to manage access and cost | [Use and provision Azure Container Registry](./adrs/004-use-and-provision-azure-container-registry.md) | Avishay Balter | NA |
 | An Azure Machine Learning workspace per AIGA environment | 21-Jun-2024 | Single Azure Machine Learning workspace for all AIGA environments in an instance, A single AML instance for all AIGA instances | Based on Microsoft LLMOps best practices. | [An Azure Machine Learning workspace per AIGA environment](./adrs/005-single-aml-per-environment.md) | Avishay Balter | NA |
 | AIGA Starter will be implemented using GitHub Actions workflows | 25-Jun-2024 | Manual, standalone, GitOps, GitHub Actions, and Application Orchestration | Ability to leverage integration with GitHub and workflow features such as approvals. | [AIGA Project Creation](./adrs/006-aiga-project-creation.md) | Liam Moat | NA |
+| Use OpenTelemetry and App Insights         | 20-Jun-2024 | Use MLFlow  |  Chosen for its integration capabilities with App Insights for enhanced traceability, log integration, and custom metrics capture. MLFlow was considered for future integration to unify the observability framework within the organisation. |   [Observability in Prompt Flow](./adrs/007-observability-prompt-flow.md)  | Dev Team    | NA    |
