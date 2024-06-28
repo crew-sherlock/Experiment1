@@ -1,45 +1,50 @@
 {
-  "ignorePaths": [],
-  "language": "en-GB",
-  "languageSettings": [
-    {
-      "languageId": "*",
-      "dictionaries": [
-        "en_US",
-        "en-gb"
-      ]
-    }
-  ],
-  "noConfigSearch": true,
-  "words": [
-    "ADLS",
-    "AIGA",
-    "appinsights",
-    "adrs",
-    "promptflow",
-    "ipynb",
-    "Arpit",
-    "Bhavana",
-    "Avishay",
-    "Balter",
-    "centered",
-    "CIID",
-    "contrib",
-    "groundedness",
-    "kusto",
-    "Locppr",
-    "Metry",
-    "mgmt",
-    "myapp",
-    "NOTEST",
-    "Nygard",
-    "opentelemetry",
-    "OTLP",
-    "promptflow",
-    "Pryce",
-    "SCDT",
-    "toolset"
-  ],
-  "version": "0.2"
+    "ignorePaths": [],
+    "language": "en-GB",
+    "languageSettings": [
+        {
+            "languageId": "*",
+            "dictionaries": [
+                "en_US",
+                "en-gb"
+            ]
+        }
+    ],
+    "noConfigSearch": true,
+    "words": [
+        "ADLS",
+        "adrs",
+        "AIGA",
+        "appinsights",
+        "Arpit",
+        "Avishay",
+        "Balter",
+        "Bhavana",
+        "centered",
+        "CIID",
+        "contrib",
+        "dataops",
+        "groundedness",
+        "ipynb",
+        "kusto",
+        "llmops",
+        "Locppr",
+        "Metry",
+        "mgmt",
+        "MSAT",
+        "myapp",
+        "NOTEST",
+        "Nygard",
+        "opentelemetry",
+        "OTLP",
+        "promptflow",
+        "Pryce",
+        "SCDT",
+        "Shiran",
+        "toolset",
+        "Virginie",
+        "Virginie's",
+        "webapps"
+    ],
+    "version": "0.2"
 }
-
