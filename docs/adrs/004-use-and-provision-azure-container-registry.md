@@ -1,4 +1,4 @@
-# 1. Use and provision Azure Container Registry
+# 4. Use and provision Azure Container Registry
 
 Date: 2024-06-20
 

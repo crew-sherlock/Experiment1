@@ -1,4 +1,4 @@
-# 1. Use and provision storage account for AML Datastore
+# 3. Use and provision storage account for AML Datastore
 
 Date: 2024-06-20
 

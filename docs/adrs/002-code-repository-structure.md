@@ -1,4 +1,4 @@
-# 1. Code Repository Structure
+# 2. Code Repository Structure
 
 Date: 2024-06-19
 

@@ -45,7 +45,13 @@
         "toolset",
         "Virginie",
         "Virginie's",
-        "webapps"
+        "webapps",
+        "genai",
+        "analyzers",
+        "hyperparameters",
+        "Martyna",
+        "Marcinkowska",
+        "azureml"
     ],
     "version": "0.2"
 }
