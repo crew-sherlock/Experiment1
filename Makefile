@@ -5,6 +5,9 @@ setup:
 pre-commit:
 	poetry run pre-commit run --all-files
 
+serve-docs:
+	poetry run mkdocs serve
+
 build-docs:
 	poetry run mkdocs build
 

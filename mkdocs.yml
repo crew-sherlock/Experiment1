@@ -7,12 +7,15 @@ theme:
     - navigation.instant
     - content.tabs.link
     - content.code.copy
-  
+
 nav:
   - Home: 'README.md'
   - Architecture:
     - Reference Architecture: 'design/aiga-infrastructure.md'
     - Decision Log: Decision-Log.md
+  - Onboarding:
+    - Deployment: 'onboarding/deployment.md'
+    - Observability: 'onboarding/observability.md'
 
 copyright: "&copy; GSK"
 
