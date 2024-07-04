@@ -6,31 +6,7 @@ Thank you for your interest in contributing to the AI Generation Accelerator (AI
 
 To contribute to the AIGA, please follow the steps below:
 
-1. Install the following pre-requisites:
-
-    - [Python 3.9-3.11](https://www.python.org/downloads/)
-    - [Node.js](https://nodejs.org/en/download/)
-    - [pre-commit](https://pre-commit.com/#install)
-    - [Git](https://git-scm.com/downloads)
-
-1. Clone the repository
-
-    ```bash
-    git clone https://github.com/gsk-tech/AIGA.git
-    cd AIGA
-    ```
-
-1. Install [poetry](https://python-poetry.org/). For example
-
-    ```bash
-    pip install poetry
-    ```
-
-1. Setup dev environment
-
-    ```bash
-    make setup
-    ```
+1. Set up your development environment by following the [Developer Guide](./docs/developer-guide.md)
 
 1. Create a new branch
 

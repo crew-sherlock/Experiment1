@@ -13,6 +13,8 @@ nav:
   - Architecture:
     - Reference Architecture: 'design/aiga-infrastructure.md'
     - Decision Log: Decision-Log.md
+  - User Guides:
+    - Developer Guide: developer-guide.md
   - Onboarding:
     - Deployment: 'onboarding/deployment.md'
     - Observability: 'onboarding/observability.md'
