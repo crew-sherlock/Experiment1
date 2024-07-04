@@ -1,10 +1,10 @@
-# Flow Deployment Options
+# 12. Flow Deployment Options
 
-Date: 2024-07-02
+Date: 2024-07-03
 
 ## Status
 
-Proposed
+Accepted
 
 ## Context
 

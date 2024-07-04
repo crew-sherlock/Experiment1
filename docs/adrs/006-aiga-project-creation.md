@@ -1,10 +1,10 @@
 # 6. AIGA Project Creation
 
-Date: 2024-06-21
+Date: 2024-06-25
 
 ## Status
 
-In Review
+Accepted
 
 ## Context
 

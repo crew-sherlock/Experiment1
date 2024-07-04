@@ -1,10 +1,10 @@
 # 7. Observability in Prompt Flow
 
-Date: 2024-06-19
+Date: 2024-06-20
 
 ## Status
 
-Proposed
+Accepted
 
 ## Context
 
