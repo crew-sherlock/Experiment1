@@ -18,6 +18,7 @@ nav:
   - Onboarding:
     - Deployment: 'onboarding/deployment.md'
     - Observability: 'onboarding/observability.md'
+    - Workflows: 'onboarding/workflows.md'
 
 copyright: "&copy; GSK"
 
