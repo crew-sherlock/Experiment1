@@ -47,4 +47,10 @@ At the present time, we have opted to not support Azure Kubernetes Service out-o
 
 The AIGA Template will provide a solid foundation for deploying Prompt flows to Azure, with support for Azure Machine Learning and Azure App Service out-of-the-box.
 
+The following artefacts will be required to provide support for both deployment options:
+
+- The AIGA Reference Architecture will provide a variant for both Azure Machine Learning and Azure App Service.
+- The Infrastructure Request document will need to be configurable to support these options.
+- CI/CD workflows will have to cater for both deployment options, with configuration options to select the desired deployment target.
+
 A project may present a unique set of requirements that are not met by the deployment options provided out-of-the-box. In such cases, the project team will need to extend the AIGA Template to support additional deployment options. Given the flexibility of a container image, this should be a relatively straightforward task.
