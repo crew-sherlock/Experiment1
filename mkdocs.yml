@@ -15,12 +15,18 @@ nav:
     - Decision Log: Decision-Log.md
   - User Guides:
     - Developer Guide: developer-guide.md
+    - Backlog traceability: Backlog-traceability.md
   - Onboarding:
     - Deployment: 'onboarding/deployment.md'
     - Observability: 'onboarding/observability.md'
     - Workflows: 'onboarding/workflows.md'
 
 copyright: "&copy; GSK"
+
+markdown_extensions:
+
+  # Python Markdown
+  - attr_list
 
 extra:
   social:
