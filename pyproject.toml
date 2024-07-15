@@ -5,10 +5,27 @@ package-mode = false
 
 [tool.poetry.dependencies]
 python = ">=3.9,<4.0"
+promptflow = "^1.13.0"
+promptflow-tools = "^1.4.0"
 
 [tool.poetry.group.dev.dependencies]
 mkdocs-material = "9.5.27"
 pre-commit = "3.7.1"
+PyPDF2 = "3.0.1"
+faiss-cpu = "1.8.0.post1"
+openai = "1.35.10"
+jinja2 = "3.1.4"
+python-dotenv = "1.0.1"
+tiktoken = "0.7.0"
+promptflow = "1.13.0"
+promptflow-azure = "1.13.0"
+promptflow-tools = "1.4.0"
+pandas = "2.2.2"
+wheel = "0.43.0"
+requests = "2.32.3"
+
+[tool.poetry.group.test.dependencies]
+pytest = "8.2.2"
 
 [build-system]
 requires = ["poetry-core"]

@@ -1,0 +1,47 @@
+name: Prepare build environment
+
+description: Prepares build environment for python and prompt flow related workflow execution.
+
+inputs:
+  versionSpec:
+    description: "The Python version to use in the environment."
+    default: "3.11"
+  base_path:
+    description: "path to the base directory of the flow"
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Checkout
+      uses: actions/checkout@v4
+
+    - uses: actions/setup-python@v4
+      with:
+        python-version: ${{ inputs.versionSpec }}
+
+    - name: Load all prompt flow and related dependencies
+      shell: bash
+      run: |
+        set -e # fail on error
+        process_requirements() {
+          local folder=$1
+
+          # Loop through all files in the current folder
+          for file in "$folder"/*; do
+              if [ -d "$file" ]; then
+                  # If the file is a directory, recursively process it
+                  process_requirements "$file"
+              elif [ -f "$file" ] && [ "$(basename "$file")" == "requirements.txt" ]; then
+                  # If the file is requirements.txt, install the dependencies
+                  echo "Installing dependencies from $file"
+                  python -m pip install -r "$file"
+              fi
+          done
+        }
+        python -m pip install --upgrade pip
+        python -m pip install -r .github/requirements/execute_job_requirements.txt
+
+        process_requirements "${{ inputs.base_path }}"
+
+        az version

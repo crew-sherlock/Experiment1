@@ -1,0 +1,95 @@
+name: platform_pr_dev_workflow
+
+on:
+  workflow_call:
+    inputs:
+      env_name:
+        type: string
+        description: "Execution Environment"
+        required: true
+      use_case_base_path:
+        type: string
+        description: "The flow use-case to execute"
+        required: true
+    secrets:
+      azure_credentials:
+        description: "service principal auth to Azure"
+        required: true
+      registry_details:
+        description: "prompt flow registry details"
+        required: false
+      aoai_api_key:
+        description: "aoai key"
+        required: true
+      aoai_api_base:
+        description: "aoai base path"
+        required: true
+
+
+jobs:
+  pr_code_validation:
+    name: Build Validation
+    uses: ./.github/workflows/build_validation_workflow.yml
+    with:
+      use_case_base_path: ${{ inputs.use_case_base_path }}
+    secrets:
+      azure_credentials: ${{ secrets.azure_credentials }}
+  pr_flow_validation:
+    runs-on: ubuntu-latest
+    needs: pr_code_validation
+    environment: ${{ inputs.env_name }}
+    env:
+        RESOURCE_GROUP_NAME: ${{ vars.RESOURCE_GROUP_NAME }}
+        WORKSPACE_NAME: ${{ vars.WORKSPACE_NAME }}
+        AZURE_SUBSCRIPTION_ID: ${{ vars.SUBSCRIPTION_ID }}
+        AOAI_API_KEY: ${{ secrets.aoai_api_key }}
+        AOAI_API_BASE: ${{ secrets.aoai_api_base }}
+    steps:
+      - name: Checkout Actions
+        uses: actions/checkout@v4
+
+      - name: Azure login
+        uses: azure/login@v1
+        with:
+          creds: ${{ secrets.azure_credentials }}
+
+      - name: Configure Azure ML Agent
+        uses: ./.github/actions/configure_azureml_agent
+        with:
+          versionSpec: "3.11"
+          base_path: ${{ inputs.use_case_base_path }}
+
+      #=====================================
+      # Registers experiment dataset in Azure ML as Data Asset
+      # Reads appropriate field values from experiment.yaml or experiment.<env>.yaml
+      #=====================================
+      - name: Register experiment data asset
+        uses: ./.github/actions/execute_script
+        with:
+          step_name: "Register experiment data asset"
+          script_parameter: |
+            python -m llmops.common.register_data_asset \
+            --subscription_id ${{ env.AZURE_SUBSCRIPTION_ID }} \
+            --base_path ${{ inputs.use_case_base_path }} \
+            --env_name ${{ inputs.env_name }}
+
+      #=====================================
+      # Executes Standard flow for a scenario
+      # Generates Reports for each RUN as well as consolidated one
+      # Execute a RUN for each unique variant combination (keeping default variant id for other nodes)
+      # Loads appropriate experiment data from Azure ML data asset
+      # Reads appropriate field values from experiment.yaml or experiment.<env>.yaml
+      # Prompt Flow connections should pre-exist
+      # used automatic (serverless) runtime by default
+      #=====================================
+      - name: Execute prompt flow bulk run
+        uses: ./.github/actions/execute_script
+        with:
+          step_name: "Execute prompt flow bulk run"
+          script_parameter: |
+            python -m llmops.common.prompt_pipeline \
+            --subscription_id ${{ env.AZURE_SUBSCRIPTION_ID }} \
+            --build_id ${{ github.run_id }} \
+            --base_path ${{ inputs.use_case_base_path }} \
+            --env_name ${{ inputs.env_name }} \
+            --output_file run_id.txt

@@ -276,3 +276,13 @@ $RECYCLE.BIN/
 
 # Draw.io
 *.$*
+
+# promptflow
+.promptflow
+
+# pdfs
+.pdfs
+
+# index
+.index
+
