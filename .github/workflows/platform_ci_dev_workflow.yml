@@ -30,7 +30,7 @@ on:
       aoai_api_base:
         description: "azure openai endpoint"
         required: true
-      
+
 jobs:
   flow-experiment-and_evaluation:
     name: prompt flow experiment and evaluation job
@@ -43,7 +43,7 @@ jobs:
       AZURE_SUBSCRIPTION_ID: ${{ vars.SUBSCRIPTION_ID }}
       AOAI_API_KEY: ${{ secrets.aoai_api_key }}
       AOAI_API_BASE: ${{ secrets.aoai_api_base }}
-    
+
     steps:
       - name: Checkout Actions
         uses: actions/checkout@v4
@@ -56,13 +56,12 @@ jobs:
       - name: Configure Azure ML Agent
         uses: ./.github/actions/configure_azureml_agent
         with:
-          versionSpec: "3.11"
           base_path: ${{ inputs.use_case_base_path }}
 
       #=====================================
       # Registers experiment dataset in Azure ML as Data Asset
       # Reads appropriate field values from experiment.yaml or experiment.<env>.yaml
-      #=====================================      
+      #=====================================
       - name: Register experiment data asset
         uses: ./.github/actions/execute_script
         with:
@@ -79,7 +78,7 @@ jobs:
       # Execute a RUN for each unique variant combination (keeping default variant id for other nodes)
       # Loads appropriate experiment data from Azure ML data asset
       # Reads appropriate field values from experiment.yaml or experiment.<env>.yaml
-      # Prompt Flow connections should pre-exist 
+      # Prompt Flow connections should pre-exist
       # used automatic (serverless) runtime by default
       # writes the RUN ID in run_id.txt file. Used in next step
       #=====================================
@@ -98,7 +97,7 @@ jobs:
       #=====================================
       # Reads run_id.txt file. Assigns it to variable RUN_NAME
       # RUN_NAME Used in next step for evaluation of flows
-      #=====================================   
+      #=====================================
       - name: Read PromptFlow Runs
         shell: bash
         run: |
@@ -128,7 +127,7 @@ jobs:
       # Uses each RUN ID as input to run evaluation against
       # Loads appropriate evaluation data from Azure ML data asset
       # Reads appropriate field values from experiment.yaml or experiment.<env>.yaml
-      # Prompt Flow connections should pre-exist 
+      # Prompt Flow connections should pre-exist
       # used automatic (serverless) runtime by default
       #=====================================
       - name: Execute bulk run evaluations

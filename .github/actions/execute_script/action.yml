@@ -16,4 +16,4 @@ runs:
     - name: ${{inputs.step_name}}
       shell: bash
       run: |
-        ${{inputs.script_parameter}}
+        poetry run ${{inputs.script_parameter}}

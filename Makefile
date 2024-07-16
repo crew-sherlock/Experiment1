@@ -1,6 +1,7 @@
 PYV=$(shell python -c "import sys;t='{v[0]}.{v[1]}'.format(v=list(sys.version_info[:2]));sys.stdout.write(t)");
 
 setup:
+	poetry env use python3.9
 	poetry config virtualenvs.in-project true
 	poetry install --with dev
 	poetry run pre-commit install

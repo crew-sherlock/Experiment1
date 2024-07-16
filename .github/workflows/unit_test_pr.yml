@@ -18,18 +18,11 @@ jobs:
     steps:
       - name: Checkout Actions
         uses: actions/checkout@v4
-      - uses: actions/setup-python@v4
-        with:
-          python-version: "3.11"
 
-      - name: Load all build validation related dependencies
-        shell: bash
-        run: |
-          set -e # fail on error
-          pip install --upgrade pip
-          pip install poetry
-          make setup
-          az version
+      - name: Configure Azure ML Agent
+        uses: ./.github/actions/configure_azureml_agent
+        with:
+          base_path: ${{ inputs.use_case_base_path }}
 
       - name: Execute Common Unit Tests
         shell: bash
