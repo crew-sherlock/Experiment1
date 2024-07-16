@@ -1,6 +1,6 @@
 # Deployment
 
-One of the key deployable artifacts for an AIGA Project is an OCI-compliant container image. This repository uses `pf` to build an image that can be deployed to many platforms, including Azure App Services, Azure Machine Learning, Kubernetes, and more.
+One of the key deployable artifacts for an AIGA Project is an OCI-compliant container image. This repository uses `pf` to build an image that can be deployed to many platforms, including Azure App Services, Azure Machine Learning, and more.
 
 The flow container image is built during Continuous Integration and is pushed to Azure Container Registry.
 
@@ -14,9 +14,8 @@ The following table presents key factors to consider when choosing a deployment 
 | ------------------------------------------ | ------------------- | --------------------------------- | ----------------------------------------- | ----------------------------------------------------------- | ------------------------ | ---------------------- | ----------------------------------------------------------- | -------------------- |
 | Azure App Service                          | 🟢 Build and Deploy | 🟢 99.99% with Availability Zones | App Service SKU x Instances [[ref](#pricing-for-azure-app-service)]               | 🟠 One flow, per app. Multiple apps per plan.               | 🟢 [Quotas and Limits](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits#app-service-limits) | 🟢 Metrics or Schedule | 🟢 [Security Features](#security-in-azure-app-service)      | 🟢 Extensive Tooling |
 | Managed endpoint in Azure Machine Learning | 🟢 Build and Deploy | 🟠 99.9%                          | VM SKU x Instances                        | 🔴 One flow, per endpoint. One endpoint is one or more VMs. | 🟠 [Quotas and Limits](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-manage-quotas?view=azureml-api-2#azure-machine-learning-online-endpoints-and-batch-endpoints)\* | 🟢 Metrics or Schedule | 🟠 [Security Features](#security-in-azure-machine-learning) | 🟠 Primitive Tooling |
-| Azure Kubernetes Service                   | 🟠 Build            | 🟢 99.95% with Availability Zones  | Cluster Management Fee + (VM SKU x Nodes) | 🟢 One flow, per pod. Multiple pods per node.               | 🟢 [Quotas and Limits](https://learn.microsoft.com/en-us/azure/azure-resource-manager/management/azure-subscription-service-limits#azure-kubernetes-service-limits) | 🟠 HPA, Keda or Custom |                                                             | 🔴 Complex Tooling   |
 
-\* We have noted that Azure App Service and Azure Kubernetes Service can achieve greater scalability than Azure Machine Learning. This is largely due to [resource limits](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-manage-quotas?view=azureml-api-2#azure-machine-learning-online-endpoints-and-batch-endpoints) in Azure Machine Learning. However, it's expected that all services will be capable of handling the load of a typical AIGA Project.
+\* We have noted that Azure App Service can achieve greater scalability than Azure Machine Learning. This is largely due to [resource limits](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-manage-quotas?view=azureml-api-2#azure-machine-learning-online-endpoints-and-batch-endpoints) in Azure Machine Learning. However, it's expected that all services will be capable of handling the load of a typical AIGA Project.
 
 In all deployment options, it is recommended to maintain a one-to-one mapping between a flow and a container image. This simplifies the deployment process and ensures that each flow is isolated from others.
 
