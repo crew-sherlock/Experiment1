@@ -10,16 +10,17 @@ theme:
 
 nav:
   - Home: 'README.md'
-  - Architecture:
-    - Reference Architecture: 'design/aiga-infrastructure.md'
-    - Decision Log: Decision-Log.md
+  - Design:
+    - Reference Architecture: design/reference-architecture.md
+    - Decision Log: design/decision-log.md
   - User Guides:
     - Developer Guide: developer-guide.md
-    - Backlog traceability: Backlog-traceability.md
+    - Backlog Traceability: backlog-integration-with-github.md
   - Onboarding:
-    - Deployment: 'onboarding/deployment.md'
-    - Observability: 'onboarding/observability.md'
-    - Workflows: 'onboarding/workflows.md'
+    - Deployment: onboarding/deployment.md
+    - GitHub Actions: onboarding/github-actions.md
+    - Observability:
+        - Alerting: onboarding/alerting.md
 
 copyright: "&copy; GSK"
 

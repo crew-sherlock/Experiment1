@@ -1,4 +1,4 @@
-# AzDO Backlog integration with Github Repo
+# Backlog Integration with GitHub
 
 In order to maintain **full traceability** for the AIGA project, it is recommended to integrate Azure Devops, where the backlog is maintained in Azure Boards with Github Enterprise being used primarily to maintain Git repos.
 

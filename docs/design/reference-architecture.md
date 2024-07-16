@@ -1,4 +1,4 @@
-# Reference Architecture for a Gen AI Product
+# Reference Architecture
 
 ## Context
 
