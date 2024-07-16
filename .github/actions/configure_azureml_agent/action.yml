@@ -35,12 +35,14 @@ runs:
               elif [ -f "$file" ] && [ "$(basename "$file")" == "requirements.txt" ]; then
                   # If the file is requirements.txt, install the dependencies
                   echo "Installing dependencies from $file"
-                  python -m pip install -r "$file"
+                  poetry run pip install -r "$file"
               fi
           done
         }
-        python -m pip install --upgrade pip
-        python -m pip install -r .github/requirements/execute_job_requirements.txt
+
+        pip install --upgrade pip
+        pip install poetry
+        make setup
 
         process_requirements "${{ inputs.base_path }}"
 

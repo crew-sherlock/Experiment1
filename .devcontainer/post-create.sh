@@ -2,8 +2,7 @@
 
 pip install --upgrade pip
 pip install poetry
-
-poetry config virtualenvs.in-project true
+pip install poetry-plugin-export
 
 git config --global --add safe.directory /workspaces/AIGA
 

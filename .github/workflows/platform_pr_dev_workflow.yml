@@ -68,7 +68,7 @@ jobs:
         with:
           step_name: "Register experiment data asset"
           script_parameter: |
-            python -m llmops.common.register_data_asset \
+            poetry run python -m llmops.common.register_data_asset \
             --subscription_id ${{ env.AZURE_SUBSCRIPTION_ID }} \
             --base_path ${{ inputs.use_case_base_path }} \
             --env_name ${{ inputs.env_name }}
@@ -87,7 +87,7 @@ jobs:
         with:
           step_name: "Execute prompt flow bulk run"
           script_parameter: |
-            python -m llmops.common.prompt_pipeline \
+            poetry run python -m llmops.common.prompt_pipeline \
             --subscription_id ${{ env.AZURE_SUBSCRIPTION_ID }} \
             --build_id ${{ github.run_id }} \
             --base_path ${{ inputs.use_case_base_path }} \

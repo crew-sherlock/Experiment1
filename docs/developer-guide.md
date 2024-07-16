@@ -28,6 +28,7 @@ After setting up your environment, you can [Validate your set up](#validating-yo
 
     ```bash
     pip install poetry
+    pip install poetry-plugin-export
     ```
 
 1. Setup dev environment
