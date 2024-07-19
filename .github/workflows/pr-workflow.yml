@@ -1,0 +1,52 @@
+name: pr-workflow
+
+on:
+  workflow_dispatch:
+    inputs:
+      env_name:
+        type: string
+        description: "Execution Environment"
+        required: true
+        default: "dev"
+      use_case_base_path:
+        type: string
+        description: "The flow use case to execute"
+        required: true
+        default: "promptflow/chat_with_pdf"
+  pull_request:
+    branches:
+      - main
+
+#=====================================
+# Execute pr-code-validation and run-workflow for testing the experiment
+#=====================================
+jobs:
+  pr-code-validation:
+    name: Run unit tests
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Actions
+        uses: actions/checkout@v4
+
+      - name: Set up Python Env
+        uses: ./.github/actions/setup-environment
+
+      - name: Pre-Commit
+        uses: devcontainers/ci@v0.3
+        with:
+            push: never
+            runCmd: make pre-commit
+
+      - name: Run unit tests
+        uses: ./.github/actions/execute-unit-tests
+
+  run-workflow:
+    needs: pr-code-validation
+    uses: ./.github/workflows/run-workflow.yml
+    with:
+      env_name: ${{ inputs.env_name || 'dev'}}
+      use_case_base_path: 'promptflow/chat_with_pdf'
+    secrets:
+      azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
+      aoai_api_key: ${{ secrets.AOAI_API_KEY }}
+      aoai_api_base: ${{ secrets.AOAI_API_BASE }}

@@ -1,14 +1,12 @@
-name: Prepare build environment
+name: setup-environment
 
 description: Prepares build environment for python and prompt flow related workflow execution.
 
 inputs:
-  versionSpec:
+  version_spec:
     description: "The Python version to use in the environment."
     default: "3.9"
-  base_path:
-    description: "path to the base directory of the flow"
-    required: true
+    required: false
 
 runs:
   using: composite
@@ -16,9 +14,9 @@ runs:
     - name: Checkout
       uses: actions/checkout@v4
 
-    - uses: actions/setup-python@v4
+    - uses: actions/setup-python@v5
       with:
-        python-version: ${{ inputs.versionSpec }}
+        python-version: ${{ inputs.version_spec }}
 
     - name: Load all prompt flow and related dependencies
       shell: bash

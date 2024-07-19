@@ -21,12 +21,10 @@ requirements:
 clean:
 	rm -rf site
 
-ci-build: lint unittest
-
 lint:
 	@echo -e "\e[34m$@\e[0m" || true
 	@poetry run flake8 src
 
 unittest:
 	@echo -e "\e[34m$@\e[0m" || true
-	@poetry run pytest -vvv
+	@poetry run pytest --junitxml=junit/test-results.xml --cov=. --cov-report=xml

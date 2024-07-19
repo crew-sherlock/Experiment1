@@ -1,7 +1,6 @@
-name: chat_with_pdf_ci_dev_workflow
+name: ci-workflow
 
 on:
-  workflow_call:
   workflow_dispatch:
     inputs:
       env_name:
@@ -22,22 +21,29 @@ on:
     branches:
       - main
       - development
-      - martyna/ci-workflow
-    paths:
-      - 'promptflow/chat_with_pdf/**'
-      - '.github/**'
-      - 'llmops/**'
-  
+      - shiranr/pipeline-refactor
+
 
 #=====================================
-# Execute platform_ci_dev_workflow workflow for experiment, evaluation and deployment of flows
+# Execute run-workflow for experiment and evaluate-workflow for the evaluation
 #=====================================
 jobs:
-  execute-platform-flow-ci:
-    uses: ./.github/workflows/platform_ci_dev_workflow.yml
+  run-workflow:
+    uses: ./.github/workflows/run-workflow.yml
     with:
       env_name: ${{ inputs.env_name || 'dev'}}
-      use_case_base_path: ${{ inputs.use_case_base_path || 'promptflow/chat_with_pdf' }}
+      use_case_base_path: 'promptflow/chat_with_pdf'
+    secrets:
+      azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
+      aoai_api_key: ${{ secrets.AOAI_API_KEY }}
+      aoai_api_base: ${{ secrets.AOAI_API_BASE }}
+
+  evaluate-workflow:
+    needs: run-workflow
+    uses: ./.github/workflows/evaluate-workflow.yml
+    with:
+      env_name: ${{ inputs.env_name || 'dev'}}
+      use_case_base_path: 'promptflow/chat_with_pdf'
       deployment_type: ${{ inputs.deployment_type|| 'aml' }}
     secrets:
       azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
