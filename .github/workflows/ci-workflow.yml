@@ -15,14 +15,13 @@ on:
         default: "promptflow/chat_with_pdf"
       deployment_type:
         type: string
-        description: "Determine type of deployment - aml, aks, docker, webapp"
+        description: "Determine type of deployment - aml, webapp"
         required: true
   push:
     branches:
       - main
       - development
-      - shiranr/pipeline-refactor
-
+  
 
 #=====================================
 # Execute run-workflow for experiment and evaluate-workflow for the evaluation

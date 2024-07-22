@@ -1,0 +1,28 @@
+name: deploy-webapp
+
+description: deploys container on webapp
+
+inputs:
+  USE_CASE_BASE_PATH:
+    description: "the path to the flow to be registered and deployed"
+    required: true
+  DEPLOY_ENVIRONMENT:
+    description: "env stage e.g. dev, test, prod"
+    required: true
+  REGISTRY_DETAILS:
+    description: "acr registry details"
+    required: true
+  ENV_VARS:
+    description: "env stage e.g. dev, test, prod"
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: create docker image
+      shell: bash
+      run: use_case_base_path=${{ inputs.USE_CASE_BASE_PATH }} deploy_environment=${{ inputs.DEPLOY_ENVIRONMENT }} build_id=${{ github.run_id }} REGISTRY_DETAILS=${{ inputs.REGISTRY_DETAILS }} ./llmops/common/scripts/gen_docker_image.sh
+
+    - name: create webapp
+      shell: bash
+      run: use_case_base_path=${{ inputs.USE_CASE_BASE_PATH }} deploy_environment=${{ inputs.DEPLOY_ENVIRONMENT }} build_id=${{ github.run_id }} ./llmops/common/scripts/az_webapp_deploy.sh

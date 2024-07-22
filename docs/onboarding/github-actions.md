@@ -4,15 +4,14 @@ Workflows are a feature of GitHub Actions that allow you to automate your softwa
 development lifecycle in your repository. AIGA leverages workflows to automate various
 tasks, such as build verification, testing, and deployment. Because AIGA comprises
 multiple components, such as AIGA Template, AIGA Starter, and AIGA Projects, it is
-important to understand the scope of each workflow, and when and where they are
-triggered.
+important to understand the scope of each workflow, and when and where they are triggered.
 
 ## Workflows
 
-| Workflow                                                                                        | Description                                                                         | Trigger           |
+|Workflow                                                                                        | Description                                                                         | Trigger           |
 |-------------------------------------------------------------------------------------------------|-------------------------------------------------------------------------------------|-------------------|
 | [pr-workflow.yml](https://github.com/gsk-tech/AIGA/blob/main/.github/workflows/pr-workflow.yml) | Experiment PR workflow, validates dev container, run unit tests and bulk experiment | *PR* to *main*    |
-| [ci-workflow.yml](https://github.com/gsk-tech/AIGA/blob/main/.github/workflows/ci-workflow.yml) | Experiment CI workflow, runs bulk experiment and evaluation                         | *Merge* to *main* |
+| [ci-workflow.yml](https://github.com/gsk-tech/AIGA/blob/main/.github/workflows/ci-workflow.yml) | Experiment CI workflow, runs bulk experiment and evaluation, see [LLMOps](./llmops.md) for further detail                         | *Merge* to *main* |
 
 ## Reusable Workflows
 
@@ -20,6 +19,7 @@ triggered.
 |-------------------------------------------------------------------------------------------------------------|-------------------------------------------------------------|---------------------|
 | [run-workflow.yml](https://github.com/gsk-tech/AIGA/blob/main/.github/workflows/run-workflow.yml)           | Register experiment data assets and run experiment bulk run | ci and pr workflows |
 | [evaluate-workflow.yml](https://github.com/gsk-tech/AIGA/blob/main/.github/workflows/evaluate-workflow.yml) | Register evaluation data assets and runs evaluations        | ci workflow         |
+| [cd-workflow.yml](https://github.com/gsk-tech/AIGA/blob/main/.github/workflows/platform_ci_dev_workflow.yml) | Runs prompts in flow and evaluates results, see [LLMOps](./llmops.md) for further detail | PR to *main* or *development* |
 
 ## Custom Actions
 

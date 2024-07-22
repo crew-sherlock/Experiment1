@@ -43,7 +43,8 @@ jobs:
       AZURE_SUBSCRIPTION_ID: ${{ vars.SUBSCRIPTION_ID }}
       AOAI_API_KEY: ${{ secrets.aoai_api_key }}
       AOAI_API_BASE: ${{ secrets.aoai_api_base }}
-
+      REGISTRY_DETAILS: ${{ secrets.registry_details }}
+    
     steps:
       - name: Checkout Actions
         uses: actions/checkout@v4
@@ -118,3 +119,21 @@ jobs:
         with:
           name: evaluation-reports
           path: ./reports
+
+  #=====================================
+  # Execute platform_cd_dev_workflow flow for deployment of flows.
+  #=====================================
+  deploy-flow:
+    uses: ./.github/workflows/cd-workflow.yml
+    needs: flow-experiment-and-evaluation
+    with:
+      env_name: ${{ inputs.env_name }}
+      use_case_base_path: ${{ inputs.use_case_base_path }} 
+      deployment_type: ${{ inputs.deployment_type }}
+    secrets:
+      azure_credentials: ${{ secrets.azure_credentials }}  
+      registry_details: ${{ secrets.registry_details }}      
+      azure_openai_api_key: ${{ secrets.AZURE_OPENAI_API_KEY }}
+      azure_openai_api_endpoint: ${{ secrets.AZURE_OPENAI_API_ENDPOINT }}
+      aoai_api_key: ${{ secrets.AOAI_API_KEY }}
+      aoai_api_base: ${{ secrets.AOAI_API_BASE }}

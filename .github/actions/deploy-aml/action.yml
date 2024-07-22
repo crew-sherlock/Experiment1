@@ -1,0 +1,96 @@
+name: deploy-aml
+
+description: execute an online endpoint for real time inference
+
+inputs:
+  SUBSCRIPTION_ID:
+    description: "subscription id needed for deployment"
+    required: true
+  use_case_base_path:
+    description: "the flow to be registered and deployed"
+    required: true
+  MODEL_VERSION:
+    description: "flow version in registry to be deployed"
+    required: true
+  DEPLOY_ENVIRONMENT:
+    description: "env stage e.g. dev, test, prod"
+    required: true
+  RESOURCE_GROUP_NAME:
+    description: "Resource group name"
+    required: true
+  WORKSPACE_NAME:
+    description: "Workspace name"
+    required: true
+  KEY_VAULT_NAME:
+    description: "Key vault name"
+    required: true
+  ENV_VARS:
+    description: 'The API key for authentication'
+    required: false
+
+runs:
+  using: composite
+  steps:
+    - name: Provision Managed Endpoint
+      uses: ./.github/actions/execute-script
+      with:
+        step_name: "Provision Managed Endpoint"
+        script_parameter: |
+          python -m llmops.common.deployment.provision_endpoint \
+            --subscription_id ${{ inputs.SUBSCRIPTION_ID }} \
+            --build_id ${{ github.run_id }} \
+            --output_file "endpoint_principal.txt" \
+            --env_name ${{ inputs.DEPLOY_ENVIRONMENT }} \
+            --base_path ${{ inputs.use_case_base_path }}
+
+    - name: Read system managed id information
+      shell: bash
+      run: |
+        readarray arr <"endpoint_principal.txt"
+        endpoint_principal=${arr[0]}
+        echo $endpoint_principal
+        echo "ENDPOINT_PRINCIPAL=${endpoint_principal}"  >> "$GITHUB_ENV"
+
+    - name: Assign Azure resource permissions
+      shell: bash
+      run: |
+        KEY_VAULT_NAME=${{ inputs.KEY_VAULT_NAME }}
+        echo $KEY_VAULT_NAME
+
+        RESOURCE_GROUP_NAME=${{ inputs.RESOURCE_GROUP_NAME }}
+        echo $RESOURCE_GROUP_NAME
+
+        WORKSPACE_NAME=${{ inputs.WORKSPACE_NAME }}
+        echo $WORKSPACE_NAME
+
+        az role assignment create --assignee $ENDPOINT_PRINCIPAL --role "AzureML Data Scientist" --scope "/subscriptions/ea481a04-0a19-444a-8589-aab55759dee3/resourcegroups/codeorange-psc-us6-shared-svc-appresources-playground/providers/Microsoft.MachineLearningServices/workspaces/$WORKSPACE_NAME"
+        auth_type=$(az keyvault show -n $KEY_VAULT_NAME  -g "PSC-aiga-AppResources-devtest" --query "properties.enableRbacAuthorization")
+        if [[ -z "$auth_type" ]]; then
+            echo "assigning RBAC permission"
+            az role assignment create --assignee $ENDPOINT_PRINCIPAL --role "Key Vault Reader" --scope "/subscriptions/c17ec04a-a0f4-46a2-b316-6be843b4e824/resourcegroups/PSC-aiga-AppResources-devtest/providers/Microsoft.KeyVault/vaults/$KEY_VAULT_NAME"
+        else
+            echo "assigning policy permission"
+            az keyvault set-policy --name $KEY_VAULT_NAME --resource-group "PSC-aiga-AppResources-devtest" --object-id $ENDPOINT_PRINCIPAL --secret-permissions get list
+        fi
+
+    - name: Provision Managed Deployment
+      uses: ./.github/actions/execute-script
+      with:
+        step_name: "Provision Managed Deployment"
+        script_parameter: |
+          python -m llmops.common.deployment.provision_deployment \
+            --subscription_id ${{ inputs.SUBSCRIPTION_ID }} \
+            --model_version ${{ inputs.MODEL_VERSION }} \
+            --build_id ${{ github.run_id }} \
+            --env_name ${{ inputs.DEPLOY_ENVIRONMENT }} \
+            --base_path ${{ inputs.use_case_base_path }}
+
+    - name: Test Managed Deployment
+      uses: ./.github/actions/execute-script
+      with:
+        step_name: "Test Managed Deployment"
+        script_parameter: |
+          python -m llmops.common.deployment.test_model_on_aml \
+            --subscription_id ${{ inputs.SUBSCRIPTION_ID }} \
+            --env_name ${{ inputs.DEPLOY_ENVIRONMENT }} \
+            --base_path ${{ inputs.use_case_base_path }}

@@ -21,6 +21,7 @@ nav:
     - GitHub Actions: onboarding/github-actions.md
     - Observability:
         - Alerting: onboarding/alerting.md
+    - LLMOps: onboarding/llmops.md
 
 copyright: "&copy; GSK"
 
