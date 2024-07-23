@@ -4,41 +4,51 @@ readme = "README.md"
 package-mode = false
 
 [tool.poetry.dependencies]
-azure-ai-generative = {version = ">=1.0.0b8", extras = ["promptflow"]}
-azure-ai-resources = ">=1.0.0b8"
-azure-identity = ">=1.16.1"
-faiss-cpu = "1.8.0.post1"
-jinja2 = "3.1.4"
-openai = "1.35.10"
-pandas = "2.2.2"
-promptflow = "^1.13.0"
-promptflow-azure = "1.13.0"
-promptflow-evals = ">=0.3.0"
-promptflow-tools = "^1.4.0"
-PyPDF2 = "3.0.1"
 python = ">=3.9, <4.0"
-python-dotenv = "^1.0.1"
-requests = "2.32.3"
-tiktoken = "0.7.0"
-wheel = "0.43.0"
-
-[tool.poetry.group.dev]
-optional = true
+promptflow = "^1.13.0"
+promptflow-tools = "^1.4.0"
 
 [tool.poetry.group.dev.dependencies]
-azure-ai-ml = ">=1.16.0"
-azureml-mlflow = ">=1.53.0"
 flake8 = "7.1.0"
 flake8-docstrings = "1.6.0"
-keyrings-alt = "5.0.1"
 mkdocs-material = "9.5.27"
-mldesigner = "0.1.0b4"
 pep8-naming = "0.13.0"
 pre-commit = "3.7.1"
+
+[tool.poetry.group.llmops]
+optional = true
+
+[tool.poetry.group.llmops.dependencies]
+pandas = "2.2.2"
+promptflow-evals = ">=0.3.0"
+promptflow-azure = "1.13.0"
+requests = "2.32.3"
+azure-ai-ml = ">=1.16.0"
+
+[tool.poetry.group.test]
+optional = true
+
+[tool.poetry.group.test.dependencies]
 pytest = "8.2.2"
 pytest-azurepipelines = "1.0.3"
 pytest-cov = "3.0.0"
 pytest-mock = "3.7.0"
+
+[tool.poetry.group.promptflow-run]
+optional = true
+
+[tool.poetry.group.promptflow-run.dependencies]
+faiss-cpu = "1.8.0.post1"
+jinja2 = "3.1.4"
+openai = "1.35.10"
+PyPDF2 = "3.0.1"
+python-dotenv = "^1.0.1"
+tiktoken = "0.7.0"
+
+[tool.poetry.group.promptflow-eval]
+optional = true
+
+[tool.poetry.group.promptflow-eval.dependencies]
 
 [build-system]
 requires = ["poetry-core"]

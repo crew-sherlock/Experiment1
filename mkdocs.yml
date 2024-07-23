@@ -16,6 +16,8 @@ nav:
   - User Guides:
     - Developer Guide: developer-guide.md
     - Backlog Traceability: backlog-integration-with-github.md
+  - Contributing Guides:
+    - PromptFlow: contributing/promptflow.md
   - Onboarding:
     - Deployment: onboarding/deployment.md
     - GitHub Actions: onboarding/github-actions.md

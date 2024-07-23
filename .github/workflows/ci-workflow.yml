@@ -21,7 +21,7 @@ on:
     branches:
       - main
       - development
-  
+
 
 #=====================================
 # Execute run-workflow for experiment and evaluate-workflow for the evaluation

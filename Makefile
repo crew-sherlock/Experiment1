@@ -3,7 +3,7 @@ PYV=$(shell python -c "import sys;t='{v[0]}.{v[1]}'.format(v=list(sys.version_in
 setup:
 	poetry env use python3.9
 	poetry config virtualenvs.in-project true
-	poetry install --with dev
+	poetry install --with dev,test,llmops
 	poetry run pre-commit install
 
 pre-commit:
@@ -16,10 +16,13 @@ build-docs:
 	poetry run mkdocs build
 
 requirements:
-	@find promptflow -name 'requirements.txt' -execdir poetry export --without-hashes -o {} \;
+	@poetry lock --no-update
+	@find promptflow -path '*/standard/*' -name 'requirements.txt' -execdir poetry export --with promptflow-run --without-hashes -o {} \;
+	@find promptflow -path '*/evaluation/*' -name 'requirements.txt' -execdir poetry export --with promptflow-eval --without-hashes -o {} \;
 
 clean:
-	rm -rf site
+	rm -rf site htmlcov junit
+	rm -f **/test-*.xml coverage.xml .coverage
 
 lint:
 	@echo -e "\e[34m$@\e[0m" || true
