@@ -18,17 +18,8 @@ on:
         description: "Determine type of deployment - aml, aks, docker, webapp"
         required: true
     secrets:
-      azure_credentials:
+      AZURE_CREDENTIALS:
         description: "service principal authentication to Azure"
-        required: true
-      registry_details:
-        description: "prompt flow registry details"
-        required: false
-      aoai_api_key:
-        description: "azure openai key"
-        required: true
-      aoai_api_base:
-        description: "azure openai endpoint"
         required: true
 
 jobs:
@@ -41,10 +32,6 @@ jobs:
       RESOURCE_GROUP_NAME: ${{ vars.RESOURCE_GROUP_NAME }}
       WORKSPACE_NAME: ${{ vars.WORKSPACE_NAME }}
       AZURE_SUBSCRIPTION_ID: ${{ vars.SUBSCRIPTION_ID }}
-      AOAI_API_KEY: ${{ secrets.aoai_api_key }}
-      AOAI_API_BASE: ${{ secrets.aoai_api_base }}
-      REGISTRY_DETAILS: ${{ secrets.registry_details }}
-    
     steps:
       - name: Checkout Actions
         uses: actions/checkout@v4
@@ -52,7 +39,12 @@ jobs:
       - name: Azure login
         uses: azure/login@v1
         with:
-            creds: ${{ secrets.azure_credentials }}
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Load Secrets from Azure Key Vault
+        uses: ./.github/actions/load-secrets
+        with:
+          azureKeyVaultName: ${{ vars.KEY_VAULT_NAME }}
 
       - name: Set up Python Env
         uses: ./.github/actions/setup-environment
@@ -128,11 +120,11 @@ jobs:
     needs: flow-experiment-and-evaluation
     with:
       env_name: ${{ inputs.env_name }}
-      use_case_base_path: ${{ inputs.use_case_base_path }} 
+      use_case_base_path: ${{ inputs.use_case_base_path }}
       deployment_type: ${{ inputs.deployment_type }}
     secrets:
-      azure_credentials: ${{ secrets.azure_credentials }}  
-      registry_details: ${{ secrets.registry_details }}      
+      azure_credentials: ${{ secrets.azure_credentials }}
+      registry_details: ${{ secrets.registry_details }}
       azure_openai_api_key: ${{ secrets.AZURE_OPENAI_API_KEY }}
       azure_openai_api_endpoint: ${{ secrets.AZURE_OPENAI_API_ENDPOINT }}
       aoai_api_key: ${{ secrets.AOAI_API_KEY }}

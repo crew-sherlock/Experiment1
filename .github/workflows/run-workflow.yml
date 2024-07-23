@@ -12,19 +12,9 @@ on:
         description: "The flow use-case to execute"
         required: true
     secrets:
-      azure_credentials:
+      AZURE_CREDENTIALS:
         description: "service principal auth to Azure"
         required: true
-      registry_details:
-        description: "prompt flow registry details"
-        required: false
-      aoai_api_key:
-        description: "aoai key"
-        required: true
-      aoai_api_base:
-        description: "aoai base path"
-        required: true
-
 
 jobs:
   experiment-and-evaluation-workflow:
@@ -35,8 +25,7 @@ jobs:
         RESOURCE_GROUP_NAME: ${{ vars.RESOURCE_GROUP_NAME }}
         WORKSPACE_NAME: ${{ vars.WORKSPACE_NAME }}
         AZURE_SUBSCRIPTION_ID: ${{ vars.SUBSCRIPTION_ID }}
-        AOAI_API_KEY: ${{ secrets.aoai_api_key }}
-        AOAI_API_BASE: ${{ secrets.aoai_api_base }}
+
     steps:
       - name: Checkout Actions
         uses: actions/checkout@v4
@@ -44,12 +33,15 @@ jobs:
       - name: Azure login
         uses: azure/login@v1
         with:
-          creds: ${{ secrets.azure_credentials }}
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Load Secrets from Azure Key Vault
+        uses: ./.github/actions/load-secrets
+        with:
+          azureKeyVaultName: ${{ vars.KEY_VAULT_NAME }}
 
       - name: Set up Python Env
         uses: ./.github/actions/setup-environment
-        with:
-          use_case_base_path: ${{ inputs.use_case_base_path }}
 
       #=====================================
       # Registers experiment dataset in Azure ML as Data Asset

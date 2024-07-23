@@ -46,7 +46,4 @@ jobs:
     with:
       env_name: ${{ inputs.env_name || 'dev'}}
       use_case_base_path: 'promptflow/chat_with_pdf'
-    secrets:
-      azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
-      aoai_api_key: ${{ secrets.AOAI_API_KEY }}
-      aoai_api_base: ${{ secrets.AOAI_API_BASE }}
+    secrets: inherit

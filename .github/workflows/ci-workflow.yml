@@ -22,7 +22,6 @@ on:
       - main
       - development
 
-
 #=====================================
 # Execute run-workflow for experiment and evaluate-workflow for the evaluation
 #=====================================
@@ -32,10 +31,7 @@ jobs:
     with:
       env_name: ${{ inputs.env_name || 'dev'}}
       use_case_base_path: 'promptflow/chat_with_pdf'
-    secrets:
-      azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
-      aoai_api_key: ${{ secrets.AOAI_API_KEY }}
-      aoai_api_base: ${{ secrets.AOAI_API_BASE }}
+    secrets: inherit
 
   evaluate-workflow:
     needs: run-workflow
@@ -44,8 +40,4 @@ jobs:
       env_name: ${{ inputs.env_name || 'dev'}}
       use_case_base_path: 'promptflow/chat_with_pdf'
       deployment_type: ${{ inputs.deployment_type|| 'aml' }}
-    secrets:
-      azure_credentials: ${{ secrets.AZURE_CREDENTIALS }}
-      registry_details: ${{ secrets.DOCKER_IMAGE_REGISTRY }}
-      aoai_api_key: ${{ secrets.AOAI_API_KEY }}
-      aoai_api_base: ${{ secrets.AOAI_API_BASE }}
+    secrets: inherit

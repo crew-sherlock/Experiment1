@@ -1,0 +1,26 @@
+name: load-secrets
+
+description: loads secrets from Azure Key Vault
+
+inputs:
+  azureKeyVaultName:
+    description: "name of the Key Vault to load secrets from"
+    required: true
+
+runs:
+  using: composite
+  steps:
+    - name: Load Secrets
+      shell: bash
+      run: |
+        set -e # fail on error
+        SECRET_NAMES=$(az keyvault secret list --vault-name $KEY_VAULT_NAME --query "[?attributes.enabled == \`true\`].name" -o tsv)
+        for SECRET_NAME in $SECRET_NAMES; do
+            ENV_NAME=$(echo $SECRET_NAME | tr '-' '_')
+            SECRET_VALUE=$(az keyvault secret show --vault-name $KEY_VAULT_NAME --name $SECRET_NAME --query "value" -o tsv)
+            echo "::add-mask::$SECRET_VALUE"
+            echo "$ENV_NAME=$SECRET_VALUE" >> $GITHUB_ENV
+        done
+        echo "Secrets loaded from Azure Key Vault"
+      env:
+        KEY_VAULT_NAME: ${{ inputs.azureKeyVaultName }}
