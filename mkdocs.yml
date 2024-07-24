@@ -12,6 +12,7 @@ nav:
   - Home: 'README.md'
   - Design:
     - Reference Architecture: design/reference-architecture.md
+    - Identity and Access: design/identity-and-access.md
     - Decision Log: design/decision-log.md
   - User Guides:
     - Developer Guide: developer-guide.md
