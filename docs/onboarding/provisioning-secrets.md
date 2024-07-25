@@ -24,7 +24,7 @@ steps:
   - name: Checkout code
     uses: actions/checkout@v4.1.5
   - name: Azure login
-    uses: azure/login@v1
+    uses: azure/login@v2.1.1
     with:
       creds: ${{ secrets.AZURE_CREDENTIALS }}
   - name: Load Secrets from Azure Key Vault
