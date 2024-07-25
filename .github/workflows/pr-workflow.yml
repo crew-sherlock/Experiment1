@@ -22,7 +22,6 @@ on:
 #=====================================
 jobs:
   pr-code-validation:
-    name: Run unit tests
     runs-on: ubuntu-latest
     steps:
       - name: Checkout Actions
@@ -31,11 +30,8 @@ jobs:
       - name: Set up Python Env
         uses: ./.github/actions/setup-environment
 
-      - name: Pre-Commit
-        uses: devcontainers/ci@v0.3
-        with:
-            push: never
-            runCmd: make pre-commit
+      - name: Run pre-commit
+        uses: ./.github/actions/execute-pre-commit
 
       - name: Run unit tests
         uses: ./.github/actions/execute-unit-tests

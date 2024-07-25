@@ -5,11 +5,9 @@ description: execute unit tests
 runs:
   using: composite
   steps:
-    - name: Build
-      uses: devcontainers/ci@v0.3
-      with:
-        push: never
-        runCmd: make unittest
+    - name: Pre-Commit
+      shell: bash
+      run: make unittest
 
     - name: Publish Unit Test Results
       uses: actions/upload-artifact@v4

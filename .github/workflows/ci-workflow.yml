@@ -22,10 +22,34 @@ on:
       - main
       - development
 
+permissions:
+  contents: read
+  packages: write
+
 #=====================================
 # Execute run-workflow for experiment and evaluate-workflow for the evaluation
 #=====================================
 jobs:
+  devcontainer:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Actions
+        uses: actions/checkout@v4
+
+      - name: Login to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.repository_owner }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Pre-build image for DevContainer
+        uses: devcontainers/ci@v0.3
+        with:
+          imageName: ghcr.io/gsk-tech/aiga
+          cacheFrom: ghcr.io/gsk-tech/aiga
+          push: always
+
   run-workflow:
     uses: ./.github/workflows/run-workflow.yml
     with:
