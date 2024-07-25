@@ -21,6 +21,7 @@ nav:
     - PromptFlow: contributing/promptflow.md
   - Onboarding:
     - Deployment: onboarding/deployment.md
+    - Environment Variables: onboarding/environment-variables.md
     - GitHub Actions: onboarding/github-actions.md
     - Observability:
         - Alerting: onboarding/alerting.md

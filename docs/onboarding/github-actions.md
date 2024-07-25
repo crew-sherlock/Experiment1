@@ -28,3 +28,11 @@ important to understand the scope of each workflow, and when and where they are 
 | [execute-script](https://github.com/gsk-tech/AIGA/blob/main/.github/actions/execute-script/action.yml)         | Wrapper to use poetry when running python scripts so it will be in the environment | run and evaluate workflows                |
 | [execute-unit-tests](https://github.com/gsk-tech/AIGA/blob/main/.github/actions/execute-unit-tests/action.yml) | Set us environment and runs unit tests                                             | pr workflow                               |
 | [setup-environment](https://github.com/gsk-tech/AIGA/blob/main/.github/actions/setup-environment/action.yml)   | A script to set up the python environment with poetry                              | run and evaluate workflows and unit tests |
+
+## GitHub Variables
+
+Some workflows require specific values to be provided as inputs to the workflow. These input variables are:
+
+- `use_case_base_path`: This is the path to the use case folder and is provided as an input to the workflow, otherwise a default is used.
+- `MODEL_VERSION`: Once a flow has been registered, the CD workflow will read what the latest version of the flow is and this is what version is deployed.
+- `DEPLOY_ENVIRONMENT`: This is environment to which the endpoint and model should be deployed and is provided as an input to the workflow, otherwise a default is used.
