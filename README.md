@@ -10,6 +10,10 @@ The AI Generation Accelerator (AIGA) will comprise a collection of artefacts, pr
 
 ![AI Generation Accelerator (AIGA)](./docs/assets/AIGA.svg)
 
+## Set up guide for AIGA
+
+We have created the AIGA Starter to help you set up a new project using the AIGA template. The AIGA Starter will generate the necessary artefacts to get you started with your Generative AI project - this includes pre-approved architecture and code repositories. If you are looking to get started, check out the [setup guide](./docs/setup-guide.md).
+
 ## AIGA Components
 
 ## AIGA Reference Architecture
