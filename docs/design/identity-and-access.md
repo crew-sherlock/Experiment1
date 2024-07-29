@@ -29,7 +29,9 @@ This System Assigned Managed Identity is configured alongside the Azure ML manag
 
 | Role | Required Actions | Scope | Justification |
 | ---- | ---------------- | ----- | ------------- |
-| [AzureML Data Scientist](https://learn.microsoft.com/en-us/azure/role-based-access-control/built-in-roles/ai-machine-learning#azureml-data-scientist) | Microsoft.MachineLearningServices/workspaces/\*/read | Azure Machine Learning workspace | To access workspace resources during the PromptFlow runtime. |
+| Azure Machine Learning Workspace Connection Secrets Reader | Microsoft.MachineLearningServices/workspaces/connections/listsecrets/action | Azure Machine Learning workspace | To access workspace's default secret store, including workspace connections, from the PromptFlow runtime. |
+
+See additional details regarding the Endpoint Principal [here](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-deploy-online-endpoint-with-secret-injection?view=azureml-api-2&tabs=sai#create-an-endpoint).
 
 ### Additional Access
 

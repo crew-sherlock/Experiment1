@@ -63,7 +63,7 @@ runs:
         WORKSPACE_NAME=${{ inputs.WORKSPACE_NAME }}
         echo $WORKSPACE_NAME
 
-        az role assignment create --assignee $ENDPOINT_PRINCIPAL --role "AzureML Data Scientist" --scope "/subscriptions/ea481a04-0a19-444a-8589-aab55759dee3/resourcegroups/codeorange-psc-us6-shared-svc-appresources-playground/providers/Microsoft.MachineLearningServices/workspaces/$WORKSPACE_NAME"
+        az role assignment create --assignee $ENDPOINT_PRINCIPAL --role "Azure Machine Learning Workspace Connection Secrets Reader" --scope "/subscriptions/ea481a04-0a19-444a-8589-aab55759dee3/resourcegroups/codeorange-psc-us6-shared-svc-appresources-playground/providers/Microsoft.MachineLearningServices/workspaces/$WORKSPACE_NAME"
         auth_type=$(az keyvault show -n $KEY_VAULT_NAME  -g "PSC-aiga-AppResources-devtest" --query "properties.enableRbacAuthorization")
         if [[ -z "$auth_type" ]]; then
             echo "assigning RBAC permission"
