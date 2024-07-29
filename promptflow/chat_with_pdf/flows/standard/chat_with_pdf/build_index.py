@@ -1,4 +1,4 @@
-import PyPDF2
+import pypdf
 import faiss
 import os
 
@@ -31,7 +31,7 @@ def create_faiss_index(pdf_path: str) -> str:
                 os.makedirs(index_persistent_path)
 
         log("Building index")
-        pdf_reader = PyPDF2.PdfReader(pdf_path)
+        pdf_reader = pypdf.PdfReader(pdf_path)
 
         text = ""
         for page in pdf_reader.pages:

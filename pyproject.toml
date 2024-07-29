@@ -23,7 +23,7 @@ pandas = "2.2.2"
 promptflow-evals = ">=0.3.0"
 promptflow-azure = "1.13.0"
 requests = "2.32.3"
-azure-ai-ml = ">=1.16.0"
+azure-ai-ml = ">=1.18.0"
 
 [tool.poetry.group.test]
 optional = true
@@ -41,7 +41,7 @@ optional = true
 faiss-cpu = "1.8.0.post1"
 jinja2 = "3.1.4"
 openai = "1.35.10"
-PyPDF2 = "3.0.1"
+pypdf = "3.17.4"
 python-dotenv = "^1.0.1"
 tiktoken = "0.7.0"
 
