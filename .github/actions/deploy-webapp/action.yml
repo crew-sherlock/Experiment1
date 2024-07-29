@@ -12,9 +12,6 @@ inputs:
   REGISTRY_DETAILS:
     description: "acr registry details"
     required: true
-  ENV_VARS:
-    description: "env stage e.g. dev, test, prod"
-    required: true
 
 runs:
   using: composite

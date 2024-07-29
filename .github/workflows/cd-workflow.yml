@@ -16,23 +16,8 @@ on:
         description: "Determine type of deployment - aml, webapp"
         required: true
     secrets:
-      azure_credentials:
+      AZURE_CREDENTIALS:
         description: "service principal auth to Azure"
-        required: true
-      registry_details:
-        description: "prompt flow registry details"
-        required: false
-      azure_openai_api_key:
-        description: "azure openai key"
-        required: true
-      azure_openai_api_endpoint:
-        description: "azure openai endpoint"
-        required: true
-      aoai_api_key:
-        description: "aoai key"
-        required: true
-      aoai_api_base:
-        description: "aoai base path"
         required: true
 
 jobs:
@@ -41,14 +26,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: ${{ inputs.env_name }}
-    env:
-        RESOURCE_GROUP_NAME: ${{ vars.RESOURCE_GROUP_NAME }}
-        WORKSPACE_NAME: ${{ vars.WORKSPACE_NAME }}
-        AZURE_SUBSCRIPTION_ID: ${{ vars.SUBSCRIPTION_ID }}
-        AZURE_OPENAI_API_KEY: ${{ secrets.azure_openai_api_key }}
-        AZURE_OPENAI_API_ENDPOINT: ${{ secrets.azure_openai_api_endpoint }}
-        AOAI_API_KEY: ${{ secrets.aoai_api_key }}
-        AOAI_API_BASE: ${{ secrets.aoai_api_base }}
+
     steps:
       - name: Checkout Actions
         uses: actions/checkout@v4
@@ -56,12 +34,15 @@ jobs:
       - name: Azure login
         uses: azure/login@v2.1.1
         with:
-          creds: ${{ secrets.azure_credentials }}
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Load Secrets from Azure Key Vault
+        uses: ./.github/actions/load-secrets
+        with:
+          azureKeyVaultName: ${{ vars.KEY_VAULT_NAME }}
 
       - name: Set up Python Env
         uses: ./.github/actions/setup-environment
-        with:
-          use_case_base_path: ${{ inputs.use_case_base_path }}
 
       - name: Create .env file
         run: |
@@ -115,14 +96,13 @@ jobs:
         if: ${{ inputs.deployment_type == 'aml'  }}
         uses: ./.github/actions/deploy-aml
         with:
-          SUBSCRIPTION_ID: ${{ env.AZURE_SUBSCRIPTION_ID }}
+          AZURE_SUBSCRIPTION_ID: ${{ env.AZURE_SUBSCRIPTION_ID }}
           use_case_base_path: ${{ inputs.use_case_base_path }}
-          DEPLOY_ENVIRONMENT: ${{ inputs.env_name }}
-          RESOURCE_GROUP_NAME: ${{ vars.RESOURCE_GROUP_NAME }}
-          WORKSPACE_NAME: ${{ vars.WORKSPACE_NAME }}
-          KEY_VAULT_NAME: ${{ vars.KEY_VAULT_NAME }}
           MODEL_VERSION: ${{ env.MODEL_VERSION }}
-          ENV_VARS: ${{ secrets.env_vars }}
+          DEPLOY_ENVIRONMENT: ${{ inputs.env_name }}
+          RESOURCE_GROUP_NAME: ${{ env.RESOURCE_GROUP_NAME }}
+          WORKSPACE_NAME: ${{ env.WORKSPACE_NAME }}
+          KEY_VAULT_NAME: ${{ vars.KEY_VAULT_NAME }}
 
       #=====================================
       # Creates local pf connections when deployment type is webapp
@@ -155,6 +135,4 @@ jobs:
         with:
           USE_CASE_BASE_PATH: ${{ inputs.use_case_base_path }}
           DEPLOY_ENVIRONMENT: ${{ inputs.env_name }}
-          ENV_VARS: ${{ steps.env_vars.outputs.local_vars }}
-        env:
-          REGISTRY_DETAILS: ${{ secrets.registry_details }}
+          REGISTRY_DETAILS: ${{ env.DOCKER_IMAGE_REGISTRY }}

@@ -28,10 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     environment:
       name: ${{ inputs.env_name }}
-    env:
-      RESOURCE_GROUP_NAME: ${{ vars.RESOURCE_GROUP_NAME }}
-      WORKSPACE_NAME: ${{ vars.WORKSPACE_NAME }}
-      AZURE_SUBSCRIPTION_ID: ${{ vars.SUBSCRIPTION_ID }}
+
     steps:
       - name: Checkout Actions
         uses: actions/checkout@v4
@@ -122,10 +119,4 @@ jobs:
       env_name: ${{ inputs.env_name }}
       use_case_base_path: ${{ inputs.use_case_base_path }}
       deployment_type: ${{ inputs.deployment_type }}
-    secrets:
-      azure_credentials: ${{ secrets.azure_credentials }}
-      registry_details: ${{ secrets.registry_details }}
-      azure_openai_api_key: ${{ secrets.AZURE_OPENAI_API_KEY }}
-      azure_openai_api_endpoint: ${{ secrets.AZURE_OPENAI_API_ENDPOINT }}
-      aoai_api_key: ${{ secrets.AOAI_API_KEY }}
-      aoai_api_base: ${{ secrets.AOAI_API_BASE }}
+    secrets: inherit

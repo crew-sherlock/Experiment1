@@ -21,10 +21,6 @@ jobs:
     name: prompt flow bulk run
     runs-on: ubuntu-latest
     environment: ${{ inputs.env_name }}
-    env:
-        RESOURCE_GROUP_NAME: ${{ vars.RESOURCE_GROUP_NAME }}
-        WORKSPACE_NAME: ${{ vars.WORKSPACE_NAME }}
-        AZURE_SUBSCRIPTION_ID: ${{ vars.SUBSCRIPTION_ID }}
 
     steps:
       - name: Checkout Actions

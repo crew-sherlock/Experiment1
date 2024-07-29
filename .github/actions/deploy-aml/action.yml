@@ -3,7 +3,7 @@ name: deploy-aml
 description: execute an online endpoint for real time inference
 
 inputs:
-  SUBSCRIPTION_ID:
+  AZURE_SUBSCRIPTION_ID:
     description: "subscription id needed for deployment"
     required: true
   use_case_base_path:
@@ -24,9 +24,6 @@ inputs:
   KEY_VAULT_NAME:
     description: "Key vault name"
     required: true
-  ENV_VARS:
-    description: 'The API key for authentication'
-    required: false
 
 runs:
   using: composite
@@ -37,7 +34,7 @@ runs:
         step_name: "Provision Managed Endpoint"
         script_parameter: |
           python -m llmops.common.deployment.provision_endpoint \
-            --subscription_id ${{ inputs.SUBSCRIPTION_ID }} \
+            --subscription_id ${{ inputs.AZURE_SUBSCRIPTION_ID }} \
             --build_id ${{ github.run_id }} \
             --output_file "endpoint_principal.txt" \
             --env_name ${{ inputs.DEPLOY_ENVIRONMENT }} \
@@ -79,7 +76,7 @@ runs:
         step_name: "Provision Managed Deployment"
         script_parameter: |
           python -m llmops.common.deployment.provision_deployment \
-            --subscription_id ${{ inputs.SUBSCRIPTION_ID }} \
+            --subscription_id ${{ inputs.AZURE_SUBSCRIPTION_ID }} \
             --model_version ${{ inputs.MODEL_VERSION }} \
             --build_id ${{ github.run_id }} \
             --env_name ${{ inputs.DEPLOY_ENVIRONMENT }} \
@@ -91,6 +88,6 @@ runs:
         step_name: "Test Managed Deployment"
         script_parameter: |
           python -m llmops.common.deployment.test_model_on_aml \
-            --subscription_id ${{ inputs.SUBSCRIPTION_ID }} \
+            --subscription_id ${{ inputs.AZURE_SUBSCRIPTION_ID }} \
             --env_name ${{ inputs.DEPLOY_ENVIRONMENT }} \
             --base_path ${{ inputs.use_case_base_path }}

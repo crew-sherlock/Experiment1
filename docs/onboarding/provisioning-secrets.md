@@ -10,8 +10,11 @@ The following secrets are required to be provisioned in the Key Vault:
 | ----------- | ----------- |
 | AOAI_API_BASE | The base URL for the Azure OpenAI Service |
 | AOAI_API_KEY | The API key for the Azure OpenAI Service |
-| DOCKER_IMAGE_REGISTRY | The name of the container registry |
 | APPLICATIONINSIGHTS_CONNECTION_STRING | The connection string for Azure Application Insights |
+| AZURE_SUBSCRIPTION_ID | The Azure subscription ID |
+| DOCKER_IMAGE_REGISTRY | The name of the container registry |
+| RESOURCE_GROUP_NAME | The name of the Azure resource group |
+| WORKSPACE_NAME | The name of the Azure Machine Learning workspace |
 
 > **Note**: Secrets loaded from Azure Key Vault will supersede any GitHub Actions variables and secrets with the same name.
 
