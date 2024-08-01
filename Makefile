@@ -7,7 +7,7 @@ setup:
 	poetry run pre-commit install
 
 pre-commit:
-	poetry run pre-commit run --show-diff-on-failure --color=always --all-files
+	poetry run pre-commit run --color=always --all-files
 
 serve-docs:
 	poetry run mkdocs serve
