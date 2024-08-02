@@ -1,16 +1,22 @@
 name: cd-workflow
 
 on:
+  workflow_run:
+    workflows: ["ci-workflow"]
+    types:
+      - completed
   workflow_call:
     inputs:
       env_name:
         type: string
         description: "Execution Environment"
         required: true
+        default: "dev"
       use_case_base_path:
         type: string
-        description: "The flow use-case to execute"
+        description: "The flow usecase to execute"
         required: true
+        default: "promptflow/chat_with_pdf"
       deployment_type:
         type: string
         description: "Determine type of deployment - aml, webapp"
@@ -21,7 +27,7 @@ on:
         required: true
 
 jobs:
-  flow-deployment:
+  on-success:
     name: prompt flow deployment job
     runs-on: ubuntu-latest
     environment:
