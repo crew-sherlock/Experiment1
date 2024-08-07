@@ -1,20 +1,16 @@
 # Backlog Integration with GitHub
 
-In order to maintain **full traceability** for the AIGA project, it is recommended to integrate Azure Devops, where the backlog is maintained in Azure Boards with Github Enterprise being used primarily to maintain Git repos.
+In order to maintain **full traceability** for the project, it is recommended to integrate Azure Devops, where the backlog is maintained in Azure Boards with Github Enterprise being used primarily to maintain Git repos.
 
 The goal is to maintain the backlog Work Items with respective Git **commits** and **pull requests**.
 
 Once you connect your Azure Boards project with a GitHub repository, you can link work items to your GitHub commits and pull requests.
 
-## In AIGA
+## Getting your AzDo board set up with github
 
-The integration will be done connecting User Stories to Github pull requests. The team once assigned to a given User Story, should the elected branch strategy, and start implementation. The expectation is that several commits will happen during implementation, culminating in a pull request, to wrap the user story. Some expected guidance:
-
-- All User Stories (US) should be linked to a Github pull request, once it gets reviewed and merged.
-- Additional related Github commits or Github pull requests may be added to a given User Story
-- The team may use `#-mention` in commits or pull requests to link it to AzDO and/or transition work item.
-
-> 📢We are asking all team members to take a look at their [User Stories](https://dev.azure.com/DevOps-Vx/AIGA/_backlogs/backlog/AIGA%20Team/Stories) and **link any past related PRs** and/or commits.
+- In your project board (you need to be an administrator), go to Project settings.
+- Click on Github connections > New connection > Connect to your github account > Select the GitHub organisation *gsk-tech*.
+- Choose one or more repositories to be linked with your project.
 
 ## Action items / Quick guidelines for development
 
@@ -47,6 +43,16 @@ Some examples:
 ## Conclusion
 
 The team will use minimum integration to allow traceability on main implementations merged to the project repo. During the sprints, specifically in stand-ups, the team can view GitHub annotations on cards within a board. Everyone can quickly open linked GitHub commits or pull requests for more detail.
+
+## In AIGA
+
+The integration will be done connecting User Stories to GitHub pull requests. Once a team member is assigned to a given User Story, they should create a branch following the branching strategy, and start implementation. The expectation is that several commits will happen during implementation, culminating in a pull request, to wrap the user story. Some expected guidance:
+
+- All User Stories (US) should be linked to a Github pull request, once it gets reviewed and merged.
+- Additional related Github commits or Github pull requests may be added to a given User Story
+- The team may use `#-mention` in commits or pull requests to link it to AzDO and/or transition work item.
+
+> 📢We are asking all team members to take a look at their [User Stories](https://dev.azure.com/DevOps-Vx/AIGA/_backlogs/backlog/AIGA%20Team/Stories) and **link any past related PRs** and/or commits.
 
 ## Related articles
 

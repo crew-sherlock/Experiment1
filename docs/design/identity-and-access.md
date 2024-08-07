@@ -7,7 +7,7 @@
 
 ## GenAI DevKit
 
-This Service Principal is created alongside the Code Orange GenAI DevKit. It is granted high-level access to the resources within the GenAI DevKit and is predominantly used the AIGA Project's GitHub Actions workflows.
+This Service Principal is created with the resource group (once the CIID is created) and is provided to the Code Orange GenAI DevKit. It is granted high-level access to the resources within the GenAI DevKit and is predominantly used the AIGA Project's GitHub Actions workflows.
 
 ### Azure Resources
 

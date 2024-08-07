@@ -60,3 +60,8 @@ A clone of the *AIGA Template* repository, with project-specific configuration, 
 | [RAG](https://learn.microsoft.com/en-us/azure/search/retrieval-augmented-generation-overview) | An architecture that augments the capabilities of a Large Language Model (LLM) by adding an information retrieval system that provides grounding data. |
 | [Skills](https://learn.microsoft.com/en-us/azure/search/cognitive-search-predefined-skills) | A concept of Azure AI Search. An atomic operation that transforms content, recognizes or extracts text, or reshapes a previous enrichment. It could be built-in, custom, or a utility. |
 | [Tool](https://microsoft.github.io/promptflow/concepts/concept-tools.html) | The fundamental building block of a flow. An executable unit or function that can perform a task.|
+| Golden Dataset| The trusted source of data used for evaluation of GenAI flows. It contains the ground truth and is approved by business.|
+
+## Getting started with the project
+
+Start by [setting up the project](/docs/setup-guide.md)
