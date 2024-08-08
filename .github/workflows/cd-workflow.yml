@@ -5,33 +5,19 @@ on:
     workflows: ["ci-workflow"]
     types:
       - completed
-  workflow_call:
-    inputs:
-      env_name:
-        type: string
-        description: "Execution Environment"
-        required: true
-        default: "dev"
-      use_case_base_path:
-        type: string
-        description: "The flow usecase to execute"
-        required: true
-        default: "promptflow/chat_with_pdf"
-      deployment_type:
-        type: string
-        description: "Determine type of deployment - aml, webapp"
-        required: true
-    secrets:
-      AZURE_CREDENTIALS:
-        description: "service principal auth to Azure"
-        required: true
+
+permissions:
+  contents: read
+  actions: read
+  packages: write
 
 jobs:
   on-success:
     name: prompt flow deployment job
     runs-on: ubuntu-latest
-    environment:
-      name: ${{ inputs.env_name }}
+    environment: ${{ vars.TMP_ENV }}
+
+    if: ${{ github.event.workflow_run.conclusion == 'success' && github.event.workflow_run.head_branch == 'main'}}
 
     steps:
       - name: Checkout Actions
@@ -77,10 +63,10 @@ jobs:
           script_parameter: |
             python -m llmops.common.deployment.register_model \
             --subscription_id ${{ env.AZURE_SUBSCRIPTION_ID }} \
-            --base_path ${{ inputs.use_case_base_path }} \
+            --base_path ${{ vars.PROMPTFLOW_BASE_PATH }} \
             --output_file "model_version.txt" \
             --build_id ${{ github.run_id }} \
-            --env_name ${{ inputs.env_name }} \
+            --env_name ${{ vars.TMP_ENV }} \
 
       #=====================================
       # Reads model_version.txt file. Assigns it to variable MODEL_VERSION
@@ -95,17 +81,17 @@ jobs:
           echo "MODEL_VERSION=${model_version}"  >> "$GITHUB_ENV"
 
       #=====================================
-      # Executes managed deployment when parameter deployment_type == 'aml'
+      # Executes managed deployment when parameter DEPLOYMENT_TARGET == 'aml'
       # Reads 'azure_managed_endpoint' field values from deployment_config.json
       #=====================================
       - name: Deploy to Managed endpoint
-        if: ${{ inputs.deployment_type == 'aml'  }}
+        if: ${{ vars.DEPLOYMENT_TARGET == 'aml'  }}
         uses: ./.github/actions/deploy-aml
         with:
           AZURE_SUBSCRIPTION_ID: ${{ env.AZURE_SUBSCRIPTION_ID }}
-          use_case_base_path: ${{ inputs.use_case_base_path }}
+          use_case_base_path: ${{ vars.PROMPTFLOW_BASE_PATH }}
           MODEL_VERSION: ${{ env.MODEL_VERSION }}
-          DEPLOY_ENVIRONMENT: ${{ inputs.env_name }}
+          DEPLOY_ENVIRONMENT: ${{ vars.TMP_ENV }}
           RESOURCE_GROUP_NAME: ${{ env.RESOURCE_GROUP_NAME }}
           WORKSPACE_NAME: ${{ env.WORKSPACE_NAME }}
           KEY_VAULT_NAME: ${{ vars.KEY_VAULT_NAME }}
@@ -115,14 +101,14 @@ jobs:
       # Uses secret CONNECTION_DETAILS for creating connections
       #=====================================
       - name: Create local PF Connections
-        if: ${{ inputs.deployment_type == 'webapp'  }}
+        if: ${{ vars.DEPLOYMENT_TARGET == 'webapp'  }}
         uses: ./.github/actions/execute-script
         with:
           step_name: "Create local PF connections"
           script_parameter: |
             python -m llmops.common.prompt_local_connections \
-              --env_name ${{ inputs.env_name }} \
-              --base_path ${{ inputs.use_case_base_path }} \
+              --env_name ${{ vars.TMP_ENV }} \
+              --base_path ${{ vars.PROMPTFLOW_BASE_PATH }} \
 
       - name: Read .env file
         id: env_vars
@@ -132,13 +118,13 @@ jobs:
 
         #=====================================
         # Executes Azure Webapp deployment when parameter
-        # deployment_type == 'webapp' using docker image
+        # DEPLOYMENT_TARGET == 'webapp' using docker image
         # Reads 'webapp_endpoint' field values from deployment_config.json
         #=====================================
       - name: Deploy to webapp
-        if: ${{ inputs.deployment_type == 'webapp'  }}
+        if: ${{ vars.DEPLOYMENT_TARGET == 'webapp'  }}
         uses: ./.github/actions/deploy-webapp
         with:
-          USE_CASE_BASE_PATH: ${{ inputs.use_case_base_path }}
-          DEPLOY_ENVIRONMENT: ${{ inputs.env_name }}
+          USE_CASE_BASE_PATH: ${{ vars.PROMPTFLOW_BASE_PATH }}
+          DEPLOY_ENVIRONMENT: ${{ vars.TMP_ENV }}
           REGISTRY_DETAILS: ${{ env.DOCKER_IMAGE_REGISTRY }}

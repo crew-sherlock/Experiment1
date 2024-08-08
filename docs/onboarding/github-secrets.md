@@ -1,4 +1,4 @@
-# Provisioning Secrets
+# GitHub Secrets
 
 AIGA leverages Azure Key Vault to store secrets and keys used in the application. The Key Vault is a pre-requisite for AIGA and should be populated with the necessary secrets and keys ahead of time.
 
@@ -40,7 +40,7 @@ The following GitHub Action secrets are required:
 
 - `AZURE_CREDENTIALS`: The Azure service principal credentials. See [Creating a Service Principal](https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure#use-the-azure-login-action-with-a-service-principal-secret) for details on creating a service principal and creating the secret.
 
-The following GitHub Action variables are required:
+The following [GitHub Variables](./github-variables.md) are required:
 
 - `KEY_VAULT_NAME`: The name of the Azure Key Vault
 
@@ -57,7 +57,7 @@ After integrating the `load-secrets` action into the GitHub Actions workflow, **
 
 AIGA uses [GitHub Environments](https://docs.github.com/en/actions/deployment/targeting-different-environments/managing-environments-for-deployment) to supports multiple deployment environments (e.g., `dev`, `test`, `prod`).
 
-When creating a new environment, it is important to ensure that the necessary secrets and variables *(documented above)* are provisioned for the environment. For more details, see:
+When creating a new environment, it is important to ensure that the necessary secrets and variables are provisioned for the environment. For more details, see:
 
 - [Environment secrets](https://docs.github.com/en/actions/deployment/targeting-different-environments/managing-environments-for-deployment#environment-secrets)
 - [Environment variables](https://docs.github.com/en/actions/deployment/targeting-different-environments/managing-environments-for-deployment#environment-variables)

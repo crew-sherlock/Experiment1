@@ -2,26 +2,10 @@ name: ci-workflow
 
 on:
   workflow_dispatch:
-    inputs:
-      env_name:
-        type: string
-        description: "Execution Environment"
-        required: true
-        default: "dev"
-      use_case_base_path:
-        type: string
-        description: "The flow use case to execute"
-        required: true
-        default: "promptflow/chat_with_pdf"
-      deployment_type:
-        type: string
-        description: "Determine type of deployment - aml, webapp"
-        required: true
   push:
     branches:
       - main
       - development
-
 
 permissions:
   contents: read
@@ -54,15 +38,15 @@ jobs:
   run-workflow:
     uses: ./.github/workflows/run-workflow.yml
     with:
-      env_name: ${{ inputs.env_name || 'dev'}}
-      use_case_base_path: 'promptflow/chat_with_pdf'
+      env_name: ${{ vars.TMP_ENV }}
+      use_case_base_path: ${{ vars.PROMPTFLOW_BASE_PATH }}
     secrets: inherit
 
   evaluate-workflow:
     needs: run-workflow
     uses: ./.github/workflows/evaluate-workflow.yml
     with:
-      env_name: ${{ inputs.env_name || 'dev'}}
-      use_case_base_path: 'promptflow/chat_with_pdf'
-      deployment_type: ${{ inputs.deployment_type|| 'aml' }}
+      env_name: ${{ vars.TMP_ENV }}
+      use_case_base_path: ${{ vars.PROMPTFLOW_BASE_PATH }}
+      deployment_type: ${{ vars.DEPLOYMENT_TARGET }}
     secrets: inherit

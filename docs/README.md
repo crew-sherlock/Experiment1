@@ -12,8 +12,6 @@ The AI Generation Accelerator (AIGA) will comprise a collection of artefacts, pr
 
 ## Resources
 
-More information on AIGA can be found in the [AIGA Overview](../README.md).
-
 If you are looking to get started with a new Generative AI project, you should consider using the AIGA Starter - check out the [Getting started with AIGA](./setup-guide.md) guide.
 
 If you are a developer looking to contribute to the AIGA project, check out the [Developer Guide](./developer-guide.md) guide.
