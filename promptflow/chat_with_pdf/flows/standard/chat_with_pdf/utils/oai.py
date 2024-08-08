@@ -118,9 +118,17 @@ class OAIEmbedding(OAI):
         extract_delay_from_error_message=extract_delay_from_rate_limit_error_msg,
     )
     def generate(self, text: str) -> List[float]:
-        return self.client.embeddings.create(
-            input=text, model=os.environ.get("EMBEDDING_MODEL_DEPLOYMENT_NAME")
-        ).data[0].embedding
+        # embedding_dim: The number of dimensions the resulting output
+        # embeddings should have. Only supported in `text-embedding-3` and later models.
+        embedding_dim = os.environ.get("EMBEDDING_DIMENSION", None)
+        model_name = os.environ.get("EMBEDDING_MODEL_DEPLOYMENT_NAME")
+        if embedding_dim is None:
+            return self.client.embeddings.create(input=text,
+                                                 model=model_name).data[0].embedding
+        embedding_dim = int(embedding_dim)
+        return self.client.embeddings.create(input=text,
+                                             model=model_name,
+                                             dimensions=embedding_dim).data[0].embedding
 
 
 def count_token(text: str) -> int:
