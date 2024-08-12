@@ -1,9 +1,12 @@
 # All the values should be string type, please use "123" instead of 123 or "True" instead of True.
 $schema: https://azuremlschemas.azureedge.net/promptflow/latest/OpenAIConnection.schema.json
-name: <name-of-connection-in-aml-workspace>
-type: open_ai
+name: aoai
+type: azure_open_ai
+api_base: <open-ai-api-base>
 api_key: "<open-ai-api-key>"
-organization: ""
+api_type: "azure"
+api_version: "2024-02-01"
+organization: "GSK"
 
 # Note:
 # The connection information will be stored in a local database with api_key encrypted for safety.

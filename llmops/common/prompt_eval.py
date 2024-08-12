@@ -322,8 +322,8 @@ def prepare_and_execute(
 
             combined_results_df = pd.concat(dataframes, ignore_index=True)
             combined_metrics_df = pd.DataFrame(metrics)
-            combined_results_df["flow_name"] = flow_name
-            combined_metrics_df["flow_name"] = flow_name
+            combined_results_df["flow_name"] = f"{experiment_name}_{flow_name}"
+            combined_metrics_df["flow_name"] = f"{experiment_name}_{flow_name}"
             combined_results_df["exp_run"] = flow_run
             combined_metrics_df["exp_run"] = flow_run
 

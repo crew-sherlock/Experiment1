@@ -11,8 +11,20 @@ pip install  -r requirements.txt
 
 - Create OpenAI Connection ([Reference Here](https://microsoft.github.io/promptflow/how-to-guides/manage-connections.html#create-a-connection))
 ```
-pf create create -f <path-to-azure-open-ai-connection> --set api_key=<your-api-key>
+pf connection create -f openai.yaml --set api_key=<your-api-key>
 ```
+#### Deployment names
+
+These are the models currently used in this repo
+
+| Model	| Model deployment name	| Provider | Version | Environment |
+|-------|---------------|----------|---------|-------------|
+| text-embedding-ada-002 | psc-msat-us6-text-embedding-ada-002-01 | OpenAI |	2      |	dev |
+| gpt-4o                 |	gpt-4o-2024-05-13               |	OpenAI | 5/13/2024 |	dev |
+| text-embedding-3-large | text-embedding-3-large |	OpenAI |	1      |	dev |
+| text-embedding-3-small | text-embedding-3-small |	OpenAI |    1      |    dev |
+
+Make sure you change the models' deployment names. 
 
 ### Running Locally
 

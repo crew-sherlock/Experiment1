@@ -62,7 +62,7 @@ jobs:
       # Prompt Flow connections should pre-exist
       # used automatic (serverless) runtime by default
       #=====================================
-      - name: Execute prompt flow bulk run
+      - name: Promptflow E2E Test
         uses: ./.github/actions/execute-script
         with:
           step_name: "Execute prompt flow bulk run"

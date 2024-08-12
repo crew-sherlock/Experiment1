@@ -360,6 +360,7 @@ def prepare_and_execute(
             )
 
             common_params = {
+                "display_name": run_name,
                 "flow": flow_detail.flow_path,
                 "data": (dataset.get_local_source(base_path)
                          if EXECUTION_TYPE == "LOCAL"

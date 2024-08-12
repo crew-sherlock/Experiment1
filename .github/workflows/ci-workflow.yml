@@ -6,6 +6,7 @@ on:
     branches:
       - main
       - development
+      - virginie/test/chatwithpdf
 
 permissions:
   contents: read

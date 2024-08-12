@@ -65,20 +65,6 @@ jobs:
           echo $PWD
 
       #=====================================
-      # Registers evaluation dataset in Azure ML as Data Asset
-      # Reads appropriate field values from experiment.yaml or experiment.<env>.yaml
-      #=====================================
-      - name: Register evaluation data asset
-        uses: ./.github/actions/execute-script
-        with:
-          step_name: "Register evaluation data asset"
-          script_parameter: |
-            python -m llmops.common.register_data_asset \
-            --subscription_id ${{ env.AZURE_SUBSCRIPTION_ID }} \
-            --base_path ${{ inputs.use_case_base_path }} \
-            --env_name ${{ inputs.env_name }}
-
-      #=====================================
       # Executes all Evaluation flows available for a scenario
       # Generates Reports for each RUN as well as consolidated one
       # Uses each RUN ID as input to run evaluation against
