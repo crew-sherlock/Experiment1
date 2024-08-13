@@ -2,17 +2,6 @@ name: pr-workflow
 
 on:
   workflow_dispatch:
-    inputs:
-      env_name:
-        type: string
-        description: "Execution Environment"
-        required: true
-        default: "dev"
-      use_case_base_path:
-        type: string
-        description: "The flow use case to execute"
-        required: true
-        default: "promptflow/chat_with_pdf"
   pull_request:
     branches:
       - main
@@ -39,7 +28,4 @@ jobs:
   run-workflow:
     needs: pr-code-validation
     uses: ./.github/workflows/run-workflow.yml
-    with:
-      env_name: ${{ inputs.env_name || 'dev'}}
-      use_case_base_path: 'promptflow/chat_with_pdf'
     secrets: inherit

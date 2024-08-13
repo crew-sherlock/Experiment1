@@ -2,15 +2,6 @@ name: run-workflow
 
 on:
   workflow_call:
-    inputs:
-      env_name:
-        type: string
-        description: "Execution Environment"
-        required: true
-      use_case_base_path:
-        type: string
-        description: "The flow use-case to execute"
-        required: true
     secrets:
       AZURE_CREDENTIALS:
         description: "service principal auth to Azure"
@@ -20,7 +11,7 @@ jobs:
   experiment-and-evaluation-workflow:
     name: prompt flow bulk run
     runs-on: ubuntu-latest
-    environment: ${{ inputs.env_name }}
+    environment: ${{ vars.TMP_ENV }}
 
     steps:
       - name: Checkout Actions
@@ -50,8 +41,8 @@ jobs:
           script_parameter: |
             python -m llmops.common.register_data_asset \
             --subscription_id ${{ env.AZURE_SUBSCRIPTION_ID }} \
-            --base_path ${{ inputs.use_case_base_path }} \
-            --env_name ${{ inputs.env_name }}
+            --base_path ${{ vars.PROMPTFLOW_BASE_PATH }} \
+            --env_name ${{ vars.TMP_ENV }}
 
       #=====================================
       # Executes Standard flow for a scenario
@@ -70,8 +61,8 @@ jobs:
             python -m llmops.common.prompt_pipeline \
             --subscription_id ${{ env.AZURE_SUBSCRIPTION_ID }} \
             --build_id ${{ github.run_id }} \
-            --base_path ${{ inputs.use_case_base_path }} \
-            --env_name ${{ inputs.env_name }} \
+            --base_path ${{ vars.PROMPTFLOW_BASE_PATH }} \
+            --env_name ${{ vars.TMP_ENV }} \
             --output_file run_id.txt
 
       - name: Upload run_id.txt artifact

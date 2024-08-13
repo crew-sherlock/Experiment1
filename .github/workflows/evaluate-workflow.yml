@@ -2,21 +2,6 @@ name: evaluation-workflow
 
 on:
   workflow_call:
-    inputs:
-      env_name:
-        type: string
-        description: "Execution Environment"
-        required: true
-        default: "dev"
-      use_case_base_path:
-        type: string
-        description: "The flow use-case to execute"
-        required: true
-        default: "web_classification"
-      deployment_type:
-        type: string
-        description: "Determine type of deployment - aml, aks, docker, webapp"
-        required: true
     secrets:
       AZURE_CREDENTIALS:
         description: "service principal authentication to Azure"
@@ -27,7 +12,7 @@ jobs:
     name: prompt flow experiment and evaluation job
     runs-on: ubuntu-latest
     environment:
-      name: ${{ inputs.env_name }}
+      name: ${{ vars.TMP_ENV }}
 
     steps:
       - name: Checkout Actions
@@ -81,8 +66,8 @@ jobs:
             python -m llmops.common.prompt_eval \
             --subscription_id ${{ env.AZURE_SUBSCRIPTION_ID }} \
             --build_id ${{ github.run_id }} \
-            --base_path ${{ inputs.use_case_base_path }} \
-            --env_name ${{ inputs.env_name }} \
+            --base_path ${{ vars.PROMPTFLOW_BASE_PATH }} \
+            --env_name ${{ vars.TMP_ENV }} \
             --run_id "$RUN_NAME"
 
       #=====================================
