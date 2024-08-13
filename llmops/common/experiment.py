@@ -91,15 +91,18 @@ class Dataset:
             )
         return f"azureml:{self.name}:{ds.version}"
 
-    def get_local_source(self, base_path: Optional[str] = None):
+    def get_local_source(self):
         """Get the local source of the dataset."""
         if self._is_remote_source:
             return None
-        safe_base_path = base_path or ""
-        data_path = os.path.join(safe_base_path, self.source)
+
+        root_path = os.path.abspath(os.path.join(os.path.dirname(__file__), "../../"))
+
+        data_path = os.path.join(root_path, self.source)
         if os.path.exists(data_path):
             return os.path.abspath(data_path)
-        return os.path.join(safe_base_path, _DEFAULT_DATA_DIR, self.source)
+
+        return os.path.join(root_path, _DEFAULT_DATA_DIR, self.source)
 
     # Define equality operation
     def __eq__(self, other):

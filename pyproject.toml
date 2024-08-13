@@ -5,8 +5,9 @@ package-mode = false
 
 [tool.poetry.dependencies]
 python = ">=3.9, <4.0"
-promptflow = "^1.13.0"
+promptflow = "^1.14.0"
 promptflow-tools = "^1.4.0"
+azure-search-documents = "^11.5.1"
 
 [tool.poetry.group.dev.dependencies]
 flake8 = "7.1.0"
@@ -14,6 +15,7 @@ flake8-docstrings = "1.6.0"
 mkdocs-material = "9.5.27"
 pep8-naming = "0.13.0"
 pre-commit = "3.7.1"
+keyrings-alt = "^5.0.1"
 
 [tool.poetry.group.llmops]
 optional = true
@@ -21,7 +23,7 @@ optional = true
 [tool.poetry.group.llmops.dependencies]
 pandas = "2.2.2"
 promptflow-evals = ">=0.3.0"
-promptflow-azure = "1.13.0"
+promptflow-azure = "1.14.0"
 requests = "2.32.3"
 azure-ai-ml = ">=1.18.0"
 
@@ -30,25 +32,8 @@ optional = true
 
 [tool.poetry.group.test.dependencies]
 pytest = "8.2.2"
-pytest-azurepipelines = "1.0.3"
 pytest-cov = "3.0.0"
 pytest-mock = "3.7.0"
-
-[tool.poetry.group.promptflow-run]
-optional = true
-
-[tool.poetry.group.promptflow-run.dependencies]
-faiss-cpu = "1.8.0.post1"
-jinja2 = "3.1.4"
-openai = "1.35.10"
-pypdf = "3.17.4"
-python-dotenv = "^1.0.1"
-tiktoken = "0.7.0"
-
-[tool.poetry.group.promptflow-eval]
-optional = true
-
-[tool.poetry.group.promptflow-eval.dependencies]
 
 [build-system]
 requires = ["poetry-core"]

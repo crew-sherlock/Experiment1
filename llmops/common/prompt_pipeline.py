@@ -275,7 +275,7 @@ def prepare_and_execute(
 
                         common_params = {
                             "flow": flow_detail.flow_path,
-                            "data": (dataset.get_local_source(base_path)
+                            "data": (dataset.get_local_source()
                                      if EXECUTION_TYPE == "LOCAL"
                                      else dataset.get_remote_source(
                                          wrapper.get_property_value())),
@@ -362,7 +362,7 @@ def prepare_and_execute(
             common_params = {
                 "display_name": run_name,
                 "flow": flow_detail.flow_path,
-                "data": (dataset.get_local_source(base_path)
+                "data": (dataset.get_local_source()
                          if EXECUTION_TYPE == "LOCAL"
                          else dataset.get_remote_source(
                               wrapper.get_property_value())),

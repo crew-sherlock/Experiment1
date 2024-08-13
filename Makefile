@@ -17,8 +17,7 @@ build-docs:
 
 requirements:
 	@poetry lock --no-update
-	@find promptflow -path '*/standard/*' -name 'requirements.txt' -execdir poetry export --with promptflow-run --without-hashes -o {} \;
-	@find promptflow -path '*/evaluation/*' -name 'requirements.txt' -execdir poetry export --with promptflow-eval --without-hashes -o {} \;
+	@find promptflow -path '*/*' -name 'requirements.txt' -execdir poetry export --without-hashes -o {} \;
 
 clean:
 	rm -rf site htmlcov junit

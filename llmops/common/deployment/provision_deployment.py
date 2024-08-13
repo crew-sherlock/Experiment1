@@ -117,7 +117,7 @@ def create_deployment(
 
     env_vars = resolve_env_vars(experiment.base_path)
 
-    real_config = f"{base_path}/configs/deployment_config.json"
+    real_config = "config/deployment_config.json"
 
     logger.info(f"Model name: {model_name}")
 

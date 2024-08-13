@@ -32,7 +32,7 @@ The AIGA Project will produce an OCI-compliant container image that will be publ
 
 Leveraging this container image, the AIGA Template will support the following deployment options out-of-the-box:
 
-- **Managed endpoint in Azure Machine Learning** - Azure Machine Learning can be used to serve a flow as a managed online endpoint for real-time inference. Deployment to Azure Machine Learning will be based on LLMOp's [provision_endpoint.py](https://github.com/microsoft/llmops-promptflow-template/blob/main/llmops/common/deployment/provision_endpoint.py)
+- **Managed endpoint in Azure Machine Learning** - Azure Machine Learning can be used to serve a flow as a managed online endpoint for real-time inference. Deployment to Azure Machine Learning will be based on LLMOps [provision_endpoint.py](https://github.com/microsoft/llmops-promptflow-template/blob/main/llmops/common/deployment/provision_endpoint.py)
 - **Azure App Service** - Azure App Service is an HTTP-based service for hosting web applications, REST APIs, and mobile back ends. Deployment to Azure App Service will be based on Prompt Flow's [deploy.sh](https://github.com/microsoft/promptflow/blob/main/examples/tutorials/flow-deploy/azure-app-service/deploy.sh) and LLMOps's [az_webapp_deploy.sh](https://github.com/microsoft/llmops-promptflow-template/blob/main/llmops/common/scripts/az_webapp_deploy.sh)
 
 > **Note:** The AIGA Template will not support Azure Functions as a target runtime out-of-the-box. Our focus will be a containerised deployment of flows on Azure App Service.

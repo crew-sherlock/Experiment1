@@ -11,23 +11,23 @@
 
 AIGA leverages [poetry](https://python-poetry.org/) for managing Python dependencies. However, at present PromptFlow requires `requirements.txt` for installing dependencies in the flow's runtime environment.
 
-To manage this, we maintain two Poetry [dependency groups](https://python-poetry.org/docs/managing-dependencies/#dependency-groups) in the project's `pyproject.toml`. Using a `pre-commit` hook, we export these groups to the appropriate `requirements.txt` file.
+To manage this, we use a `pre-commit` hook and export Poetry requirements to the appropriate `requirements.txt` files.
 
-- `promptflow-run` is exported to "promptflow/*/standard/requirements.txt"
-- `promptflow-eval` is exported to "promptflow/*/evaluation/requirements.txt"
+- "promptflow/*/standard/requirements.txt"
+- "promptflow/*/evaluation/requirements.txt"
 
 ### Maintaining dependencies
 
-1. Adding a new dependency to `promptflow-run`:
+1. Adding a new dependency:
 
     ```bash
-    poetry add <package-name> --group promptflow-run
+    poetry add <package-name>
     ```
 
-1. Removing a dependency from `promptflow-run`:
+1. Removing a dependency:
 
     ```bash
-    poetry remove <package-name> --group promptflow-run
+    poetry remove <package-name>
     ```
 
 1. Export dependencies to `requirements.txt`:

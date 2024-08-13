@@ -22,7 +22,6 @@ install the environment [using poetry](https://python-poetry.org/docs/#installat
 
 ```bash
 make setup
-poetry install --with promptflow-run
 ```
 
 When the command finish successfully, you can perform:
@@ -70,7 +69,7 @@ The flow uses the configuration in [flow.dag.yaml](../../promptflow/chat_with_pd
 To run it, we will use [this pdf](https://arxiv.org/pdf/1810.04805.pdf) as an example:
 
 ```bash
-pf flow test --flow promptflow/chat_with_pdf/flows/standard --inputs question="What is the name of the new language representation model introduced in the document?" pdf_url="https://arxiv.org/pdf/1810.04805.pdf"
+pf flow test --flow promptflow/inference --inputs question="What is the name of the new language representation model introduced in the document?" pdf_url="https://arxiv.org/pdf/1810.04805.pdf"
 ```
 
 ## Run evaluation flow
@@ -102,7 +101,7 @@ In that file, we can see the evaluation flow is using the files:
 To test the evaluation flow, run:
 
 ```bash
-pf flow test --flow promptflow/chat_with_pdf/flows/evaluation
+pf flow test --flow promptflow/evaluation
 ```
 
 ### Create flow run with multi line data and selected metrics

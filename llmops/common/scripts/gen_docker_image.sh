@@ -62,7 +62,7 @@ if [[ -e "$config_path" ]]; then
     pip install -r ./$use_case_base_path/$STANDARD_FLOW/requirements.txt
     pf flow build --source "./$use_case_base_path/$STANDARD_FLOW" --output "./$use_case_base_path/docker"  --format docker
 
-    cp "./$use_case_base_path/environment/Dockerfile" "./$use_case_base_path/docker/Dockerfile"
+    cp "./docker/promptflow/Dockerfile" "./$use_case_base_path/docker/Dockerfile"
 
     python -m llmops.common.deployment.migrate_connections --base_path $use_case_base_path --env_name $deploy_environment
     # docker build the prompt flow based image
@@ -70,7 +70,7 @@ if [[ -e "$config_path" ]]; then
 
     docker images
 
-    deploy_config="./$use_case_base_path/configs/deployment_config.json"
+    deploy_config="./config/deployment_config.json"
     con_object=$(jq ".webapp_endpoint[] | select(.ENV_NAME == \"$deploy_environment\")" "$deploy_config")
 
     read -r -a connection_names <<< "$(echo "$con_object" | jq -r '.CONNECTION_NAMES | join(" ")')"

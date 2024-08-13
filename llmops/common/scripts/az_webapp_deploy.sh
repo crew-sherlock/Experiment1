@@ -37,7 +37,7 @@ set -e # fail on error
 
 # read values from deployment_config.json related to `webapp_endpoint`
 env_name=$deploy_environment
-deploy_config="./$use_case_base_path/configs/deployment_config.json"
+deploy_config="./config/deployment_config.json"
 env_var_file_path="./$use_case_base_path/environment/env.yaml"
 con_object=$(jq ".webapp_endpoint[] | select(.ENV_NAME == \"$env_name\")" "$deploy_config")
 REGISTRY_NAME=$(echo "$con_object" | jq -r '.REGISTRY_NAME')

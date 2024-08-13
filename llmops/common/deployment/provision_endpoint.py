@@ -42,7 +42,7 @@ def create_endpoint(
         subscription_id=subscription_id, env_name=env_name
     )
 
-    real_config = f"{base_path}/configs/deployment_config.json"
+    real_config = "config/deployment_config.json"
 
     ml_client = MLClient(
         subscription_id=config.subscription_id,

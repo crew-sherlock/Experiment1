@@ -202,7 +202,7 @@ def prepare_and_execute(
                 column_mapping = dataset_mapping.mappings
                 dataset = dataset_mapping.dataset
                 data_id = (
-                    dataset.get_local_source(base_path)
+                    dataset.get_local_source()
                     if EXECUTION_TYPE == "LOCAL"
                     else dataset.get_remote_source(pf.ml_client)
                     )
