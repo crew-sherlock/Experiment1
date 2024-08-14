@@ -10,6 +10,8 @@ The following secrets are required to be provisioned in the Key Vault:
 | ----------- | ----------- |
 | AOAI_API_BASE | The base URL for the Azure OpenAI Service |
 | AOAI_API_KEY | The API key for the Azure OpenAI Service |
+| AISEARCH_API_BASE | The base URL for the Azure AI Search Service |
+| AISEARCH_API_KEY | The API key for the Azure AI Search Service |
 | APPLICATIONINSIGHTS_CONNECTION_STRING | The connection string for Azure Application Insights |
 | AZURE_SUBSCRIPTION_ID | The Azure subscription ID |
 | DOCKER_IMAGE_REGISTRY | The name of the container registry |

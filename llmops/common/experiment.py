@@ -622,13 +622,6 @@ def _create_connections(
     """
     connections: list[Connection] = []
     for raw_connection in raw_connections:
-        # Raise error if expected evaluator configuration missing
-        _raise_error_if_missing_keys(
-            ["name", "api_key", "api_base", "api_type", "api_version"],
-            raw_connection,
-            message=f"Connection '{raw_connection.get('name')}' config missing"
-        )
-
         connection_name = None
         connection_type = None
         connection_properties = {}

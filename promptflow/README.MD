@@ -9,10 +9,13 @@ This is a simple flow that allow you to ask questions about the content of a PDF
 pip install  -r requirements.txt
 ```
 
-- Create OpenAI Connection ([Reference Here](https://microsoft.github.io/promptflow/how-to-guides/manage-connections.html#create-a-connection))
+Create PromptFlow Connections ([reference](https://microsoft.github.io/promptflow/how-to-guides/manage-connections.html#create-a-connection)). From the `inference` directory:
+
+```bash
+pf connection create -f openai.yaml --set api_key=<open-ai-api-key> --set api_base=<open-ai-api-base>
+pf connection create -f aisearch.yaml --set api_key=<aisearch-api-key> --set api_base=aisearch-api-base>
 ```
-pf connection create -f openai.yaml --set api_key=<your-api-key>
-```
+
 #### Deployment names
 
 These are the models currently used in this repo
@@ -24,7 +27,7 @@ These are the models currently used in this repo
 | text-embedding-3-large | text-embedding-3-large |	OpenAI |	1      |	dev |
 | text-embedding-3-small | text-embedding-3-small |	OpenAI |    1      |    dev |
 
-Make sure you change the models' deployment names. 
+Make sure you change the models' deployment names.
 
 ### Running Locally
 

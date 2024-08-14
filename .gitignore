@@ -281,6 +281,7 @@ $RECYCLE.BIN/
 
 # promptflow
 .promptflow
+promptflow/*/src
 
 # pdfs
 .pdfs

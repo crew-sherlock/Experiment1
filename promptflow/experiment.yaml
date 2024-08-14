@@ -8,6 +8,11 @@ connections:
   api_version: 2023-05-15
   api_key: ${api_key}
   api_type: azure
+- name: aisearch
+  connection_type: CognitiveSearchConnection
+  api_base: ${api_base}
+  api_version: 2023-11-01
+  api_key: ${api_key}
 
 datasets:
 - name: chat_with_pdf
