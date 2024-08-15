@@ -19,6 +19,7 @@ nav:
   - Contributing:
     - Developer Guide: contributing/developer-guide.md
     - PromptFlow: contributing/promptflow.md
+    - Adding Metrics: contributing/adding-metrics.md
     - Backlog Traceability: contributing/backlog-integration-with-github.md
     - Branching Strategy: contributing/branching-strategy.md
   - Onboarding:
@@ -40,6 +41,13 @@ markdown_extensions:
 
   # Python Markdown
   - attr_list
+  - pymdownx.highlight:
+      anchor_linenums: true
+      line_spans: __span
+      pygments_lang_class: true
+  - pymdownx.inlinehilite
+  - pymdownx.snippets
+  - pymdownx.superfences
 
 extra:
   social:

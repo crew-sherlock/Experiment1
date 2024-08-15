@@ -76,7 +76,7 @@ The flow uses the configuration in [flow.dag.yaml](https://github.com/gsk-tech/A
 To run it, we will use [this pdf](https://arxiv.org/pdf/1810.04805.pdf) as an example:
 
 ```bash
-pf flow test --flow promptflow/inference --inputs question="What is the name of the new language representation model introduced in the document?" pdf_url="https://arxiv.org/pdf/1810.04805.pdf"
+pf flow test --flow promptflow/inference --inputs question="What is the name of the new language representation model introduced in the document?"
 ```
 
 ## Run evaluation flow
@@ -101,9 +101,9 @@ The evaluation flow uses [flow.dag.yaml](https://github.com/gsk-tech/AIGA/tree/m
 
 In that file, we can see the evaluation flow is using the files:
 
-- rag_groundedness_prompt.jinja2 -> groundedness
-- rag_retrieval_prompt.jinja2 -> retrieval score
-- rag_generation_prompt.jinja2 -> relevance
+- gpt_groundedness_prompt.jinja2 -> groundedness
+- gpt_retrieval_score_prompt.jinja2 -> retrieval score
+- gpt_relevance_prompt.jinja2 -> relevance
 
 To test the evaluation flow, run:
 

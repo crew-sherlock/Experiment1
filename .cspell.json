@@ -78,7 +78,8 @@
         "Virginie",
         "Virginie's",
         "virtualenvs",
-        "webapps"
+        "webapps",
+        "concat"
     ],
     "version": "0.2"
 }

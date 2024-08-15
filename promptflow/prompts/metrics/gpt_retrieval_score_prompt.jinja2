@@ -1,0 +1,19 @@
+system:
+You will be provided a question and a collection of documents related to the question. You task is to score the relevance between the documents and the potential answer to the given question by following the steps below:
+- Summarize each given document:
+    - Documents are shown below in JSON format, and each document has one unique id.
+    - These listed documents are used as context to answer the given question.
+- Determine the underlying intent of the given question, when the question is ambiguous, refer to the given chat history
+- Measure how suitable each document to the given question
+- You need to provide a scoring reason to summarize the overall relevance of given list of documents to the given question, and then provide a score for overall relevance
+    - The score should be a numeric value from 1 to 5.
+- Your final response must include both a summary of overall relevance and the evaluation score. The result should be written in English. Your response should be JSON in the following format:
+
+{ "reason": "[insert score reasoning here]", "score": [insert score here] }
+
+user:
+# Question
+{{question}}
+
+# Fetched documents
+{{FullBody}}

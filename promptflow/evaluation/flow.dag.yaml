@@ -1,20 +1,23 @@
 $schema: https://azuremlschemas.azureedge.net/promptflow/latest/Flow.schema.json
 environment:
   python_requirements_txt: requirements.txt
+additional_includes:
+- ../../src/
+- ../prompts/
 inputs:
   metrics:
-    type: string
-    default: gpt_groundedness,gpt_relevance,gpt_retrieval_score
-    is_chat_input: false
+    type: list
+    default:
+    - gpt_groundedness
+    - gpt_relevance
+    - gpt_retrieval_score
   answer:
     type: string
     default: Of the tents mentioned in the retrieved documents, the Alpine Explorer
       Tent has the highest waterproof rating of 3000mm for its rainfly.
-    is_chat_input: false
   question:
     type: string
     default: Which tent is the most waterproof?
-    is_chat_input: false
   documents:
     type: string
     default: "{\"documents\"： [{\"content\":\"<h1
@@ -384,7 +387,6 @@ inputs:
       b.core.windows.net/fileupload-my-product-info/product_info_1.md\",\"metad\
       ata\":{\"chunking\":\"orignal document size=981. Scores=4.0350547Org
       Highlight count=74.\"},\"chunk_id\":\"0\"}]}"
-    is_chat_input: false
 outputs:
   gpt_relevance:
     type: string
@@ -396,15 +398,110 @@ outputs:
     type: string
     reference: ${concat_scores.output.gpt_retrieval_score}
 nodes:
+- name: select_metrics
+  type: python
+  source:
+    type: code
+    path: src/tools/metrics/select_metrics.py
+  inputs:
+    selected_metrics: ${inputs.metrics}
+  use_variants: false
+  aggregation: false
+- name: gpt_relevance
+  type: llm
+  source:
+    type: code
+    path: prompts/metrics/gpt_relevance_prompt.jinja2
+  inputs:
+    deployment_name: gpt-4o-2024-05-13
+    temperature: 0
+    top_p: 1
+    max_tokens: 1000
+    presence_penalty: 0
+    frequency_penalty: 0
+    question: ${inputs.question}
+    answer: ${inputs.answer}
+    FullBody: ${inputs.documents}
+  connection: aoai
+  api: chat
+  activate:
+    when: ${select_metrics.output.gpt_relevance}
+    is: true
+  use_variants: false
+- name: parse_gpt_relevance
+  type: python
+  source:
+    type: code
+    path: src/tools/metrics/parse_llm_evaluation_score.py
+  inputs:
+    llm_evaluation_score: ${gpt_relevance.output}
+  use_variants: false
+- name: gpt_groundedness
+  type: llm
+  source:
+    type: code
+    path: prompts/metrics/gpt_groundedness_prompt.jinja2
+  inputs:
+    deployment_name: gpt-4o-2024-05-13
+    temperature: 0
+    top_p: 1
+    max_tokens: 1000
+    presence_penalty: 0
+    frequency_penalty: 0
+    FullBody: ${inputs.documents}
+    answer: ${inputs.answer}
+    question: ${inputs.question}
+  connection: aoai
+  api: chat
+  activate:
+    when: ${select_metrics.output.gpt_groundedness}
+    is: true
+  use_variants: false
+- name: parse_gpt_groundedness
+  type: python
+  source:
+    type: code
+    path: src/tools/metrics/parse_llm_evaluation_score.py
+  inputs:
+    llm_evaluation_score: ${gpt_groundedness.output}
+  use_variants: false
+- name: gpt_retrieval_score
+  type: llm
+  source:
+    type: code
+    path: prompts/metrics/gpt_retrieval_score_prompt.jinja2
+  inputs:
+    deployment_name: gpt-4o-2024-05-13
+    temperature: 0
+    top_p: 1
+    max_tokens: 1000
+    presence_penalty: 0
+    frequency_penalty: 0
+    FullBody: ${inputs.documents}
+    question: ${inputs.question}
+  connection: aoai
+  api: chat
+  activate:
+    when: ${select_metrics.output.gpt_retrieval_score}
+    is: true
+  use_variants: false
+- name: parse_gpt_retrieval_score
+  type: python
+  source:
+    type: code
+    path: src/tools/metrics/parse_llm_evaluation_score.py
+  inputs:
+    llm_evaluation_score: ${gpt_retrieval_score.output}
+  use_variants: false
 - name: concat_scores
   type: python
   source:
     type: code
     path: src/tools/metrics/concat_scores.py
   inputs:
-    rag_generation_score: ${parse_generation_score.output}
-    rag_grounding_score: ${parse_grounding_score.output}
-    rag_retrieval_score: ${parse_retrieval_score.output}
+    gpt_relevance: ${parse_gpt_relevance.output}
+    gpt_groundedness: ${parse_gpt_groundedness.output}
+    gpt_retrieval_score: ${parse_gpt_retrieval_score.output}
   use_variants: false
 - name: aggregate_variants_results
   type: python
@@ -413,114 +510,6 @@ nodes:
     path: src/tools/metrics/aggregate_variants_results.py
   inputs:
     metrics: ${inputs.metrics}
-    results: ${concat_scores.output}
+    scores: ${concat_scores.output}
   aggregation: true
   use_variants: false
-- name: gpt_groundedness
-  type: llm
-  source:
-    type: code
-    path: rag_groundedness_prompt.jinja2
-  inputs:
-    deployment_name: gpt-4o-2024-05-13
-    temperature: 0
-    top_p: 1
-    max_tokens: 1000
-    presence_penalty: 0
-    frequency_penalty: 0
-    FullBody: ${inputs.documents}
-    answer: ${inputs.answer}
-    question: ${inputs.question}
-  connection: aoai
-  api: chat
-  activate:
-    when: ${validate_input.output.gpt_groundedness}
-    is: true
-  use_variants: false
-- name: gpt_retrieval_score
-  type: llm
-  source:
-    type: code
-    path: rag_retrieval_prompt.jinja2
-  inputs:
-    deployment_name: gpt-4o-2024-05-13
-    temperature: 0
-    top_p: 1
-    max_tokens: 1000
-    presence_penalty: 0
-    frequency_penalty: 0
-    FullBody: ${inputs.documents}
-    question: ${inputs.question}
-  connection: aoai
-  api: chat
-  activate:
-    when: ${validate_input.output.gpt_retrieval_score}
-    is: true
-  use_variants: false
-- name: gpt_relevance
-  type: llm
-  source:
-    type: code
-    path: rag_generation_prompt.jinja2
-  inputs:
-    deployment_name: gpt-4o-2024-05-13
-    temperature: 0
-    top_p: 1
-    max_tokens: 1000
-    presence_penalty: 0
-    frequency_penalty: 0
-    FullBody: ${inputs.documents}
-    answer: ${inputs.answer}
-    question: ${inputs.question}
-  connection: aoai
-  api: chat
-  activate:
-    when: ${validate_input.output.gpt_relevance}
-    is: true
-  use_variants: false
-- name: parse_generation_score
-  type: python
-  source:
-    type: code
-    path: src/tools/metrics/parse_generation_score.py
-  inputs:
-    rag_generation_score: ${gpt_relevance.output}
-  use_variants: false
-- name: parse_retrieval_score
-  type: python
-  source:
-    type: code
-    path: src/tools/metrics/parse_retrieval_score.py
-  inputs:
-    retrieval_output: ${gpt_retrieval_score.output}
-  use_variants: false
-- name: parse_grounding_score
-  type: python
-  source:
-    type: code
-    path: src/tools/metrics/parse_groundedness_score.py
-  inputs:
-    rag_grounding_score: ${gpt_groundedness.output}
-  use_variants: false
-- name: select_metrics
-  type: python
-  source:
-    type: code
-    path: src/tools/metrics/select_metrics.py
-  inputs:
-    metrics: ${inputs.metrics}
-  use_variants: false
-- name: validate_input
-  type: python
-  source:
-    type: code
-    path: src/tools/metrics/validate_input.py
-  inputs:
-    answer: ${inputs.answer}
-    documents: ${inputs.documents}
-    question: ${inputs.question}
-    selected_metrics: ${select_metrics.output}
-  use_variants: false
-
-additional_includes:
-- ../../src/

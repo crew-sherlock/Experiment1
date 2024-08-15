@@ -51,8 +51,10 @@ jobs:
         run: |
           export subscriptionId=$(az account show --query id -o tsv)
           echo "SUBSCRIPTION_ID=$subscriptionId" >> $GITHUB_OUTPUT
-      - name: copy src to inference
-        run: cp -r src ./promptflow/inference
+      - name: copy to inference
+        run: |
+          cp -r src promptflow/inference
+          cp -r promptflow/prompts promptflow/inference
 
       #=====================================
       # Registers the flow in Azure ML registry

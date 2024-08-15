@@ -3,6 +3,7 @@ environment:
   python_requirements_txt: requirements.txt
 additional_includes:
 - ../../src/
+- ../prompts/
 inputs:
   chat_history:
     type: list
@@ -22,7 +23,7 @@ nodes:
   type: llm
   source:
     type: code
-    path: rewrite_question_prompt.jinja2
+    path: prompts/rewrite_question_prompt.jinja2
   inputs:
     deployment_name: gpt-4o-2024-05-13
     temperature: 1
@@ -50,7 +51,7 @@ nodes:
   type: llm
   source:
     type: code
-    path: generate_response_prompt.jinja2
+    path: prompts/generate_response_prompt.jinja2
   inputs:
     deployment_name: gpt-4o-2024-05-13
     temperature: 0

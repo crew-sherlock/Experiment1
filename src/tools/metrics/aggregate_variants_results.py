@@ -1,13 +1,14 @@
-from typing import List
 from promptflow.core import tool, log_metric
 import numpy as np
 
 
 @tool
-def aggregate_variants_results(results: List[dict], metrics: List[str]):
+def aggregate_variants_results(scores: list[dict[str, int]], metrics: list[list[str]]):
+    input_metrics = metrics[0]
+
     aggregate_results = {}
-    for result in results:
-        for name, value in result.items():
+    for score in scores:
+        for name, value in score.items():
             if name not in aggregate_results.keys():
                 aggregate_results[name] = []
             try:
@@ -17,7 +18,7 @@ def aggregate_variants_results(results: List[dict], metrics: List[str]):
             aggregate_results[name].append(float_val)
 
     for name, value in aggregate_results.items():
-        if name in metrics[0]:
+        if name in input_metrics:
             metric_name = name
             aggregate_results[name] = np.nanmean(value)
             if 'pass_rate' in metric_name:
