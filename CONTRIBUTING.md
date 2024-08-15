@@ -14,6 +14,8 @@ To contribute to the AIGA, please follow the steps below:
     git checkout -b <branch-name>
     ```
 
+1. Please refer to [PromptFlow contribution docs](./docs/contributing/promptflow.md) for additional guidance.
+
 1. Make your changes and push them to GitHub
 
     ```bash

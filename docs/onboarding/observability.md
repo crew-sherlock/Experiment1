@@ -1,14 +1,14 @@
-# Connecting to Application Insights
+# Observability
 
 ## Azure Machine Learning Endpoint
 
 Application Insights resource is provisioned and linked to your Azure Machine Learning (AML) workspace by default. This is where any telemetry data from your inference Prompt Flow runs will be stored.
 
-After you deploy your AML managed endpoint for the first time, you will automatically see traces from your Prompt Flow runs in Application Insights. This has been configured by default in the [provision_deployment.py](../../llmops/common/deployment/provision_deployment.py) script:
+After you deploy your AML managed endpoint for the first time, you will automatically see traces from your Prompt Flow runs in Application Insights. This has been configured by default in the [provision_deployment.py](https://github.com/gsk-tech/AIGA/tree/main/llmops/common/deployment/provision_deployment.py) script:
 
 ![alt text](./assets/provision_deployment.png)
 
-Make sure `APPLICATIONINSIGHTS_CONNECTION_STRING` secret is [added to your Azure Key Vault](provisioning-secrets.md) (the one connected to your GitHub workflow).
+Make sure `APPLICATIONINSIGHTS_CONNECTION_STRING` secret is [added to your Azure Key Vault](./github-secrets.md) (the one connected to your GitHub workflow).
 
 ### Traces
 

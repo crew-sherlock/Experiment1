@@ -36,7 +36,7 @@ To fine tune the AI system and determine the score and the metrics, we will go t
 
 The process of developing a GenAI products goes like:
 
-![cycle](/docs/design/assets/Lifecycle.svg)
+![cycle](./assets/Lifecycle.svg)
 
 - Once the business requirements (including the success criteria) have been captured, we need to collect a sample of data
 - The basic document processing pipelines, prompts and flows can be built

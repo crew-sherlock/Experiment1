@@ -49,7 +49,7 @@ After setting up your environment, you can [Validate your set up](#validating-yo
     ```
 
 1. Once the repository is open in VS Code, you should see a prompt to `Reopen in Container`. (Note: If this does not appear search `>Dev Containers` in the search bar and select this option):
-![Dev Container prompt](assets/devguide-devcontainer.png)
+![Dev Container prompt](../assets/devguide-devcontainer.png)
 
 ## Validating your set up
 
@@ -62,7 +62,7 @@ To check that your environment is set up correctly you can validate the followin
     ```
 
     You should see for example:
-    ![Interpreter output](assets/devguide-interpreter-output.png)
+    ![Interpreter output](../assets/devguide-interpreter-output.png)
 
 1. To check that pre-commit is correctly configured you can run the following:
 

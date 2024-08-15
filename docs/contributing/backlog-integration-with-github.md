@@ -18,7 +18,7 @@ Once you connect your Azure Boards project with a GitHub repository, you can lin
   - In a given User Story in AzDO, the section `Development` allows to add a GitHub commit or GitHub pull request link type
   - This is done from the Azure Boards work item (e.g. User Story).
 
-    ![Add link to a Github Pull Request or commmit](assets/link-gh-pull-request.png){: style="width:400px"}
+    ![Add link to a Github Pull Request or commmit](../assets/link-gh-pull-request.png){: style="width:400px"}
 
 - **Linking to an AzDo User Story from Git:**
   - Use `AB#` to link from GitHub to Azure Boards work items: From a GitHub commit, pull request use this convention to create a link to your Azure Boards work item.

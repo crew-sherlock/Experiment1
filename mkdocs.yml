@@ -12,20 +12,25 @@ nav:
   - Home: 'README.md'
   - Design:
     - Reference Architecture: design/reference-architecture.md
+    - Template Components: design/template-components.md
     - Identity and Access: design/identity-and-access.md
-    - Decision Log: design/decision-log.md
-  - User Guides:
-    - Developer Guide: developer-guide.md
-    - Backlog Traceability: backlog-integration-with-github.md
-  - Contributing Guides:
+    - AI Evaluation: design/ai-evaluation.md
+  - Decision Log: design/decision-log.md
+  - Contributing:
+    - Developer Guide: contributing/developer-guide.md
     - PromptFlow: contributing/promptflow.md
+    - Backlog Traceability: contributing/backlog-integration-with-github.md
+    - Branching Strategy: contributing/branching-strategy.md
   - Onboarding:
+    - Getting Started: onboarding/getting-started.md
+    - Running PromptFlow: onboarding/running-promptflow.md
     - Deployment: onboarding/deployment.md
     - GitHub:
       - GitHub Actions: onboarding/github-actions.md
       - GitHub Variables: onboarding/github-variables.md
       - GitHub Secrets: onboarding/github-secrets.md
     - Observability:
+        - Observability: onboarding/observability.md
         - Alerting: onboarding/alerting.md
     - LLMOps: onboarding/llmops.md
 

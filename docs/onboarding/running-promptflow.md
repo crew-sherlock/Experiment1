@@ -1,4 +1,4 @@
-# Run chat-with-pdf
+# Running PromptFlow
 
 Chat with PDF is a simple flow that allow you to ask questions about the content of a PDF file and get answers.
 You can run the flow with a URL to a PDF file and question as argument.
@@ -9,14 +9,14 @@ When you ask a question, it will look up the index to retrieve relevant content 
 
 ## Setup environment
 
-Create a copy of the file [.env.example](../../promptflow/chat_with_pdf/flows/standard/chat_with_pdf/.env.example) as a .env file in the root.
+Create a copy of the file [.env.example](https://github.com/gsk-tech/AIGA/tree/main/promptflow/chat_with_pdf/flows/standard/chat_with_pdf/.env.example) as a .env file in the root.
 Fill the required params:
 `OPENAI_API_BASE`
 `OPENAI_API_KEY`
 
 > Note: For other components such as the CI/CD, you will also need to supply the following variables: `SUBSCRIPTION_ID`, `RESOURCE_GROUP_NAME`, `WORKSPACE_NAME`
 
-To run the environment, you can either use VSCode and the dev container supplied [in here](../../.devcontainer)
+To run the environment, you can either use VSCode and the dev container supplied [in here](https://github.com/gsk-tech/AIGA/tree/main/.devcontainer)
 or
 install the environment [using poetry](https://python-poetry.org/docs/#installation) by running:
 
@@ -71,7 +71,7 @@ This will create a new file:
 ## Run standard flow
 
 The chat with PDF receives a PDF and answer a question about it.
-The flow uses the configuration in [flow.dag.yaml](../../promptflow/chat_with_pdf/flows/standard/flow.dag.yaml).
+The flow uses the configuration in [flow.dag.yaml](https://github.com/gsk-tech/AIGA/tree/main/promptflow/chat_with_pdf/flows/standard/flow.dag.yaml).
 
 To run it, we will use [this pdf](https://arxiv.org/pdf/1810.04805.pdf) as an example:
 
@@ -97,7 +97,7 @@ The Q&A RAG evaluation flow allows you to assess and evaluate your model with th
   - 1 means the provided answer is completely irrelevant to the reference answer.
   - 5 means the provided answer includes all information necessary to answer the question based on the reference answer. If the reference answer is can not be generated since no relevant document were retrieved, the answer would be rated as 5.
 
-The evaluation flow uses [flow.dag.yaml](../../promptflow/chat_with_pdf/flows/evaluation/flow.dag.yaml) for its configuration.
+The evaluation flow uses [flow.dag.yaml](https://github.com/gsk-tech/AIGA/tree/main/promptflow/chat_with_pdf/flows/evaluation/flow.dag.yaml) for its configuration.
 
 In that file, we can see the evaluation flow is using the files:
 

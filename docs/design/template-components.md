@@ -1,4 +1,4 @@
-# AIGA Template Components
+# Template Components
 
 The AIGA Template provides a **working** implementation of a Generative AI workload that can be used as a starting point for new projects. The template is designed to be modular and extensible, allowing developers to easily add new features and components to the end-to-end process.
 
@@ -80,18 +80,3 @@ The code in this directory is linted using [flake8](https://flake8.pycqa.org/en/
 > **Note:** There is a requirement for business partners to review and iteratively improve the golden dataset. We are currently designing the user flow to facilitate this process.
 
 It is intended that this script will be run manually by the data scientist as required and therefore is not included in the CI/CD workflow.
-
-## Migration Steps
-
-The following steps are required to migrate the existing `chat_with_pdf` flows to align with the AIGA Template Components documented above:
-
-- `promptflow/chat_with_pdf/configs/deployment_config.json` -> `config/deployment_config.json`
-- `promptflow/chat_with_pdf/data` -> `data`
-- `promptflow/chat_with_pdf/environment/**` -> `docker/**`
-- `promptflow/chat_with_pdf/flows/standard` -> `promptflow/inference`
-- `promptflow/chat_with_pdf/flows/evaluation` -> `promptflow/evaluation`
-- `promptflow/chat_with_pdf/flows/**/*.py` -> `src`
-- `promptflow/chat_with_pdf/tests` -> Delete
-- `promptflow/chat_with_pdf/experiment[.*].yaml` -> `config/experiment[.*].yaml`
-- `promptflow/chat_with_pdf/README.md` -> Merge with `README.md`
-- `promptflow/chat_with_pdf/sample-request.json` -> `sample-request.json`

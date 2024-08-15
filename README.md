@@ -12,7 +12,7 @@ The AI Generation Accelerator (AIGA) will comprise a collection of artefacts, pr
 
 ## Set up guide for AIGA
 
-We have created the AIGA Starter to help you set up a new project using the AIGA template. The AIGA Starter will generate the necessary artefacts to get you started with your Generative AI project - this includes pre-approved architecture and code repositories. If you are looking to get started, check out the [setup guide](./docs/setup-guide.md).
+We have created the [AIGA Starter](https://github.com/gsk-tech/AIGA-Starter) to help you set up a new project using the AIGA template. The AIGA Starter will generate the necessary artefacts to get you started with your Generative AI project - this includes pre-approved architecture and code repositories. If you are looking to get started, check out the [setup guide](./docs/onboarding/setup-guide.md).
 
 ## AIGA Components
 
@@ -27,14 +27,14 @@ A Git repository template designed to bootstrap and facilitate building, evaluat
 - The template will be hosted on GitHub, and will be the starting point for new projects.
 - The template will contain executable [flows](https://microsoft.github.io/promptflow/concepts/concept-flows.html), [tools](https://microsoft.github.io/promptflow/concepts/concept-tools.html), [skills](https://learn.microsoft.com/en-us/azure/search/cognitive-search-predefined-skills), and configuration.
 - The template will contain documentation artefacts:
-  - **Contribution Guides** *(CONTRIBUTING.md)* - To support the contribution of code, documentation, and other artefacts to the **template**.
+  - **Contribution Guides** [*(CONTRIBUTING.md)*](./CONTRIBUTING.md) - To support the contribution of code, documentation, and other artefacts to the **template**.
   - **Getting Started Guides** - To support the project team get up and running with their *AIGA Project*.
   - **Project Documentation** - To support the project lifecycle, along with artefacts to expedite ARB approval and infrastructure requests.
 - The template will include [workspace settings](https://code.visualstudio.com/docs/getstarted/settings#_workspace-settings) for VSCode, support for [Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers), and [pipelines](https://learn.microsoft.com/en-us/azure/devops/pipelines/get-started/what-is-azure-pipelines) for CI/CD.
 
 The template structure is defined in [ADR-002](./adrs/002-code-repository-structure.md).
 
-### AIGA Starter
+### [AIGA Starter](https://github.com/gsk-tech/AIGA-Starter)
 
 A tool, or collection of processes, that will capture key project information and orchestrate the creation of an *AIGA Project*, based on an *AIGA Template*.
 
