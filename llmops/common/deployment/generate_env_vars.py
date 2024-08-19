@@ -29,7 +29,7 @@ output_list = []
 
 # Iterate over the top-level elements under 'init'
 for key, value in data.items():
-    if value.startswith('${') and value.endswith('}'):
+    if isinstance(value, str) and value.startswith('${') and value.endswith('}'):
         value = value.replace('${', '').replace('}', '')
         resolved_value = os.environ.get(value.upper(), None)
         if resolved_value is None:

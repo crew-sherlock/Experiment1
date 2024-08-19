@@ -8,8 +8,8 @@ AIGA uses GitHub Variables to store project-specific configuration settings. The
 
 An AIGA Project can configure the behaviour of the repository workflows by setting the following variables:
 
-- `DEPLOYMENT_TARGET` - The Azure service to target for inference deployment - "aml" or "webapp"
-- `PROMPTFLOW_BASE_PATH` - The base path for the PromptFlow directory. E.g. "promptflow/chat_with_pdf"
+- `DEPLOYMENT_TARGET` - The Azure service to target for inference deployment - "aml", "webapp" or "both"
+- `PROMPTFLOW_BASE_PATH` - The base path for the PromptFlow directory. E.g. "promptflow"
 - `TMP_ENV` - The environment to target. **Note:** This variable will be deprecated in future releases.
 
 ## Environment Variables

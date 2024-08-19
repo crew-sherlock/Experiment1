@@ -11,8 +11,11 @@ When you ask a question, it will look up the index to retrieve relevant content 
 
 Create a copy of the file [.env.example](https://github.com/gsk-tech/AIGA/tree/main/promptflow/chat_with_pdf/flows/standard/chat_with_pdf/.env.example) as a .env file in the root.
 Fill the required params:
-`OPENAI_API_BASE`
-`OPENAI_API_KEY`
+
+- `AOAI_API_BASE`
+- `AOAI_API_KEY`
+- `AISEARCH_API_BASE`
+- `AISEARCH_API_KEY`
 
 > Note: For other components such as the CI/CD, you will also need to supply the following variables: `SUBSCRIPTION_ID`, `RESOURCE_GROUP_NAME`, `WORKSPACE_NAME`
 

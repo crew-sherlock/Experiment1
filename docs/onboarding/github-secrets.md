@@ -6,23 +6,29 @@ AIGA leverages Azure Key Vault to store secrets and keys used in the application
 
 The following secrets are required to be provisioned in the Key Vault:
 
-| Secret Name | Description |
-| ----------- | ----------- |
-| AOAI_API_BASE | The base URL for the Azure OpenAI Service |
-| AOAI_API_KEY | The API key for the Azure OpenAI Service |
-| AISEARCH_API_BASE | The base URL for the Azure AI Search Service |
-| AISEARCH_API_KEY | The API key for the Azure AI Search Service |
-| APPLICATIONINSIGHTS_CONNECTION_STRING | The connection string for Azure Application Insights |
-| AZURE_SUBSCRIPTION_ID | The Azure subscription ID |
-| DOCKER_IMAGE_REGISTRY | The name of the container registry |
-| RESOURCE_GROUP_NAME | The name of the Azure resource group |
-| WORKSPACE_NAME | The name of the Azure Machine Learning workspace |
+| Secret Name                           | Description                                             |
+|---------------------------------------|---------------------------------------------------------|
+| AOAI_API_BASE                         | The base URL for the Azure OpenAI Service               |
+| AOAI_API_KEY                          | The API key for the Azure OpenAI Service                |
+| AISEARCH_API_BASE                     | The base URL for the Azure AI Search Service            |
+| AISEARCH_API_KEY                      | The API key for the Azure AI Search Service             |
+| APPLICATIONINSIGHTS_CONNECTION_STRING | The connection string for Azure Application Insights    |
+| AZURE_SUBSCRIPTION_ID                 | The Azure subscription ID                               |
+| REGISTRY_NAME                         | The name of the container registry                      |
+| REGISTRY_SECRET                       | The access key for the container registry               |
+| RESOURCE_GROUP_NAME                   | The name of the Azure resource group                    |
+| WORKSPACE_NAME                        | The name of the Azure Machine Learning workspace        |
+| WEBAPP_SUBSCRIPTION_ID                | The name of the web app service subscription ID         |
+| WEBAPP_RG_NAME                        | The name of the web app service resource group          |
+| WEBAPP_NAME                           | The name of the web app service                         |
 
-> **Note**: Secrets loaded from Azure Key Vault will supersede any GitHub Actions variables and secrets with the same name.
+> **Note**: Secrets loaded from Azure Key Vault will supersede any GitHub Actions
+> variables and secrets with the same name.
 
 ## Integrating with GitHub Actions
 
-AIGA provides a custom GitHub Action (`load-secrets`) to load secrets from Azure Key Vault into a GitHub Actions workflow.
+AIGA provides a custom GitHub Action (`load-secrets`) to load secrets from Azure Key
+Vault into a GitHub Actions workflow.
 
 ```yaml
 steps:
@@ -40,13 +46,17 @@ steps:
 
 The following GitHub Action secrets are required:
 
-- `AZURE_CREDENTIALS`: The Azure service principal credentials. See [Creating a Service Principal](https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure#use-the-azure-login-action-with-a-service-principal-secret) for details on creating a service principal and creating the secret.
+- `AZURE_CREDENTIALS`: The Azure service principal credentials.
+  See [Creating a Service Principal](https://learn.microsoft.com/en-us/azure/developer/github/connect-from-azure#use-the-azure-login-action-with-a-service-principal-secret)
+  for details on creating a service principal and creating the secret.
 
 The following [GitHub Variables](./github-variables.md) are required:
 
 - `KEY_VAULT_NAME`: The name of the Azure Key Vault
 
-After integrating the `load-secrets` action into the GitHub Actions workflow, **all** secrets from the given Azure Key Vault will be available for use in the workflow (replacing '-' with '_'):
+After integrating the `load-secrets` action into the GitHub Actions workflow, **all**
+secrets from the given Azure Key Vault will be available for use in the workflow (
+replacing '-' with '_'):
 
 ```yaml
   - name: Print Secrets
@@ -57,9 +67,12 @@ After integrating the `load-secrets` action into the GitHub Actions workflow, **
 
 ## Managing Multiple Environments
 
-AIGA uses [GitHub Environments](https://docs.github.com/en/actions/deployment/targeting-different-environments/managing-environments-for-deployment) to supports multiple deployment environments (e.g., `dev`, `test`, `prod`).
+AIGA
+uses [GitHub Environments](https://docs.github.com/en/actions/deployment/targeting-different-environments/managing-environments-for-deployment)
+to supports multiple deployment environments (e.g., `dev`, `test`, `prod`).
 
-When creating a new environment, it is important to ensure that the necessary secrets and variables are provisioned for the environment. For more details, see:
+When creating a new environment, it is important to ensure that the necessary secrets
+and variables are provisioned for the environment. For more details, see:
 
 - [Environment secrets](https://docs.github.com/en/actions/deployment/targeting-different-environments/managing-environments-for-deployment#environment-secrets)
 - [Environment variables](https://docs.github.com/en/actions/deployment/targeting-different-environments/managing-environments-for-deployment#environment-variables)

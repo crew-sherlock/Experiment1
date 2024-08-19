@@ -8,7 +8,7 @@ on:
         required: true
 
 jobs:
-  experiment-and-evaluation-workflow:
+  run-workflow:
     name: prompt flow bulk run
     runs-on: ubuntu-latest
     environment: ${{ vars.TMP_ENV }}

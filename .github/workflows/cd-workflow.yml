@@ -90,7 +90,7 @@ jobs:
       # Reads 'azure_managed_endpoint' field values from deployment_config.json
       #=====================================
       - name: Deploy to Managed endpoint
-        if: ${{ vars.DEPLOYMENT_TARGET == 'aml'  }}
+        if: ${{ vars.DEPLOYMENT_TARGET == 'aml' || vars.DEPLOYMENT_TARGET == 'both' }}
         uses: ./.github/actions/deploy-aml
         with:
           AZURE_SUBSCRIPTION_ID: ${{ env.AZURE_SUBSCRIPTION_ID }}
@@ -106,7 +106,7 @@ jobs:
       # Uses secret CONNECTION_DETAILS for creating connections
       #=====================================
       - name: Create local PF Connections
-        if: ${{ vars.DEPLOYMENT_TARGET == 'webapp'  }}
+        if: ${{ vars.DEPLOYMENT_TARGET == 'webapp' || vars.DEPLOYMENT_TARGET == 'both' }}
         uses: ./.github/actions/execute-script
         with:
           step_name: "Create local PF connections"
@@ -127,9 +127,13 @@ jobs:
         # Reads 'webapp_endpoint' field values from deployment_config.json
         #=====================================
       - name: Deploy to webapp
-        if: ${{ vars.DEPLOYMENT_TARGET == 'webapp'  }}
+        if: ${{ vars.DEPLOYMENT_TARGET == 'webapp' || vars.DEPLOYMENT_TARGET == 'both' }}
         uses: ./.github/actions/deploy-webapp
         with:
           USE_CASE_BASE_PATH: ${{ vars.PROMPTFLOW_BASE_PATH }}
           DEPLOY_ENVIRONMENT: ${{ vars.TMP_ENV }}
-          REGISTRY_DETAILS: ${{ env.DOCKER_IMAGE_REGISTRY }}
+          REGISTRY_NAME: ${{ env.REGISTRY_NAME }}
+          REGISTRY_SECRET: ${{ env.REGISTRY_SECRET }}
+          WEBAPP_SUBSCRIPTION_ID: ${{ env.WEBAPP_SUBSCRIPTION_ID }}
+          WEBAPP_RG_NAME: ${{ env.WEBAPP_RG_NAME }}
+          WEBAPP_NAME: ${{ env.WEBAPP_NAME }}

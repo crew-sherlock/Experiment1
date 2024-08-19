@@ -3,20 +3,24 @@
 # Parse command line arguments
 while [[ $# -gt 0 ]]; do
     case "$1" in
-        --use_case_base_path)
-            use_case_base_path="$2"
+        --USE_CASE_BASE_PATH)
+            USE_CASE_BASE_PATH="$2"
             shift 2
             ;;
-        --deploy_environment)
-            deploy_environment="$2"
+        --DEPLOY_ENVIRONMENT)
+            DEPLOY_ENVIRONMENT="$2"
             shift 2
             ;;
         --build_id)
             build_id="$2"
             shift 2
             ;;
-        --REGISTRY_DETAILS)
-            REGISTRY_DETAILS="$2"
+        --REGISTRY_NAME)
+            REGISTRY_NAME="$2"
+            shift 2
+            ;;
+        --REGISTRY_SECRET)
+            REGISTRY_SECRET="$2"
             shift 2
             ;;
         *)
@@ -25,28 +29,35 @@ while [[ $# -gt 0 ]]; do
             ;;
     esac
 done
-source .env
-# Use the assigned variables as needed
-echo "Flow to execute: $use_case_base_path"
-echo "Deploy environment: $deploy_environment"
-echo "Build ID: $build_id"
 
-# Description: 
+# Description:
 # This script generates docker image for Prompt flow deployment
 set -e # fail on error
 
-# read values from experiment.yaml related to given environment
-config_path="./$use_case_base_path/experiment.yaml"
-env_var_file_path="./$use_case_base_path/environment/env.yaml"
-
 source .env
 . .env
+
+
+# read values from experiment.yaml related to given environment
+config_path="./$USE_CASE_BASE_PATH/experiment.yaml"
+env_var_file_path="./$USE_CASE_BASE_PATH/environment/env.yaml"
+
+REGISTRY_ENDPOINT="$REGISTRY_NAME.azurecr.io"
+echo "Build ID: $build_id"
+echo "Deploy environment: $DEPLOY_ENVIRONMENT"
+echo "Registry: $REGISTRY_ENDPOINT"
+echo "PWD: $(pwd)"
+echo "ls: $(ls -la)"
+echo "STANDARD_FLOW: $STANDARD_FLOW"
+echo "USE_CASE_BASE_PATH: $USE_CASE_BASE_PATH"
+
 if [[ -e "$config_path" ]]; then
     STANDARD_FLOW=$(yq '.flow' "$config_path" |  sed 's/"//g')
 
-    init_file_path="./$use_case_base_path/$STANDARD_FLOW/flow.flex.yaml"
+    init_file_path="./$USE_CASE_BASE_PATH/$STANDARD_FLOW/flow.flex.yaml"
 
     init_output=""
+
     if [ -e "$init_file_path" ]; then
         init_output=$(python llmops/common/deployment/generate_config.py "$init_file_path" "true")
     fi
@@ -54,29 +65,30 @@ if [[ -e "$config_path" ]]; then
 
     env_output=""
     if [ -e "$env_var_file_path" ]; then
-        env_output=$(python llmops/common/deployment/generate_env_vars.py "$env_var_file_path" "true")
+        echo "$env_var_file_path"
+        env_output=$(poetry run python llmops/common/deployment/generate_env_vars.py "$env_var_file_path" "true")
     fi
     echo "$env_output"
 
+    pip install -r ./$USE_CASE_BASE_PATH/$STANDARD_FLOW/requirements.txt
+    pf flow build --source "./$USE_CASE_BASE_PATH/$STANDARD_FLOW" --output "./$USE_CASE_BASE_PATH/$STANDARD_FLOW/docker"  --format docker
 
-    pip install -r ./$use_case_base_path/$STANDARD_FLOW/requirements.txt
-    pf flow build --source "./$use_case_base_path/$STANDARD_FLOW" --output "./$use_case_base_path/docker"  --format docker
+    cp "./docker/promptflow/Dockerfile" "./$USE_CASE_BASE_PATH/$STANDARD_FLOW/docker/Dockerfile"
 
-    cp "./docker/promptflow/Dockerfile" "./$use_case_base_path/docker/Dockerfile"
-
-    python -m llmops.common.deployment.migrate_connections --base_path $use_case_base_path --env_name $deploy_environment
+    poetry run python -m llmops.common.deployment.migrate_connections --base_path "$USE_CASE_BASE_PATH" --env_name $DEPLOY_ENVIRONMENT
     # docker build the prompt flow based image
-    docker build --platform=linux/amd64 -t localpf "./$use_case_base_path/docker"
+
+    docker build --platform=linux/amd64 -t localpf "./$USE_CASE_BASE_PATH/$STANDARD_FLOW/docker"
 
     docker images
 
     deploy_config="./config/deployment_config.json"
-    con_object=$(jq ".webapp_endpoint[] | select(.ENV_NAME == \"$deploy_environment\")" "$deploy_config")
+    con_object=$(jq ".webapp_endpoint[] | select(.ENV_NAME == \"$DEPLOY_ENVIRONMENT\")" "$deploy_config")
 
-    read -r -a connection_names <<< "$(echo "$con_object" | jq -r '.CONNECTION_NAMES | join(" ")')"
+    read -r -a CONNECTION_NAMES <<< "$(echo "$con_object" | jq -r '.CONNECTION_NAMES | join(" ")')"
     result_string=""
     printenv
-    for name in "${connection_names[@]}"; do
+    for name in "${CONNECTION_NAMES[@]}"; do
         uppercase_name=$(echo "$name" | tr '[:lower:]' '[:upper:]')
         env_var_key="${uppercase_name}_API_KEY"
         api_key=${!env_var_key}
@@ -103,23 +115,20 @@ if [[ -e "$config_path" ]]; then
 
     docker ps -a
 
-    chmod +x "./$use_case_base_path/sample-request.json"
+    chmod +x "./$USE_CASE_BASE_PATH/sample-request.json"
 
-    file_contents=$(<./$use_case_base_path/sample-request.json)
+    file_contents=$(<./$USE_CASE_BASE_PATH/sample-request.json)
     echo "$file_contents"
 
-    python -m llmops.common.deployment.test_local_flow \
-            --base_path $use_case_base_path
+    poetry run python -m llmops.common.deployment.test_local_flow \
+            --base_path "$USE_CASE_BASE_PATH"
 
-    registry_name=$(echo "${REGISTRY_DETAILS}" | jq -r '.[0].registry_name')
-    registry_server=$(echo "${REGISTRY_DETAILS}" | jq -r '.[0].registry_server')
-    registry_username=$(echo "${REGISTRY_DETAILS}" | jq -r '.[0].registry_username')
-    registry_password=$(echo "${REGISTRY_DETAILS}" | jq -r '.[0].registry_password')
-
-    docker login "$registry_server" -u "$registry_username" --password-stdin <<< "$registry_password"
-    docker tag localpf "$registry_server"/"$use_case_base_path"_"$deploy_environment":"$build_id"
-    docker push "$registry_server"/"$use_case_base_path"_"$deploy_environment":"$build_id"
+    docker login "$REGISTRY_ENDPOINT" -u "$REGISTRY_NAME" --password-stdin <<< "$REGISTRY_SECRET"
+    docker tag localpf "$REGISTRY_ENDPOINT"/"$USE_CASE_BASE_PATH"/"$STANDARD_FLOW"_"$DEPLOY_ENVIRONMENT":"$build_id"
+    docker tag localpf "$REGISTRY_ENDPOINT"/"$USE_CASE_BASE_PATH"/"$STANDARD_FLOW"_"$DEPLOY_ENVIRONMENT":"latest"
+    docker push "$REGISTRY_ENDPOINT"/"$USE_CASE_BASE_PATH"/"$STANDARD_FLOW"_"$DEPLOY_ENVIRONMENT":"$build_id"
+    docker push "$REGISTRY_ENDPOINT"/"$USE_CASE_BASE_PATH"/"$STANDARD_FLOW"_"$DEPLOY_ENVIRONMENT":"latest"
 
 else
-    echo $config_path "not found"
+    echo "$config_path" "not found"
 fi
