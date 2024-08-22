@@ -25,6 +25,10 @@ jobs:
       - name: Run unit tests
         uses: ./.github/actions/execute-unit-tests
 
+      - name: Build Docs
+        shell: bash
+        run: make build-docs
+
   run-workflow:
     needs: pr-code-validation
     uses: ./.github/workflows/run-workflow.yml

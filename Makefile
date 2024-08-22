@@ -13,7 +13,7 @@ serve-docs:
 	poetry run mkdocs serve
 
 build-docs:
-	poetry run mkdocs build
+	poetry run mkdocs build --strict
 
 requirements:
 	@poetry lock --no-update
