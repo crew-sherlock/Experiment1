@@ -4,7 +4,10 @@ environment:
 additional_includes:
 - ../../src/
 - ../prompts/
-inputs:
+inputs:  
+  deployment_name:
+    type: string
+    default: gpt-4o-2024-05-13
   chat_history:
     type: list
     default: []
@@ -25,7 +28,7 @@ nodes:
     type: code
     path: prompts/rewrite_question_prompt.jinja2
   inputs:
-    deployment_name: gpt-4o-2024-05-13
+    deployment_name: ${inputs.deployment_name}
     temperature: 1
     top_p: 1
     max_tokens: 16
@@ -53,7 +56,7 @@ nodes:
     type: code
     path: prompts/generate_response_prompt.jinja2
   inputs:
-    deployment_name: gpt-4o-2024-05-13
+    deployment_name: ${inputs.deployment_name}
     temperature: 0
     top_p: 1
     max_tokens: 1000

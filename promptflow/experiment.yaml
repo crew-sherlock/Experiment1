@@ -19,7 +19,9 @@ datasets:
   source: data/bert-paper-qna-1-line.jsonl
   description: "This dataset is for prompt experiments."
   mappings:
-    math_question: "${data.question}"
+    question: "${data.question}"
+    chat_history: "${data.chat_history}"
+    deployment_name: "${data.CHAT_MODEL_DEPLOYMENT_NAME}"
 
 evaluators:
 - name: chat_with_pdf_evaluation_flow
