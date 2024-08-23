@@ -1,4 +1,20 @@
 services:
+  promptflow:
+    build:
+      context: ..
+      dockerfile: docker/Dockerfile
+      args:
+        - USE_CASE_BASE_PATH=promptflow
+        - FLOW_NAME=inference
+      platforms:
+        - linux/amd64
+    environment:
+      - AOAI_API_BASE=${AOAI_API_BASE}
+      - AOAI_API_KEY=${AOAI_API_KEY}
+      - AISEARCH_API_BASE=${AISEARCH_API_BASE}
+      - AISEARCH_API_KEY=${AISEARCH_API_KEY}
+    ports:
+      - "8080:8080"
   docs:
     image: squidfunk/mkdocs-material
     ports:

@@ -59,8 +59,8 @@ source .venv/bin/activate
 Create PromptFlow Connections ([reference](https://microsoft.github.io/promptflow/how-to-guides/manage-connections.html#create-a-connection)). From the `inference` directory:
 
 ```bash
-pf connection create -f openai.yaml --set api_key=<open-ai-api-key> --set api_base=<open-ai-api-base>
-pf connection create -f aisearch.yaml --set api_key=<aisearch-api-key> --set api_base=aisearch-api-base>
+pf connection create -f connections/aoai.yaml --set api_key=<open-ai-api-key> --set api_base=<open-ai-api-base>
+pf connection create -f connections/aisearch.yaml --set api_key=<aisearch-api-key> --set api_base=aisearch-api-base>
 ```
 
 You will also need to create a connection in the Prompt Flow extension, matching the name of the Azure OpenAI resource connection defined in the flow configuration, e.g. 'aoai':
@@ -123,3 +123,16 @@ pf run create --flow . --data ./data.jsonl --column-mapping question='${data.que
 ```
 
 For more information on how to deploy this please see [llmops.md](llmops.md).
+
+## Deployment names
+
+These are the models currently used in this repo
+
+| Model | Model deployment name | Provider | Version | Environment |
+| ----- | --------------------- | -------- | ------- | ----------- |
+| text-embedding-ada-002 | psc-msat-us6-text-embedding-ada-002-01 | OpenAI | 2 | dev |
+| gpt-4o | gpt-4o-2024-05-13 | OpenAI | 5/13/2024 | dev |
+| text-embedding-3-large | text-embedding-3-large | OpenAI | 1 | dev |
+| text-embedding-3-small | text-embedding-3-small | OpenAI | 1 | dev |
+
+Make sure you change the models' deployment names.

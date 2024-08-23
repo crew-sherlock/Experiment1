@@ -2,7 +2,6 @@
     "azure_managed_endpoint":[
         {
             "ENV_NAME": "dev",
-            "TEST_FILE_PATH": "sample-request.json",
             "ENDPOINT_NAME": "dev-442d8fb6-65a3-4c32",
             "ENDPOINT_DESC": "An online endpoint serving a flow for chat with pdf flow",
             "DEPLOYMENT_DESC": "prompt flow deployment",
@@ -18,7 +17,6 @@
     "webapp_endpoint":[
         {
             "ENV_NAME": "dev",
-            "TEST_FILE_PATH": "sample-request.json",
             "CONNECTION_NAMES": ["aoai", "aisearch"],
             "REGISTRY_NAME": "",
             "APP_PLAN_NAME": "",

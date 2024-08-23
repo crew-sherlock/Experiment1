@@ -26,6 +26,7 @@ promptflow-evals = ">=0.3.0"
 promptflow-azure = "1.14.0"
 requests = "2.32.3"
 azure-ai-ml = "1.18.0"
+pyyaml = "^6.0.2"
 
 [tool.poetry.group.test]
 optional = true

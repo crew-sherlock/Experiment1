@@ -28,9 +28,34 @@ inputs:
 runs:
   using: composite
   steps:
-    - name: deploy docker image to registry
+    - name: login to ACR
+      uses: docker/login-action@v3
+      with:
+        registry: ${{ inputs.REGISTRY_NAME }}.azurecr.io
+        username: ${{ inputs.REGISTRY_NAME }}
+        password: ${{ inputs.REGISTRY_SECRET }}
+
+    - name: build docker image
       shell: bash
-      run: REGISTRY_NAME=${{ inputs.REGISTRY_NAME }} REGISTRY_SECRET=${{ inputs.REGISTRY_SECRET }} USE_CASE_BASE_PATH=${{ inputs.USE_CASE_BASE_PATH }} DEPLOY_ENVIRONMENT=${{ inputs.DEPLOY_ENVIRONMENT }} build_id=${{ github.run_id }} ./llmops/common/scripts/gen_docker_image.sh
+      run: |
+        CONFIG_PATH="./$USE_CASE_BASE_PATH/experiment.yaml"
+        REGISTRY_ENDPOINT="$REGISTRY_NAME.azurecr.io"
+        FLOW_NAME=$(yq '.flow' "$CONFIG_PATH" |  sed 's/"//g')
+        IMAGE_NAME="$REGISTRY_ENDPOINT"/"$USE_CASE_BASE_PATH"/"$FLOW_NAME"_"$DEPLOY_ENVIRONMENT"
+
+        cd docker
+        docker compose build --build-arg USE_CASE_BASE_PATH="$USE_CASE_BASE_PATH" --build-arg FLOW_NAME="$FLOW_NAME" promptflow
+
+        docker tag docker-promptflow "$IMAGE_NAME":"$BUILD_ID"
+        docker tag docker-promptflow "$IMAGE_NAME":"latest"
+
+        docker push "$IMAGE_NAME":"$BUILD_ID"
+        docker push "$IMAGE_NAME":"latest"
+      env:
+        USE_CASE_BASE_PATH: ${{ inputs.USE_CASE_BASE_PATH }}
+        REGISTRY_NAME: ${{ inputs.REGISTRY_NAME }}
+        DEPLOY_ENVIRONMENT: ${{ inputs.DEPLOY_ENVIRONMENT }}
+        BUILD_ID: ${{ github.run_id }}
 
     - name: deploy webapp
       shell: bash

@@ -74,12 +74,12 @@ init_file_path="./$USE_CASE_BASE_PATH/$STANDARD_FLOW/flow.flex.yaml"
 
 init_output=()
 if [ -e "$init_file_path" ]; then
-    IFS=' ' read -r -a init_output <<< $(python llmops/common/deployment/generate_config.py "$init_file_path" "false")
+    IFS=' ' read -r -a init_output <<< $(poetry run python llmops/common/deployment/generate_config.py "$init_file_path" "false")
 fi
 
 env_output=()
 if [ -e "$env_var_file_path" ]; then
-    IFS=' ' read -r -a env_output <<< $(python llmops/common/deployment/generate_env_vars.py "$env_var_file_path" "false")
+    IFS=' ' read -r -a env_output <<< $(poetry run python llmops/common/deployment/generate_env_vars.py "$env_var_file_path" "false")
 fi
 
 read -r -a connection_names <<< "$(echo "$con_object" | jq -r '.CONNECTION_NAMES | join(" ")')"
@@ -90,12 +90,16 @@ az webapp config appsettings set --resource-group "$WEBAPP_RG_NAME" --name "$WEB
 
 for name in "${connection_names[@]}"; do
     uppercase_name=$(echo "$name" | tr '[:lower:]' '[:upper:]')
-    env_var_key="${uppercase_name}_API_KEY"
-    api_key=${!env_var_key}
+
+    api_base_env_name="${uppercase_name}_API_BASE"
+    api_base=${!api_base_env_name}
+    api_key_env_name="${uppercase_name}_API_KEY"
+    api_key=${!api_key_env_name}
+
     az webapp config appsettings set \
-        --resource-group "$WEBAPP_RG_NAME" \
-        --name "$WEBAPP_NAME" \
-        --settings "${env_var_key}=${api_key}"
+        --resource-group $WEBAPP_RG_NAME \
+        --name $WEBAPP_NAME \
+        --settings ${api_base_env_name}=${api_base} ${api_key_env_name}=${api_key}
 done
 
 for pair in "${env_output[@]}"; do
