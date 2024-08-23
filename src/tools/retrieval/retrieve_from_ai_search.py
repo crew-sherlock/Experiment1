@@ -8,7 +8,8 @@ from promptflow.connections import CognitiveSearchConnection
 def retrieve_from_ai_search(
     query: str,
     index_name: str,
-    azure_ai_search_connection: CognitiveSearchConnection
+    azure_ai_search_connection: CognitiveSearchConnection,
+    n_results: int = 10
 ) -> str:
     if not query or not index_name:
         return []
@@ -24,6 +25,7 @@ def retrieve_from_ai_search(
         include_total_count=True,
         search_fields=["content"],
         select=["content", "url"],
+        top=n_results
     )
 
     retrieved_docs = []

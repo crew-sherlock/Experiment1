@@ -21,6 +21,10 @@ outputs:
     type: string
     reference: ${generate_response.output}
     is_chat_output: true
+  groundedness_score:
+    type: int
+    reference: ${parse_groundedness.output}
+    is_chat_output: false
 nodes:
 - name: rewrite_question
   type: llm
@@ -50,11 +54,12 @@ nodes:
     query: ${rewrite_question.output}
     index_name: loc-pp-ds-gd
     azure_ai_search_connection: aisearch
+    n_results: 5
 - name: generate_response
   type: llm
   source:
     type: code
-    path: prompts/generate_response_prompt.jinja2
+    path: generate_response_prompt.jinja2
   inputs:
     deployment_name: ${inputs.deployment_name}
     temperature: 0
@@ -72,3 +77,24 @@ nodes:
   api: chat
   module: promptflow.tools.aoai
   use_variants: false
+- name: groundedness
+  type: llm
+  source:
+    type: code
+    path: prompts/metrics/gpt_groundedness_prompt.jinja2
+  inputs:
+    question: ${rewrite_question.output}
+    context: ${retrieve_from_ai_search.output}
+    answer: ${generate_response.output}
+    deployment_name: gpt-4o-2024-05-13
+    response_format:
+      type: text
+  connection: aoai
+  api: chat
+- name: parse_groundedness
+  type: python
+  source:
+    type: code
+    path: src/tools/metrics/parse_llm_evaluation_score.py
+  inputs:
+    llm_evaluation_score: ${groundedness.output}

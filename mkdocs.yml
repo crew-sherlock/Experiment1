@@ -19,10 +19,10 @@ nav:
   - Contributing:
     - Developer Guide: contributing/developer-guide.md
     - PromptFlow: contributing/promptflow.md
-    - Adding Metrics: contributing/adding-metrics.md
     - Backlog Traceability: contributing/backlog-integration-with-github.md
     - Branching Strategy: contributing/branching-strategy.md
   - Onboarding:
+    - Adding Metrics: onboarding/adding-metrics.md
     - Getting Started: onboarding/getting-started.md
     - Running PromptFlow: onboarding/running-promptflow.md
     - Deployment: onboarding/deployment.md

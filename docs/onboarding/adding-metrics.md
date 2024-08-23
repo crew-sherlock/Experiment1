@@ -1,5 +1,9 @@
 # Adding Metrics
 
+In order to implement the monitoring strategy, as described in the [project lifecycle](/docs/design/ai-evaluation.md), we need to add metrics to the online flow. These metrics can then be captured in [App Insight](/docs/onboarding/observability.md) as part of the trace, once the flow is deployed.
+
+## Metrics in AIGA
+
 Out of the box, AIGA supports the following metrics:
 
 - gpt_groundedness_prompt.jinja2 -> groundedness
@@ -18,7 +22,7 @@ AIGA provides a set of tools to make it easy to add new metrics to your flows.
 
     ![File Selection](./assets/file-selection.png)
 
-1. If you select "existing file", you will be prompted to select the file. Select a file from the "prompts" directory.
+1. If you select "existing file", you will be prompted to select the file. Navigate to ```promptflow/prompts``` and select the metric you would like to get into your flow.
 
 1. If you select "new file", PromptFlow will create a new file in the flow directory. See [Writing a Prompt](#writing-a-prompt) for guidance on writing a prompt.
 
@@ -27,7 +31,9 @@ AIGA provides a set of tools to make it easy to add new metrics to your flows.
     - `score`
     - `reason`
 
-1. From the PromptFlow Visual Editor, click "+" and a new Python node to the flow. When prompted, select "existing file" and select the `parse_llm_evaluation_score` file from the "src/tools/metrics" directory.
+1. From the PromptFlow Visual Editor, click "+" and a new Python node to the flow. When prompted, select "existing file" and navigate to ```src/tools/metrics``` then select the `parse_llm_evaluation_score` file.
+
+1. In your ```flow.dag.yaml``` file, don't forget to adjust your paths to remove the ```../```. For example, ```../../src/tools/metrics/parse_llm_evaluation_score.py``` will become ```src/tools/metrics/parse_llm_evaluation_score.py``` to account for the paths specified in additional_includes.
 
 1. Wait for PromptFlow to generate metadata for the new node. Once the metadata is generated, you can select the output of the LLM node as the input to the Python node.
 
@@ -40,6 +46,8 @@ AIGA provides a set of tools to make it easy to add new metrics to your flows.
 1. Using the metric name as the "Input Key" and the output of the parse node as the "Input Value".
 
     ![Add Input](./assets/add-input.png)
+
+You are now all set. When in production, if you want to monitor your metrics, you should follow the  [observability recommendation](/docs/onboarding/observability.md) to enable App Insights for your flows and then use the [alerting recommendations](/docs/onboarding/alerting.md) to be able to get some alerts for your flows.
 
 ### Writing a Prompt
 

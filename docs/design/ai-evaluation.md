@@ -38,18 +38,18 @@ The process of developing a GenAI products goes like:
 
 ![cycle](./assets/Lifecycle.svg)
 
-- Once the business requirements (including the success criteria) have been captured, we need to collect a sample of data
-- The basic document processing pipelines, prompts and flows can be built
+- Once the business requirements (including the success criteria) have been captured, we need to collect a sample of data.
+- The basic document processing pipelines, prompts and flows can be built. Refer to [running promptflow](/docs/onboarding/running-promptflow.md)
 - Based on the payload from the flows, we create a test set (identified by the business as candidates for the golden dataset). The test set is a xxx file
 - With the test set, we run the pipeline and flows in order to generate the output
-- The metrics defined by the business are included in the inference flow and the generated AI output is evaluated against these
+- The metrics defined by the business are included in the inference flow and the generated AI output is evaluated against these. Check [how to add a metric](/docs/onboarding/adding-metrics.md)
 - If the metrics do not meet expectations, we will optimise the pipelines and flows
 - If the metrics do meet expectations, we will collect feedback from the SME's, using an excel file
 - With the feedback from the business, we will go back to optimising the pipelines, flows and prompts
 - Once we have reached satisfactory level, we consider the validated output from business the Golden Dataset
 - Before deploying a flow, the offline evaluation flow (comparing the AI generated output and the golden dataset) will always run
-- Once the metrics and flows have been logged and validated, the flows and pipelines can be deployed
-- While running as usual, the online metrics are captured into App Insights and metrics and alerts are implement
+- Once the metrics and flows have been logged and validated, the flows and pipelines can be deployed with our [CD pipelines](/docs/onboarding/deployment.md)
+- While running as usual, the online metrics are [captured into App Insights](/docs/onboarding/observability.md) and [metrics and alerts](/docs/onboarding/alerting.md) are implemented
 - If an alert is triggered or if an incident is raised by the users, the Root Cause Analysis will start
 - We will go back to optimising the pipelines and flows, and straight to the production flow, skipping the evaluation flow since we do already have a Golden Dataset
 
