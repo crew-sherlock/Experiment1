@@ -25,6 +25,8 @@ nav:
     - Adding Metrics: onboarding/adding-metrics.md
     - Getting Started: onboarding/getting-started.md
     - Running PromptFlow: onboarding/running-promptflow.md
+    - Running with Docker: onboarding/running-with-docker.md
+    - Running Evaluation locally: onboarding/experiment-evaluate-locally.md
     - Deployment: onboarding/deployment.md
     - GitHub:
       - GitHub Actions: onboarding/github-actions.md
@@ -33,7 +35,9 @@ nav:
     - Observability:
         - Observability: onboarding/observability.md
         - Alerting: onboarding/alerting.md
-    - LLMOps: onboarding/llmops.md
+    - LLMOps: 
+        - LLMOps CI/CD: onboarding/llmops.md
+        - Experiment YAML Structure Guide: onboarding/experiment-configuration-guide.md
 
 copyright: "&copy; GSK"
 

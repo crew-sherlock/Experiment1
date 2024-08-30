@@ -6,6 +6,8 @@ Once it's launched it will download the PDF and build an index of the content.
 When you ask a question, it will look up the index to retrieve relevant content and post the question with the relevant content to OpenAI chat model (gpt-3.5-turbo or gpt4) to get an answer.
 
 > Note: the full example and documentation of chat with PDF is OSS which can be found [here](https://github.com/microsoft/llmops-promptflow-template).
+>
+> Note: For more details on running a full E2E evaluation flow locally, please see [Experiment and Evaluate Locally](./experiment-evaluate-locally.md) documentation.
 
 ## Setup environment
 

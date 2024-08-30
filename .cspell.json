@@ -82,7 +82,8 @@
         "webapps",
         "Op's",
         "Entra",
-        "concat"
+        "concat",
+        "readarray"
     ],
     "version": "0.2"
 }
