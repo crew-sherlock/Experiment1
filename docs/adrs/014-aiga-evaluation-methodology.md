@@ -1,5 +1,11 @@
 # User Story 89856 – Structured Way to Evaluate GenAI output
 
+Date: 2024-08-12
+
+## Status
+
+Accepted
+
 ## 1. Initial Planning and Stakeholder Identification
 
 ### Who: Product team + Senior stakeholders
