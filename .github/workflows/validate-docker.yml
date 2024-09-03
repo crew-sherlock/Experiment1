@@ -1,0 +1,78 @@
+name: validate-docker-compose
+
+on:
+  workflow_call:
+    inputs:
+      compose-folder:
+        type: string
+        description: "Path to the folder where the docker-compose.yml file is located."
+        required: true
+      validation-url:
+        type: string
+        description: "URL to validate the Docker image."
+        default: "http://localhost:8080"
+        required: false
+    secrets:
+      AZURE_CREDENTIALS:
+        description: "service principal authentication to Azure"
+        required: true
+jobs:
+  validate-docker:
+    name: validate docker compose
+    runs-on: ubuntu-latest
+    environment: ${{ vars.TMP_ENV }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+
+      - name: Azure login
+        uses: azure/login@v2.1.1
+        with:
+          creds: ${{ secrets.AZURE_CREDENTIALS }}
+
+      - name: Load Secrets from Azure Key Vault
+        uses: ./.github/actions/load-secrets
+        with:
+          azureKeyVaultName: ${{ vars.KEY_VAULT_NAME }}
+
+      - name: Create .env file
+        run: |
+          echo "${{ secrets.env_vars }}" >> .env
+            for var in $(cat .env); do
+              echo "$var" >> $GITHUB_ENV
+            done
+
+      - name: Build Docker Image
+        run: docker compose build
+        working-directory: ${{ inputs.compose-folder }}
+
+      - name: Run Docker Image
+        run: docker compose up --no-build -d
+        working-directory: ${{ inputs.compose-folder }}
+
+      - name: Validate Docker Image
+        run: |
+          RETRIES=10
+          SLEEP_TIME=10
+          set +e
+
+          for ((i=1; i<=RETRIES; i++)); do
+              echo "Attempt $i: Checking ${{ inputs.validation-url }}..."
+              STATUS_CODE=$(curl -o /dev/null -s -w "%{http_code}" "${{ inputs.validation-url }}")
+              
+              if [ "$STATUS_CODE" -eq 200 ]; then
+                  echo "Success: $URL returned status code 200."
+                  exit 0
+              else
+                  echo "Failed: $URL returned status code $STATUS_CODE. Retrying in $SLEEP_TIME seconds..."
+                  sleep $SLEEP_TIME
+              fi
+          done
+
+          echo "Error: $URL failed to return status code 200 after $RETRIES attempts."
+          exit 1
+
+      - name: Deprovision Docker Image
+        run: docker compose down
+        working-directory: ${{ inputs.compose-folder }}

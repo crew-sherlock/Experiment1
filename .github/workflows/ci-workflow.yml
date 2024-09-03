@@ -67,3 +67,10 @@ jobs:
     needs: run-workflow
     uses: ./.github/workflows/evaluate-workflow.yml
     secrets: inherit
+
+  validate-docker:
+    uses: ./.github/workflows/validate-docker.yml
+    secrets: inherit
+    with:
+      compose-folder: "docker"
+      validation-url: "http://localhost:8080/health"

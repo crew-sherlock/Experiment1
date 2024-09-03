@@ -33,3 +33,12 @@ jobs:
     needs: pr-code-validation
     uses: ./.github/workflows/run-workflow.yml
     secrets: inherit
+
+  validate-docker:
+    needs: pr-code-validation
+    uses: ./.github/workflows/validate-docker.yml
+    secrets: inherit
+    with:
+      compose-folder: "docker"
+      validation-url: "http://localhost:8080/health"
+    
