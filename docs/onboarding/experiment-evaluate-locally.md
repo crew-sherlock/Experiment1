@@ -114,9 +114,12 @@ poetry run python -m llmops.common.prompt_pipeline \
             --base_path $USE_CASE_BASE_PATH \
             --env_name dev \
             --output_file run_id.txt
+```
 
 > Note: this command might take some time to run.
+
 This will create a csv file in the folder `reports/` this csv file can be shared with SME's to collect feedback
+
 ## Evaluate the results
 
 Executes all Evaluation flows available for a scenario that is described in the experiment.yaml or experiment.[env].yaml. This uses each RUN ID as input to run evaluation against. The experiment data and the evaluation data are loaded from Azure ML data assets that were loaded in the previous steps. The evaluation data is loaded from Azure ML data asset that was loaded in the previous step.
