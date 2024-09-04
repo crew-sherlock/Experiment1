@@ -18,7 +18,7 @@ The repository contains example of several different prompt flow use cases. Each
 - tests            : contains unit tests for the flows.
 - data-pipelines   : It contains the data pipelines to generate the datasets (experimentation, evaluation etc.) necessary for the flows. This folder will have sub-folders specific to the data engineering tool - Microsoft Fabric, Azure ML etc.
 
-Additionally, there is a `experiment.yaml` file that configures the use-case. Read the [Experiment Configuration Guide](/docs/onboarding/experiment-configuration-guide.md) for more information on how to structure the YAML file for configuring an experiment and prepare the experiment configuration as per your requirements.
+Additionally, there is a `experiment.yaml` file that configures the use-case. Read the [Experiment Configuration Guide](../onboarding/experiment-configuration-guide.md) for more information on how to structure the YAML file for configuring an experiment and prepare the experiment configuration as per your requirements.
 
 **The project includes 6 examples demonstrating different scenarios:**
 

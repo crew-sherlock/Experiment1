@@ -56,7 +56,7 @@ The Github CD workflow contains the following steps:
 
 Both the CI and CD workflows expect the variables `RESOURCE_GROUP_NAME`, `WORKSPACE_NAME` and `KEY_VAULT_NAME`. These variables should contain the values of the Azure resources in the dev environment.
 
-The rest of the workflow configurations will be read from the `experiment.yaml` file and from the `config/deployment_config.json` file for the deployment. Read the [Experiment Configuration Guide](/docs/onboarding/experiment-configuration-guide.md) for more information on how to structure the YAML file for configuring an experiment and prepare the experiment configuration as per your requirements.
+The rest of the workflow configurations will be read from the `experiment.yaml` file and from the `config/deployment_config.json` file for the deployment. Read the [Experiment Configuration Guide](../onboarding/experiment-configuration-guide.md) for more information on how to structure the YAML file for configuring an experiment and prepare the experiment configuration as per your requirements.
 
 Before running the deployment workflows, you need to make changes to `config/deployment_config.json`:
 

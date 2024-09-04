@@ -1,6 +1,6 @@
 # Adding Metrics
 
-In order to implement the monitoring strategy, as described in the [project lifecycle](/docs/design/ai-evaluation.md), we need to add metrics to the online flow. These metrics can then be captured in [App Insight](/docs/onboarding/observability.md) as part of the trace, once the flow is deployed.
+In order to implement the monitoring strategy, as described in the [project lifecycle](../design/lifecycle.md), we need to add metrics to the online flow. These metrics can then be captured in [App Insight](../onboarding/observability.md) as part of the trace, once the flow is deployed.
 
 ## Metrics in AIGA
 
@@ -47,7 +47,7 @@ AIGA provides a set of tools to make it easy to add new metrics to your flows.
 
     ![Add Input](./assets/add-input.png)
 
-You are now all set. When in production, if you want to monitor your metrics, you should follow the  [observability recommendation](/docs/onboarding/observability.md) to enable App Insights for your flows and then use the [alerting recommendations](/docs/onboarding/alerting.md) to be able to get some alerts for your flows.
+You are now all set. When in production, if you want to monitor your metrics, you should follow the  [observability recommendation](../onboarding/observability.md) to enable App Insights for your flows and then use the [alerting recommendations](../onboarding/alerting.md) to be able to get some alerts for your flows.
 
 ### Writing a Prompt
 

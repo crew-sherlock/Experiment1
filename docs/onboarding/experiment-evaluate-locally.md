@@ -6,7 +6,7 @@ This guide will walk you through running a full E2E experiment and evaluation fl
 
 ### Environment variables
 
-Create a copy of the file [.env.example](/config/.env.example) as a .env file in the root.
+Create a copy of the file [.env.example](https://github.com/gsk-tech/AIGA/blob/main/config/.env.example) as a .env file in the root.
 Fill all the params in the .env file.
 
 To run the environment, you can either use VSCode and the dev container supplied [in here](https://github.com/gsk-tech/AIGA/tree/main/.devcontainer)
@@ -63,7 +63,7 @@ az login --use-device-code
 ### Local or Remote Execution
 
 Choose the execution mode by setting the EXECUTION_TYPE variable for the LLMOPS package.
-The file [config.py](/llmops/config.py), located in the 'llmops' directory, has a single variable called EXECUTION_TYPE that can be set to either 'LOCAL' or 'AZURE'. The default value is 'AZURE'.
+The file [config.py](https://github.com/gsk-tech/AIGA/blob/main/llmops/config.py), located in the 'llmops' directory, has a single variable called EXECUTION_TYPE that can be set to either 'LOCAL' or 'AZURE'. The default value is 'AZURE'.
 
 ### Set trace configuration
 
@@ -77,7 +77,7 @@ pf config set trace.destination=azureml://subscriptions/$AZURE_SUBSCRIPTION_ID/r
 
 The next steps read appropriate field values from experiment.yaml or experiment.[env].yaml that are located in the promptflow directory that is indicated by the USE_CASE_BASE_PATH environment variable (e.g. promptflow directory).
 
-Read the [Experiment Configuration Guide](/docs/onboarding/experiment-configuration-guide.md) for more information on how to structure the YAML file for configuring an experiment and prepare the experiment configuration as per your requirements.
+Read the [Experiment Configuration Guide](../onboarding/experiment-configuration-guide.md) for more information on how to structure the YAML file for configuring an experiment and prepare the experiment configuration as per your requirements.
 Set the base path for the directory where the experiment definitions are located. for example see the folder 'promptflow' in the root of the project.
 
 ```bash

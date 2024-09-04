@@ -14,7 +14,10 @@ nav:
     - Reference Architecture: design/reference-architecture.md
     - Template Components: design/template-components.md
     - Identity and Access: design/identity-and-access.md
-    - AI Evaluation: design/ai-evaluation.md
+    - Document Loading: design/document-loading.md
+    - Accountability Report: design/accountability-report.md
+    - GenAI Lifecycle: design/lifecycle.md
+    - Success Criteria for Evaluation: design/model-evaluation-success-criteria.md
   - Decision Log: design/decision-log.md
   - Contributing:
     - Developer Guide: contributing/developer-guide.md
@@ -28,6 +31,7 @@ nav:
     - Running with Docker: onboarding/running-with-docker.md
     - Running Evaluation locally: onboarding/experiment-evaluate-locally.md
     - Deployment: onboarding/deployment.md
+    - Models: onboarding/models.md
     - GitHub:
       - GitHub Actions: onboarding/github-actions.md
       - GitHub Variables: onboarding/github-variables.md
@@ -35,7 +39,7 @@ nav:
     - Observability:
         - Observability: onboarding/observability.md
         - Alerting: onboarding/alerting.md
-    - LLMOps: 
+    - LLMOps:
         - LLMOps CI/CD: onboarding/llmops.md
         - Experiment YAML Structure Guide: onboarding/experiment-configuration-guide.md
 

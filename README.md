@@ -64,4 +64,4 @@ A clone of the *AIGA Template* repository, with project-specific configuration, 
 
 ## Getting started with the project
 
-To get started with AIGA, take a look at the [Getting Started](./docs/onboarding/getting-started.md) guide.
+To get started with AIGA, take a look at the [Getting Started](./docs/onboarding/getting-started.md) guide and the [Lifecycle of the project](/docs/design/lifecycle.md).
