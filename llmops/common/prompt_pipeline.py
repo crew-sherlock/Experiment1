@@ -424,12 +424,14 @@ def prepare_and_execute(
 
         if save_output:
             combined_results_df = pd.concat(dataframes, ignore_index=True)
+            combined_results_df["score"] = None
+            combined_results_df["comment"] = "<TO BE FILLED BY BUSINESS>"
             combined_results_df.to_csv(
-                f"{report_dir}/{dataset.name}_result.csv"
+                f"{report_dir}/{timestamp}{dataset.name}_result.csv"
             )
             styled_df = combined_results_df.to_html(index=False)
             with open(
-                f"{report_dir}/{dataset.name}_result.html", "w"
+                f"{report_dir}/{timestamp}{dataset.name}_result.html", "w"
             ) as c_results:
                 c_results.write(styled_df)
             all_df.append(combined_results_df)
@@ -537,9 +539,10 @@ def main():
     )
     parser.add_argument(
         "--save_output",
+        type=bool,
+        default=True,
         help="Save the outputs to report dir",
-        required=False,
-        action="store_true",
+        required=False
     )
     parser.add_argument(
         "--save_metric",
