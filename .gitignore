@@ -283,6 +283,8 @@ $RECYCLE.BIN/
 .promptflow
 promptflow/*/src
 promptflow/*/prompts
+run_id.txt
+promptflow/environment/env.yaml
 
 # pdfs
 .pdfs
