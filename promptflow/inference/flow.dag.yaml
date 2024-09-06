@@ -16,6 +16,8 @@ inputs:
     type: string
     default: what is BERT?
     is_chat_input: true
+  ai_search_endpoint:
+    type: string
 outputs:
   answer:
     type: string
@@ -45,16 +47,6 @@ nodes:
   api: chat
   module: promptflow.tools.aoai
   use_variants: false
-- name: retrieve_from_ai_search
-  type: python
-  source:
-    type: code
-    path: src/tools/retrieval/retrieve_from_ai_search.py
-  inputs:
-    query: ${rewrite_question.output}
-    index_name: loc-pp-ds-gd
-    azure_ai_search_connection: aisearch
-    n_results: 5
 - name: retrieve_sql_data
   type: python
   source:
@@ -108,3 +100,12 @@ nodes:
     path: src/tools/metrics/parse_llm_evaluation_score.py
   inputs:
     llm_evaluation_score: ${groundedness.output}
+- name: retrieve_from_ai_search
+  type: python
+  source:
+    type: code
+    path: src/tools/retrieval/retrieve_from_ai_search.py
+  inputs:
+    query: ${rewrite_question.output}
+    index_name: loc-pp-ds-gd
+    service_endpoint: ${inputs.ai_search_endpoint}

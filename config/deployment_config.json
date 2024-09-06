@@ -17,7 +17,7 @@
     "webapp_endpoint":[
         {
             "ENV_NAME": "dev",
-            "CONNECTION_NAMES": ["aoai", "aisearch"],
+            "CONNECTION_NAMES": ["aoai"],
             "REGISTRY_NAME": "",
             "APP_PLAN_NAME": "",
             "WEB_APP_NAME": "",

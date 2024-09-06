@@ -8,11 +8,6 @@ connections:
   api_version: 2023-05-15
   api_key: ${api_key}
   api_type: azure
-- name: aisearch
-  connection_type: CognitiveSearchConnection
-  api_base: ${api_base}
-  api_version: 2023-11-01
-  api_key: ${api_key}
 
 datasets:
 - name: chat_with_pdf
@@ -22,6 +17,7 @@ datasets:
     question: "${data.question}"
     chat_history: "${data.chat_history}"
     deployment_name: "${data.CHAT_MODEL_DEPLOYMENT_NAME}"
+    ai_search_endpoint: "${data.ai_search_endpoint}"
 
 evaluators:
 - name: chat_with_pdf_evaluation_flow

@@ -113,8 +113,6 @@ services:
     environment:
       - AOAI_API_BASE=${AOAI_API_BASE}
       - AOAI_API_KEY=${AOAI_API_KEY}
-      - AISEARCH_API_BASE=${AISEARCH_API_BASE}
-      - AISEARCH_API_KEY=${AISEARCH_API_KEY}
     ports:
       - "8080:8080"
   promptflow-2:
@@ -129,8 +127,6 @@ services:
     environment:
       - AOAI_API_BASE=${AOAI_API_BASE}
       - AOAI_API_KEY=${AOAI_API_KEY}
-      - AISEARCH_API_BASE=${AISEARCH_API_BASE}
-      - AISEARCH_API_KEY=${AISEARCH_API_KEY}
     ports:
       - "8090:8080"
 ```

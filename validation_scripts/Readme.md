@@ -32,7 +32,7 @@ Run the above `pf config set trace.destination=azureml://subscriptions/<subscrip
 - creates an index, update
 
 ```bash
-python -m validation_scripts.aisearch
+poetry run python -m validation_scripts.aisearch
 ```
 
 ## Deployment from ACR to webapp

@@ -62,7 +62,6 @@ Create PromptFlow Connections ([reference](https://microsoft.github.io/promptflo
 
 ```bash
 pf connection create -f connections/aoai.yaml --set api_key=<open-ai-api-key> --set api_base=<open-ai-api-base>
-pf connection create -f connections/aisearch.yaml --set api_key=<aisearch-api-key> --set api_base=aisearch-api-base>
 ```
 
 You will also need to create a connection in the Prompt Flow extension, matching the name of the Azure OpenAI resource connection defined in the flow configuration, e.g. 'aoai':

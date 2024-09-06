@@ -145,7 +145,7 @@ def prepare_and_execute(
     env_name: Optional[str] = None,
     output_file: Optional[str] = None,
     save_output: Optional[bool] = None,
-    save_metric: Optional[bool] = None,
+    save_metric: Optional[bool] = None
 ):
     """
     Run the experimentation loop by executing standard flows.
@@ -160,8 +160,7 @@ def prepare_and_execute(
     Returns:
         None
     """
-    config = ExperimentCloudConfig(
-        subscription_id=subscription_id, env_name=env_name)
+    config = ExperimentCloudConfig(subscription_id=subscription_id, env_name=env_name)
     experiment = load_experiment(
         filename=exp_filename, base_path=base_path, env=config.environment_name
     )
@@ -200,7 +199,6 @@ def prepare_and_execute(
             wrapper = ObjectWrapper(pf=pf)
 
     flow_detail = experiment.get_flow_detail(flow_type)
-    print(flow_detail.flow_path)
     run_ids = []
     past_runs = []
     all_df = []
@@ -209,6 +207,7 @@ def prepare_and_execute(
     env_vars = resolve_env_vars(experiment.base_path)
 
     logger.info(f"Running experiment {experiment.name}")
+
     for mapped_dataset in experiment.datasets:
         logger.info(f"Using dataset {mapped_dataset.dataset.source}")
         dataset = mapped_dataset.dataset

@@ -1,23 +1,26 @@
 from promptflow.core import tool
 from azure.search.documents import SearchClient
-from azure.core.credentials import AzureKeyCredential
-from promptflow.connections import CognitiveSearchConnection
+from azure.identity import DefaultAzureCredential
+# Retrieve the IDs and secret to use with ServicePrincipalCredentials
 
 
 @tool
 def retrieve_from_ai_search(
     query: str,
     index_name: str,
-    azure_ai_search_connection: CognitiveSearchConnection,
-    n_results: int = 10
+    service_endpoint: str,
+    n_results: int = 10,
+
 ) -> str:
     if not query or not index_name:
         return []
 
+    credential = DefaultAzureCredential()
+
     search_client = SearchClient(
-        azure_ai_search_connection.api_base,
+        service_endpoint,
         index_name,
-        AzureKeyCredential(azure_ai_search_connection.api_key)
+        credential
     )
 
     results = search_client.search(
