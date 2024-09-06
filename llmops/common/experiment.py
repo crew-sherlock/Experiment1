@@ -362,7 +362,7 @@ class Experiment:
                 all_llm_nodes = set()
         else:
             raise ValueError(
-                    f"Invalid flow type {flow_file_path}"
+                    f"Invalid flow type {flow_type}"
                 )
         return FlowDetail(
             flow_path, all_variants, all_llm_nodes, default_variants

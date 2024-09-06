@@ -55,6 +55,16 @@ nodes:
     index_name: loc-pp-ds-gd
     azure_ai_search_connection: aisearch
     n_results: 5
+- name: retrieve_sql_data
+  type: python
+  source:
+    type: code
+    path: src/tools/retrieval/retrieve_sql_data.py
+  inputs:
+    query: "SELECT ? FROM ?"
+    params:
+        - '*'
+        - '[AIGA].[TestTable]'
 - name: generate_response
   type: llm
   source:

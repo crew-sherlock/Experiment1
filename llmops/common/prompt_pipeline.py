@@ -206,7 +206,6 @@ def prepare_and_execute(
     all_df = []
     all_metrics = []
 
-    env_vars = {}
     env_vars = resolve_env_vars(experiment.base_path)
 
     logger.info(f"Running experiment {experiment.name}")
@@ -367,7 +366,6 @@ def prepare_and_execute(
                          else dataset.get_remote_source(
                               wrapper.get_property_value())),
                 "name": run_name,
-                "display_name": run_name,
                 "environment_variables": env_vars,
                 "column_mapping": column_mapping,
                 "tags": {} if not build_id else {"build_id": build_id},

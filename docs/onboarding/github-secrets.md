@@ -1,26 +1,30 @@
 # GitHub Secrets
 
-AIGA leverages Azure Key Vault to store secrets and keys used in the application. The Key Vault is a pre-requisite for AIGA and should be populated with the necessary secrets and keys ahead of time.
+AIGA leverages Azure Key Vault to store secrets and keys used in the application. The
+Key Vault is a pre-requisite for AIGA and should be populated with the necessary secrets
+and keys ahead of time.
 
 ## Required Secrets
 
 The following secrets are required to be provisioned in the Key Vault:
 
-| Secret Name                           | Description                                             |
-|---------------------------------------|---------------------------------------------------------|
-| AOAI_API_BASE                         | The base URL for the Azure OpenAI Service               |
-| AOAI_API_KEY                          | The API key for the Azure OpenAI Service                |
-| AISEARCH_API_BASE                     | The base URL for the Azure AI Search Service            |
-| AISEARCH_API_KEY                      | The API key for the Azure AI Search Service             |
-| APPLICATIONINSIGHTS_CONNECTION_STRING | The connection string for Azure Application Insights    |
-| AZURE_SUBSCRIPTION_ID                 | The Azure subscription ID                               |
-| REGISTRY_NAME                         | The name of the container registry                      |
-| REGISTRY_SECRET                       | The access key for the container registry               |
-| RESOURCE_GROUP_NAME                   | The name of the Azure resource group                    |
-| WORKSPACE_NAME                        | The name of the Azure Machine Learning workspace        |
-| WEBAPP_SUBSCRIPTION_ID                | The name of the web app service subscription ID         |
-| WEBAPP_RG_NAME                        | The name of the web app service resource group          |
-| WEBAPP_NAME                           | The name of the web app service                         |
+| Secret Name                           | Description                                          |
+|---------------------------------------|------------------------------------------------------|
+| AOAI_API_BASE                         | The base URL for the Azure OpenAI Service            |
+| AOAI_API_KEY                          | The API key for the Azure OpenAI Service             |
+| AISEARCH_API_BASE                     | The base URL for the Azure AI Search Service         |
+| AISEARCH_API_KEY                      | The API key for the Azure AI Search Service          |
+| APPLICATIONINSIGHTS_CONNECTION_STRING | The connection string for Azure Application Insights |
+| AZURE_SUBSCRIPTION_ID                 | The Azure subscription ID                            |
+| REGISTRY_NAME                         | The name of the container registry                   |
+| REGISTRY_SECRET                       | The access key for the container registry            |
+| RESOURCE_GROUP_NAME                   | The name of the Azure resource group                 |
+| WORKSPACE_NAME                        | The name of the Azure Machine Learning workspace     |
+| WEBAPP_SUBSCRIPTION_ID                | The name of the web app service subscription ID      |
+| WEBAPP_RG_NAME                        | The name of the web app service resource group       |
+| WEBAPP_NAME                           | The name of the web app service                      |
+| AZ_SQL_SERVER                         | The name of the SQL server in azure                  |
+| AZ_SQL_DATABASE                       | The name of the SQL database in azure                |
 
 > **Note**: Secrets loaded from Azure Key Vault will supersede any GitHub Actions
 > variables and secrets with the same name.

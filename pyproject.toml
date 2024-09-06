@@ -9,6 +9,10 @@ promptflow = "1.14.0"
 promptflow-tools = "1.4.0"
 azure-search-documents = "^11.5.1"
 keyrings-alt = "5.0.1"
+aioodbc = "^0.5.0"
+azureml-core = "1.57.0"
+numpy = "1.26.4"
+pyarrow = "14.0.2"
 
 [tool.poetry.group.dev.dependencies]
 flake8 = "7.1.0"

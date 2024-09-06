@@ -67,6 +67,12 @@ As you extend the capabilities of the PromptFlow application, it may be required
         --build-arg FLOW_NAME=use-case-flow
     ```
 
+    example for the evaluation:
+
+   ```bash
+    docker compose -f docker/docker-compose.yml build --build-arg USE_CASE_BASE_PATH=promptflow --build-arg FLOW_NAME=evaluation promptflow
+    ```
+
 1. Once the image is built, it can be tagged with a different name. For example:
 
     ```bash

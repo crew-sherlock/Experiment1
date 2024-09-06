@@ -16,6 +16,7 @@
         "adrs",
         "AIGA",
         "aisearch",
+        "aigasql",
         "analyzers",
         "AOAI",
         "appinsights",
@@ -38,6 +39,7 @@
         "featurebranch",
         "Gandhar",
         "genai",
+        "getenv",
         "Goulart",
         "groundedness",
         "hyperparameters",
@@ -51,12 +53,14 @@
         "listsecrets",
         "linted",
         "llmops",
+        "LLMOp's",
         "Locppr",
         "Martyna",
         "Marcinkowska",
         "Metry",
         "mgmt",
         "mlflow",
+        "MLTABLE",
         "MSAT",
         "myapp",
         "NOTEST",
@@ -91,7 +95,7 @@
         "Begeti",
         "Harikrishna",
         "Harshit",
-        "Wadhwani" 
+        "Wadhwani"
     ],
     "version": "0.2"
 }

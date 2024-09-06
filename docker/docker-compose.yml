@@ -13,6 +13,8 @@ services:
       - AOAI_API_KEY=${AOAI_API_KEY}
       - AISEARCH_API_BASE=${AISEARCH_API_BASE}
       - AISEARCH_API_KEY=${AISEARCH_API_KEY}
+      - AZ_SQL_DATABASE=${AZ_SQL_DATABASE}
+      - AZ_SQL_SERVER=${AZ_SQL_SERVER}
     ports:
       - "8080:8080"
   docs:
@@ -21,6 +23,6 @@ services:
       - "8090:8000"
     volumes:
       - ../:/docs
-    command: ["serve", "-a", "0.0.0.0:8000"]
+    command: [ "serve", "-a", "0.0.0.0:8000" ]
     profiles:
       - docs
