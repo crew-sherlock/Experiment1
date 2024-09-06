@@ -1,9 +1,9 @@
-name: cd-workflow
+name: promptflow-cd-workflow
 
 on:
   workflow_dispatch:
   workflow_run:
-    workflows: ["ci-workflow"]
+    workflows: ["promptflow-ci-workflow"]
     types:
       - completed
 

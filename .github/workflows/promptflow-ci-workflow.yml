@@ -1,4 +1,4 @@
-name: ci-workflow
+name: promptflow-ci-workflow
 
 on:
   workflow_dispatch:

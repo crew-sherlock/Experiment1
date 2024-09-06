@@ -1,6 +1,6 @@
 on:
   workflow_run:
-    workflows: ["cd-workflow"]
+    workflows: ["promptflow-cd-workflow"]
     types:
       - completed
 
