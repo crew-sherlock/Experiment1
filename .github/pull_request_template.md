@@ -5,8 +5,8 @@
 ## Does this introduce a breaking change?
 <!-- Mark one with an "x". -->
 
-* [ ] Yes
-* [ ] No
+-[ ] Yes
+-[ ] No
 
 <!-- Please prefix your PR title with one of the following:
   * `feat`: A new feature
