@@ -1,5 +1,9 @@
 # AI Generation Accelerator (AIGA)
 
+![Release Status](https://github.com/gsk-tech/AIGA/actions/workflows/create-release.yml/badge.svg?branch=main)
+![Promptflow CI Status](https://github.com/gsk-tech/AIGA/actions/workflows/promptflow-ci-workflow.yml/badge.svg?branch=main)
+![Promptflow CD Status](https://github.com/gsk-tech/AIGA/actions/workflows/promptflow-cd-workflow.yml/badge.svg?branch=main)
+
 The **AI Generation Accelerator (AIGA)** provides a repeatable framework for building standardised LLM applications. It is intended to accelerate the delivery of value by:
 
 1. Bootstrapping experimentation and evaluation
