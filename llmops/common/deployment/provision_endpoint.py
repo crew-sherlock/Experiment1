@@ -17,6 +17,7 @@ to the output file necessary for the endpoint principal.
 
 import json
 import argparse
+
 from typing import Optional
 from dotenv import load_dotenv
 
@@ -36,13 +37,14 @@ def create_endpoint(
     build_id: Optional[str] = None,
     subscription_id: Optional[str] = None,
     output_file: Optional[str] = None,
+    deployment_config: str = "config/deployment_config.json",
 ):
     """Create endpoint for the model version."""
     config = ExperimentCloudConfig(
         subscription_id=subscription_id, env_name=env_name
     )
 
-    real_config = "config/deployment_config.json"
+    real_config = deployment_config
 
     ml_client = MLClient(
         subscription_id=config.subscription_id,

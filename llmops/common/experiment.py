@@ -24,7 +24,6 @@ from llmops.common.common import FlowTypeOption
 
 _FLOW_DAG_FILENAME = "flow.dag.yaml"
 _FLOW_FLEX_FILENAME = "flow.flex.yaml"
-_DEFAULT_FLOWS_DIR = "flows"
 _DEFAULT_DATA_DIR = "data"
 
 

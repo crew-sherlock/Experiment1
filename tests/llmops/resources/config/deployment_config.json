@@ -1,0 +1,19 @@
+{
+    "azure_managed_endpoint": [
+        {
+            "ENV_NAME": "dev",
+            "ENDPOINT_NAME": "test-endpoint",
+            "ENDPOINT_DESC": "test-endpoint-description",
+            "DEPLOYMENT_DESC": "test-deployment-description",
+            "PRIOR_DEPLOYMENT_NAME": "test-prior-deployment",
+            "PRIOR_DEPLOYMENT_TRAFFIC_ALLOCATION": "10",
+            "CURRENT_DEPLOYMENT_NAME": "test-deployment",
+            "CURRENT_DEPLOYMENT_TRAFFIC_ALLOCATION": "90",
+            "DEPLOYMENT_VM_SIZE": "test-vm-size",
+            "DEPLOYMENT_INSTANCE_COUNT": 1,
+            "ENVIRONMENT_VARIABLES": {
+                "test-key": "test-value"
+            }
+        }
+    ]
+}

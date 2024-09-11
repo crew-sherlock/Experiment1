@@ -70,12 +70,6 @@ con_object=$(jq ".webapp_endpoint[] | select(.ENV_NAME == \"$env_name\")" "$depl
 
 config_path="./$USE_CASE_BASE_PATH/experiment.yaml"
 STANDARD_FLOW=$(yq '.flow' "$config_path" |  sed 's/"//g')
-init_file_path="./$USE_CASE_BASE_PATH/$STANDARD_FLOW/flow.flex.yaml"
-
-init_output=()
-if [ -e "$init_file_path" ]; then
-    IFS=' ' read -r -a init_output <<< $(poetry run python llmops/common/deployment/generate_config.py "$init_file_path" "false")
-fi
 
 env_output=()
 if [ -e "$env_var_file_path" ]; then
@@ -112,20 +106,6 @@ for pair in "${env_output[@]}"; do
         --resource-group "$WEBAPP_RG_NAME" \
         --name "$WEBAPP_NAME" \
         --settings "$key"="$value"
-done
-
-for element in "${init_output[@]}"
-do
-    echo "Key-value pair: $element"
-    key="${element%%=*}"
-    value="${element#*=}"
-    key=$(echo "$key" | tr '[:lower:]' '[:upper:]')
-    pair="$key=$value"
-    az webapp config appsettings set \
-        --resource-group "$WEBAPP_RG_NAME" \
-        --name "$WEBAPP_NAME" \
-        --settings "$key"="$value"
-    echo "$element"
 done
 
 az webapp config appsettings set \

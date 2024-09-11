@@ -56,6 +56,7 @@ def create_deployment(
     build_id: Optional[str] = None,
     env_name: Optional[str] = None,
     subscription_id: Optional[str] = None,
+    deployment_config: str = "config/deployment_config.json",
 ):
     """Create deployment for the model version."""
     config = ExperimentCloudConfig(
@@ -117,7 +118,7 @@ def create_deployment(
 
     env_vars = resolve_env_vars(experiment.base_path)
 
-    real_config = "config/deployment_config.json"
+    real_config = deployment_config
 
     logger.info(f"Model name: {model_name}")
 
