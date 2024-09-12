@@ -2,7 +2,6 @@
 
 ls
 ls /flow/connections
-pf connection create --file /flow/connections/aisearch.yaml
 pf connection create --file /flow/connections/aoai.yaml
 WORKER_NUM=${PROMPTFLOW_WORKER_NUM:-"8"}
 WORKER_THREADS=${PROMPTFLOW_WORKER_THREADS:-"1"}

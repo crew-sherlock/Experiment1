@@ -13,6 +13,7 @@ aioodbc = "^0.5.0"
 azureml-core = "1.57.0"
 numpy = "1.23.5"
 pyarrow = "14.0.2"
+opentelemetry-instrumentation-flask = "0.48b0"
 
 [tool.poetry.group.dev.dependencies]
 flake8 = "7.1.0"

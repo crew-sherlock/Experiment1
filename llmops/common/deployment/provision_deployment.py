@@ -164,15 +164,18 @@ def create_deployment(
                 deployment_desc = elem["DEPLOYMENT_DESC"]
                 environment_variables = dict(elem["ENVIRONMENT_VARIABLES"])
 
-                if os.environ.get(
-                    "APPLICATIONINSIGHTS_CONNECTION_STRING",
-                    None
-                ):
-                    environment_variables[
-                        "APPLICATIONINSIGHTS_CONNECTION_STRING"
-                    ] = (
-                        os.environ.get("APPLICATIONINSIGHTS_CONNECTION_STRING")
+                appinsights_connection_string = (
+                    os.getenv("APPLICATIONINSIGHTS_CONNECTION_STRING")
+                )
+                if appinsights_connection_string is not None:
+                    environment_variables["APPLICATIONINSIGHTS_CONNECTION_STRING"] = (
+                        appinsights_connection_string
                     )
+                    logger.info("Application Insights connection " +
+                                "string is set from Key Vault.")
+                else:
+                    logger.warn("Application Insights connection string is not set. "
+                                "Using AML linked service.")
 
                 if isinstance(env_vars, dict):
                     if env_vars:
