@@ -8,20 +8,27 @@ and keys ahead of time.
 
 The following secrets are required to be provisioned in the Key Vault:
 
-| Secret Name                           | Description                                          |
-|---------------------------------------|------------------------------------------------------|
-| AOAI_API_BASE                         | The base URL for the Azure OpenAI Service            |
-| AOAI_API_KEY                          | The API key for the Azure OpenAI Service             |
-| AISEARCH_API_BASE                     | The base URL for the Azure AI Search Service         |
-| APPLICATIONINSIGHTS_CONNECTION_STRING | The connection string for Azure Application Insights |
-| AZURE_SUBSCRIPTION_ID                 | The Azure subscription ID                            |
-| REGISTRY_NAME                         | The name of the container registry                   |
-| REGISTRY_SECRET                       | The access key for the container registry            |
-| RESOURCE_GROUP_NAME                   | The name of the Azure resource group                 |
-| WORKSPACE_NAME                        | The name of the Azure Machine Learning workspace     |
-| WEBAPP_SUBSCRIPTION_ID                | The name of the web app service subscription ID      |
-| WEBAPP_RG_NAME                        | The name of the web app service resource group       |
-| WEBAPP_NAME                           | The name of the web app service                      |
+| Secret Name                           | Description                                             |
+|---------------------------------------|---------------------------------------------------------|
+| AOAI_API_BASE                         | The base URL for the Azure OpenAI Service               |
+| AOAI_API_KEY                          | The API key for the Azure OpenAI Service                |
+| AOAI_API_VERSION                      | The version of the Azure OpenAI Service                 |
+| EMBEDDING_MODEL_DEPLOYMENT_NAME       | The name of the Azure OpenAI deployment for embeddings  |
+| SEARCH_SERVICE_NAME                   | The base URL for the Azure AI Search Service            |
+| AI_DOC_INTELLIGENCE_SERVICE           | The base URL for the Azure AI Document Intelligence     |
+| AI_DOC_INTELLIGENCE_KEY               | The API key for the Azure AI Document Intelligence      |
+| APPLICATIONINSIGHTS_CONNECTION_STRING | The connection string for Azure Application Insights    |
+| AZURE_SUBSCRIPTION_ID                 | The Azure subscription ID                               |
+| AZURE_TENANT_ID                       | The Azure tenant ID                                     |
+| SERVICE_PRINCIPAL_ID                  | The Azure service principal ID                          |
+| SERVICE_PRINCIPAL_PASSWORD            | The Azure service principal password                    |
+| REGISTRY_NAME                         | The name of the container registry                      |
+| REGISTRY_SECRET                       | The access key for the container registry               |
+| RESOURCE_GROUP_NAME                   | The name of the Azure resource group                    |
+| WORKSPACE_NAME                        | The name of the Azure Machine Learning workspace        |
+| WEBAPP_SUBSCRIPTION_ID                | The name of the web app service subscription ID         |
+| WEBAPP_RG_NAME                        | The name of the web app service resource group          |
+| WEBAPP_NAME                           | The name of the web app service                         |
 | AZ_SQL_SERVER                         | The name of the SQL server in azure                  |
 | AZ_SQL_DATABASE                       | The name of the SQL database in azure                |
 

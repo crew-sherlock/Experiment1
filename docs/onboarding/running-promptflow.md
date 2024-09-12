@@ -16,8 +16,7 @@ Fill the required params:
 
 - `AOAI_API_BASE`
 - `AOAI_API_KEY`
-- `AISEARCH_API_BASE`
-- `AISEARCH_API_KEY`
+- `SEARCH_SERVICE_NAME`
 
 > Note: For other components such as the CI/CD, you will also need to supply the following variables: `SUBSCRIPTION_ID`, `RESOURCE_GROUP_NAME`, `WORKSPACE_NAME`
 

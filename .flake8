@@ -1,3 +1,4 @@
 [flake8]
-extend-ignore = D103, D100
+extend-ignore = D103, D100, D101, E402, D107, D102
 max-line-length = 88
+exclude = tests/document_loading/components/test_chunking_component.py

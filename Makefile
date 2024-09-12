@@ -3,7 +3,7 @@ PYV=$(shell python -c "import sys;t='{v[0]}.{v[1]}'.format(v=list(sys.version_in
 setup:
 	poetry env use python3.9
 	poetry config virtualenvs.in-project true
-	poetry install --with dev,test,llmops
+	poetry install --with dev,test,llmops,aml
 	poetry run pre-commit install
 
 pre-commit:
@@ -18,6 +18,7 @@ build-docs:
 requirements:
 	@poetry lock --no-update
 	@find promptflow -path '*/*' -name 'requirements.txt' -execdir poetry export --without-hashes -o {} \;
+	@find src/document_loading -path '*/*' -name 'requirements.txt' -execdir poetry export --only aml --without-hashes -o {} \;
 
 clean:
 	rm -rf site htmlcov junit

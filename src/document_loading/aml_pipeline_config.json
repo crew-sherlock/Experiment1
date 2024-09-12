@@ -1,0 +1,114 @@
+{
+    "path_to_script": "src/document_loading",
+    "compute_name": "sp-document-loading",
+    "vm_size": "STANDARD_DS11_V2",
+    "max_nodes": 2,
+    "experiment_name": "data-fetch-experiment",
+    "storage_account_name": "copscdaius6storagedev001",
+    "container_name": "aia-container",
+    "datastore_name": "deviationsblob",
+    "data_path": "past-deviations/",
+    "chunking_strategy": "headers",
+    "chunk_size": 1000,
+    "chunk_overlap": 200,
+    "index_name": "deviationsidx",
+    "fields": [
+        {
+            "name": "id",
+            "type": "Edm.String",
+            "key": true,
+            "retrievable": true,
+            "filterable": false,
+            "sortable": false,
+            "facetable": false,
+            "searchable": false
+        },
+        {
+            "name": "filename",
+            "type": "Edm.String",
+            "retrievable": true,
+            "filterable": true,
+            "sortable": true,
+            "facetable": false,
+            "searchable": true
+        },
+        {
+            "name": "ingestionDate",
+            "type": "Edm.DateTimeOffset",
+            "retrievable": true,
+            "filterable": true,
+            "sortable": true,
+            "facetable": false
+        },
+        {
+            "name": "text",
+            "type": "Edm.String",
+            "retrievable": true,
+            "filterable": false,
+            "sortable": false,
+            "facetable": false,
+            "searchable": true
+        },
+        {
+            "name": "textVector",
+            "type": "Collection(Edm.Single)",
+            "vector_search_dimensions": 1536,
+            "vector_search_profile_name": "myHnswProfile",
+            "retrievable": false,
+            "searchable": true
+        },
+        {
+            "name": "metadata",
+            "type": "Edm.ComplexType",
+            "fields": [
+                {
+                    "name": "Header1",
+                    "type": "Edm.String",
+                    "retrievable": true,
+                    "filterable": false,
+                    "sortable": false,
+                    "facetable": false,
+                    "searchable": true
+                },
+                {
+                    "name": "Header2",
+                    "type": "Edm.String",
+                    "retrievable": true,
+                    "filterable": false,
+                    "sortable": false,
+                    "facetable": false,
+                    "searchable": true
+                },
+                {
+                    "name": "Header3",
+                    "type": "Edm.String",
+                    "retrievable": true,
+                    "filterable": false,
+                    "sortable": false,
+                    "facetable": false,
+                    "searchable": true
+                }
+            ]
+        }
+    ],
+    "vector_search": {
+        "algorithms": [
+            {
+                "name": "myHnsw",
+                "kind": "hnsw",
+                "parameters": {
+                    "m": 4,
+                    "ef_construction": 400,
+                    "ef_search": 500,
+                    "metric": "cosine"
+                }
+            }
+        ],
+        "profiles": [
+            {
+                "name": "myHnswProfile",
+                "algorithm_configuration_name": "myHnsw"
+            }
+        ]
+    }
+}

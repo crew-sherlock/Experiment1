@@ -4,14 +4,14 @@ readme = "README.md"
 package-mode = false
 
 [tool.poetry.dependencies]
-python = ">=3.9, <4.0"
+python = ">=3.9, <3.11"
 promptflow = "1.14.0"
 promptflow-tools = "1.4.0"
 azure-search-documents = "^11.5.1"
 keyrings-alt = "5.0.1"
 aioodbc = "^0.5.0"
 azureml-core = "1.57.0"
-numpy = "1.26.4"
+numpy = "1.23.5"
 pyarrow = "14.0.2"
 
 [tool.poetry.group.dev.dependencies]
@@ -43,3 +43,20 @@ pytest-mock = "3.7.0"
 [build-system]
 requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.group.aml]
+optional = true
+
+[tool.poetry.group.aml.dependencies]
+numpy = "1.23.5"
+azureml-core = ">=1.57.0"
+azureml-pipeline-core = ">=1.57.0"
+azureml-pipeline-steps = ">=1.57.0"
+azureml-pipeline = ">=1.57.0"
+langchain = ">=0.2.0"
+langchain-community = ">=0.2.0"
+azure-ai-documentintelligence = ">=1.0.0b3"
+tiktoken = ">=0.7.0"
+openai = ">=1.43.0"
+azure-identity = ">=1.17.1"
+azure-core = ">=1.30.2"
