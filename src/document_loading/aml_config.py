@@ -57,13 +57,13 @@ class AMLConfig:
 
     def load_env_variables(self):
         load_dotenv()
-        self.subscription_id = self.load_env_variable('AZURE_SUBSCRIPTION_ID')
-        self.resource_group = self.load_env_variable('RESOURCE_GROUP_NAME')
-        self.workspace_name = self.load_env_variable('WORKSPACE_NAME')
+        self.subscription_id = self.load_env_variable('AML_AZURE_SUBSCRIPTION_ID')
+        self.resource_group = self.load_env_variable('AML_RESOURCE_GROUP_NAME')
+        self.workspace_name = self.load_env_variable('AML_WORKSPACE_NAME')
         self.tenant_id = self.load_env_variable('AZURE_TENANT_ID')
-        self.service_principal_id = self.load_env_variable('SERVICE_PRINCIPAL_ID')
+        self.service_principal_id = self.load_env_variable('AZURE_CLIENT_ID')
         self.service_principal_password = self.load_env_variable(
-            'SERVICE_PRINCIPAL_PASSWORD'
+            'AZURE_CLIENT_SECRET'
             )
         self.ai_doc_intelligence_service = self.load_env_variable(
             'AI_DOC_INTELLIGENCE_SERVICE'

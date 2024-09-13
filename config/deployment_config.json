@@ -18,7 +18,7 @@
         {
             "ENV_NAME": "dev",
             "CONNECTION_NAMES": ["aoai"],
-            "REGISTRY_NAME": "",
+            "DOCKER_IMAGE_REGISTRY": "",
             "APP_PLAN_NAME": "",
             "WEB_APP_NAME": "",
             "WEB_APP_RG_NAME": "",

@@ -18,7 +18,7 @@ Fill the required params:
 - `AOAI_API_KEY`
 - `SEARCH_SERVICE_NAME`
 
-> Note: For other components such as the CI/CD, you will also need to supply the following variables: `SUBSCRIPTION_ID`, `RESOURCE_GROUP_NAME`, `WORKSPACE_NAME`
+> Note: For other components such as the CI/CD, you will also need to supply the following variables: `AML_SUBSCRIPTION_ID`, `AML_RESOURCE_GROUP_NAME`, `AML_WORKSPACE_NAME`
 
 To run the environment, you can either use VSCode and the dev container supplied [in here](https://github.com/gsk-tech/AIGA/tree/main/.devcontainer)
 or

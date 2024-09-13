@@ -54,14 +54,14 @@ The Github CD workflow contains the following steps:
 
 ## Deployment configuration
 
-Both the CI and CD workflows expect the variables `RESOURCE_GROUP_NAME`, `WORKSPACE_NAME` and `KEY_VAULT_NAME`. These variables should contain the values of the Azure resources in the dev environment.
+Both the CI and CD workflows expect the variables `AML_RESOURCE_GROUP_NAME`, `AML_WORKSPACE_NAME` and `KEY_VAULT_NAME`. These variables should contain the values of the Azure resources in the dev environment.
 
 The rest of the workflow configurations will be read from the `experiment.yaml` file and from the `config/deployment_config.json` file for the deployment. Read the [Experiment Configuration Guide](../onboarding/experiment-configuration-guide.md) for more information on how to structure the YAML file for configuring an experiment and prepare the experiment configuration as per your requirements.
 
 Before running the deployment workflows, you need to make changes to `config/deployment_config.json`:
 
 - Update the `ENDPOINT_NAME` and `CURRENT_DEPLOYMENT_NAME` if you want to deploy to Azure Machine Learning compute
-- Or update the `CONNECTION_NAMES`, `REGISTRY_NAME`, `APP_PLAN_NAME`, `WEB_APP_NAME`, `WEB_APP_RG_NAME`, `WEB_APP_SKU`, and `USER_MANAGED_ID`if you want to deploy to Azure Web App.
+- Or update the `CONNECTION_NAMES`, `DOCKER_IMAGE_REGISTRY`, `APP_PLAN_NAME`, `WEB_APP_NAME`, `WEB_APP_RG_NAME`, `WEB_APP_SKU`, and `USER_MANAGED_ID`if you want to deploy to Azure Web App.
 
 ### Update deployment_config.json in config folder
 

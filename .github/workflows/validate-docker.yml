@@ -3,11 +3,11 @@ name: validate-docker-compose
 on:
   workflow_call:
     inputs:
-      compose-folder:
+      compose_folder:
         type: string
         description: "Path to the folder where the docker-compose.yml file is located."
         required: true
-      validation-url:
+      validation_url:
         type: string
         description: "URL to validate the Docker image."
         default: "http://localhost:8080"
@@ -45,11 +45,11 @@ jobs:
 
       - name: Build Docker Image
         run: docker compose build
-        working-directory: ${{ inputs.compose-folder }}
+        working-directory: ${{ inputs.compose_folder }}
 
       - name: Run Docker Image
         run: docker compose up --no-build -d
-        working-directory: ${{ inputs.compose-folder }}
+        working-directory: ${{ inputs.compose_folder }}
 
       - name: Validate Docker Image
         run: |
@@ -58,8 +58,8 @@ jobs:
           set +e
 
           for ((i=1; i<=RETRIES; i++)); do
-              echo "Attempt $i: Checking ${{ inputs.validation-url }}..."
-              STATUS_CODE=$(curl -o /dev/null -s -w "%{http_code}" "${{ inputs.validation-url }}")
+              echo "Attempt $i: Checking ${{ inputs.validation_url }}..."
+              STATUS_CODE=$(curl -o /dev/null -s -w "%{http_code}" "${{ inputs.validation_url }}")
               
               if [ "$STATUS_CODE" -eq 200 ]; then
                   echo "Success: $URL returned status code 200."
@@ -75,4 +75,4 @@ jobs:
 
       - name: Deprovision Docker Image
         run: docker compose down
-        working-directory: ${{ inputs.compose-folder }}
+        working-directory: ${{ inputs.compose_folder }}

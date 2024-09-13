@@ -17,9 +17,9 @@ RESOURCE_PATH = CWD_PATH / "tests/llmops/resources"
 def _set_required_env_vars():
     """Set required environment variables."""
     monkeypatch = pytest.MonkeyPatch()
-    monkeypatch.setenv("SUBSCRIPTION_ID", "TEST_SUBSCRIPTION_ID")
-    monkeypatch.setenv("RESOURCE_GROUP_NAME", "TEST_RESOURCE_GROUP_NAME")
-    monkeypatch.setenv("WORKSPACE_NAME", "TEST_WORKSPACE_NAME")
+    monkeypatch.setenv("AML_AZURE_SUBSCRIPTION_ID", "TEST_SUBSCRIPTION_ID")
+    monkeypatch.setenv("AML_RESOURCE_GROUP_NAME", "TEST_RESOURCE_GROUP_NAME")
+    monkeypatch.setenv("AML_WORKSPACE_NAME", "TEST_WORKSPACE_NAME")
 
 
 def test_register_data_asset():

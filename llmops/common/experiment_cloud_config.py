@@ -65,13 +65,13 @@ class ExperimentCloudConfig:
     ):
         """Initialize the configuration."""
         self.subscription_id = subscription_id or _try_get_env_var(
-            "SUBSCRIPTION_ID"
+            "AML_AZURE_SUBSCRIPTION_ID"
         )
         self.resource_group_name = resource_group_name or _try_get_env_var(
-            "RESOURCE_GROUP_NAME"
+            "AML_RESOURCE_GROUP_NAME"
         )
         self.workspace_name = workspace_name or _try_get_env_var(
-            "WORKSPACE_NAME"
+            "AML_WORKSPACE_NAME"
         )
         self.environment_name = env_name or _get_optional_env_var(
             "ENV_NAME"

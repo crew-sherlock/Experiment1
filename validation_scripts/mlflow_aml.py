@@ -13,9 +13,9 @@ load_dotenv()
 tenant_id = os.environ["AZURE_TENANT_ID"]
 client_id = os.environ["AZURE_CLIENT_ID"]
 client_secret = os.environ["AZURE_CLIENT_SECRET"]
-subscription_id = os.environ["AZURE_SUBSCRIPTION_ID"]
-resource_group_name = os.environ["RESOURCE_GROUP_NAME"]
-workspace_name = os.environ["WORKSPACE_NAME"]
+subscription_id = os.environ["AML_AZURE_SUBSCRIPTION_ID"]
+resource_group_name = os.environ["AML_RESOURCE_GROUP_NAME"]
+workspace_name = os.environ["AML_WORKSPACE_NAME"]
 
 credential = ClientSecretCredential(tenant_id=tenant_id, client_id=client_id,
                                     client_secret=client_secret)

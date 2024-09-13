@@ -42,9 +42,9 @@ from azureml.data.azure_sql_database_datastore import AzureSqlDatabaseDatastore
 datastore_name = "aigasql"
 
 # Step 1: Authenticate to Azure and get MLClient
-subscription_id = os.getenv("AZURE_SUBSCRIPTION_ID")
-resource_group = os.getenv("RESOURCE_GROUP_NAME")
-workspace_name = os.getenv("WORKSPACE_NAME")
+subscription_id = os.getenv("AML_AZURE_SUBSCRIPTION_ID")
+resource_group = os.getenv("AML_RESOURCE_GROUP_NAME")
+workspace_name = os.getenv("AML_WORKSPACE_NAME")
 
 credential = DefaultAzureCredential()
 workspace = Workspace(

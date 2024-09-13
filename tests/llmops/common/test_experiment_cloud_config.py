@@ -53,9 +53,9 @@ def test_experiment_cloud_config(monkeypatch: pytest.MonkeyPatch):
     env_name = "dev"
 
     # Check works with arguments
-    monkeypatch.setenv("SUBSCRIPTION_ID", "")
-    monkeypatch.setenv("RESOURCE_GROUP_NAME", "")
-    monkeypatch.setenv("WORKSPACE_NAME", "")
+    monkeypatch.setenv("AML_AZURE_SUBSCRIPTION_ID", "")
+    monkeypatch.setenv("AML_RESOURCE_GROUP_NAME", "")
+    monkeypatch.setenv("AML_WORKSPACE_NAME", "")
     monkeypatch.setenv("ENV_NAME", "")
     config = ExperimentCloudConfig(subscription_id, rg_name, ws_name, env_name)
     assert config.subscription_id == subscription_id
@@ -66,36 +66,36 @@ def test_experiment_cloud_config(monkeypatch: pytest.MonkeyPatch):
     # Check fails without arguments or environment variables
     with pytest.raises(
         ValueError,
-        match="env var 'SUBSCRIPTION_ID' is not set or is empty.",
+        match="env var 'AML_AZURE_SUBSCRIPTION_ID' is not set or is empty.",
     ):
         ExperimentCloudConfig()
 
-    # Check fails without RESOURCE_GROUP_NAME
-    monkeypatch.setenv("SUBSCRIPTION_ID", subscription_id)
-    monkeypatch.setenv("RESOURCE_GROUP_NAME", "")
-    monkeypatch.setenv("WORKSPACE_NAME", "")
+    # Check fails without AML_RESOURCE_GROUP_NAME
+    monkeypatch.setenv("AML_AZURE_SUBSCRIPTION_ID", subscription_id)
+    monkeypatch.setenv("AML_RESOURCE_GROUP_NAME", "")
+    monkeypatch.setenv("AML_WORKSPACE_NAME", "")
     with pytest.raises(
         ValueError,
         match=(
-            "env var 'RESOURCE_GROUP_NAME' is not set or is empty."
+            "env var 'AML_RESOURCE_GROUP_NAME' is not set or is empty."
         ),
     ):
         ExperimentCloudConfig()
 
-    # Check fails without WORKSPACE_NAME
-    monkeypatch.setenv("SUBSCRIPTION_ID", subscription_id)
-    monkeypatch.setenv("RESOURCE_GROUP_NAME", rg_name)
-    monkeypatch.setenv("WORKSPACE_NAME", "")
+    # Check fails without AML_WORKSPACE_NAME
+    monkeypatch.setenv("AML_AZURE_SUBSCRIPTION_ID", subscription_id)
+    monkeypatch.setenv("AML_RESOURCE_GROUP_NAME", rg_name)
+    monkeypatch.setenv("AML_WORKSPACE_NAME", "")
     with pytest.raises(
         ValueError,
-        match="env var 'WORKSPACE_NAME' is not set or is empty.",
+        match="env var 'AML_WORKSPACE_NAME' is not set or is empty.",
     ):
         ExperimentCloudConfig()
 
     # Check works wth environment variables
-    monkeypatch.setenv("SUBSCRIPTION_ID", subscription_id)
-    monkeypatch.setenv("RESOURCE_GROUP_NAME", rg_name)
-    monkeypatch.setenv("WORKSPACE_NAME", ws_name)
+    monkeypatch.setenv("AML_AZURE_SUBSCRIPTION_ID", subscription_id)
+    monkeypatch.setenv("AML_RESOURCE_GROUP_NAME", rg_name)
+    monkeypatch.setenv("AML_WORKSPACE_NAME", ws_name)
     monkeypatch.setenv("ENV_NAME", env_name)
     config = ExperimentCloudConfig()
     assert config.subscription_id == subscription_id

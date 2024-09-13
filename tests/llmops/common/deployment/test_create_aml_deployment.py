@@ -19,9 +19,9 @@ REQUEST_TIMEOUT_MS = 3 * 60 * 1000
 @pytest.fixture(scope="module", autouse=True)
 def _set_required_env_vars():
     monkeypatch = pytest.MonkeyPatch()
-    monkeypatch.setenv("SUBSCRIPTION_ID", "TEST_SUBSCRIPTION_ID")
-    monkeypatch.setenv("RESOURCE_GROUP_NAME", "TEST_RESOURCE_GROUP_NAME")
-    monkeypatch.setenv("WORKSPACE_NAME", "TEST_WORKSPACE_NAME")
+    monkeypatch.setenv("AML_AZURE_SUBSCRIPTION_ID", "TEST_SUBSCRIPTION_ID")
+    monkeypatch.setenv("AML_RESOURCE_GROUP_NAME", "TEST_RESOURCE_GROUP_NAME")
+    monkeypatch.setenv("AML_WORKSPACE_NAME", "TEST_WORKSPACE_NAME")
 
 
 def test_create_aml_deployment():

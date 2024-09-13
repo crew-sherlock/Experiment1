@@ -3,7 +3,7 @@ name: deploy-aml
 description: execute an online endpoint for real time inference
 
 inputs:
-  AZURE_SUBSCRIPTION_ID:
+  AML_AZURE_SUBSCRIPTION_ID:
     description: "subscription id needed for deployment"
     required: true
   use_case_base_path:
@@ -15,10 +15,10 @@ inputs:
   DEPLOY_ENVIRONMENT:
     description: "env stage e.g. dev, test, prod"
     required: true
-  RESOURCE_GROUP_NAME:
-    description: "Resource group name"
+  AML_RESOURCE_GROUP_NAME:
+    description: "Resource group name where AML workspace is provisioned"
     required: true
-  WORKSPACE_NAME:
+  AML_WORKSPACE_NAME:
     description: "Workspace name"
     required: true
   KEY_VAULT_NAME:
@@ -34,7 +34,7 @@ runs:
         step_name: "Provision Managed Endpoint"
         script_parameter: |
           python -m llmops.common.deployment.provision_endpoint \
-            --subscription_id ${{ inputs.AZURE_SUBSCRIPTION_ID }} \
+            --subscription_id ${{ inputs.AML_AZURE_SUBSCRIPTION_ID }} \
             --build_id ${{ github.run_id }} \
             --output_file "endpoint_principal.txt" \
             --env_name ${{ inputs.DEPLOY_ENVIRONMENT }} \
@@ -54,13 +54,13 @@ runs:
         KEY_VAULT_NAME=${{ inputs.KEY_VAULT_NAME }}
         echo $KEY_VAULT_NAME
 
-        RESOURCE_GROUP_NAME=${{ inputs.RESOURCE_GROUP_NAME }}
-        echo $RESOURCE_GROUP_NAME
+        AML_RESOURCE_GROUP_NAME=${{ inputs.AML_RESOURCE_GROUP_NAME }}
+        echo $AML_RESOURCE_GROUP_NAME
 
-        WORKSPACE_NAME=${{ inputs.WORKSPACE_NAME }}
-        echo $WORKSPACE_NAME
+        AML_WORKSPACE_NAME=${{ inputs.AML_WORKSPACE_NAME }}
+        echo $AML_WORKSPACE_NAME
 
-        az role assignment create --assignee $ENDPOINT_PRINCIPAL --role "Azure Machine Learning Workspace Connection Secrets Reader" --scope "/subscriptions/ea481a04-0a19-444a-8589-aab55759dee3/resourcegroups/codeorange-psc-us6-shared-svc-appresources-playground/providers/Microsoft.MachineLearningServices/workspaces/$WORKSPACE_NAME"
+        az role assignment create --assignee $ENDPOINT_PRINCIPAL --role "Azure Machine Learning Workspace Connection Secrets Reader" --scope "/subscriptions/ea481a04-0a19-444a-8589-aab55759dee3/resourcegroups/codeorange-psc-us6-shared-svc-appresources-playground/providers/Microsoft.MachineLearningServices/workspaces/$AML_WORKSPACE_NAME"
         auth_type=$(az keyvault show -n $KEY_VAULT_NAME  -g "PSC-aiga-AppResources-devtest" --query "properties.enableRbacAuthorization")
         if [[ -z "$auth_type" ]]; then
             echo "assigning RBAC permission"
@@ -76,7 +76,7 @@ runs:
         step_name: "Provision Managed Deployment"
         script_parameter: |
           python -m llmops.common.deployment.provision_deployment \
-            --subscription_id ${{ inputs.AZURE_SUBSCRIPTION_ID }} \
+            --subscription_id ${{ inputs.AML_AZURE_SUBSCRIPTION_ID }} \
             --model_version ${{ inputs.MODEL_VERSION }} \
             --build_id ${{ github.run_id }} \
             --env_name ${{ inputs.DEPLOY_ENVIRONMENT }} \
@@ -88,6 +88,6 @@ runs:
         step_name: "Test Managed Deployment"
         script_parameter: |
           python -m llmops.common.deployment.test_model_on_aml \
-            --subscription_id ${{ inputs.AZURE_SUBSCRIPTION_ID }} \
+            --subscription_id ${{ inputs.AML_AZURE_SUBSCRIPTION_ID }} \
             --env_name ${{ inputs.DEPLOY_ENVIRONMENT }} \
             --base_path ${{ inputs.use_case_base_path }}

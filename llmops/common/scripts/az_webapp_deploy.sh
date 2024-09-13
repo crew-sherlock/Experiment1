@@ -17,20 +17,20 @@ while [[ $# -gt 0 ]]; do
             build_id="$2"
             shift 2
             ;;
-        --REGISTRY_NAME)
-            REGISTRY_NAME="$2"
+        --DOCKER_IMAGE_REGISTRY)
+            DOCKER_IMAGE_REGISTRY="$2"
             shift 2
             ;;
-        --WEBAPP_SUBSCRIPTION_ID)
-            WEBAPP_SUBSCRIPTION_ID="$2"
+        --WA_AZURE_SUBSCRIPTION_ID)
+            WA_AZURE_SUBSCRIPTION_ID="$2"
             shift 2
             ;;
-        --WEBAPP_RG_NAME)
-            WEBAPP_RG_NAME="$2"
+        --WA_RESOURCE_GROUP_NAME)
+            WA_RESOURCE_GROUP_NAME="$2"
             shift 2
             ;;
-        --WEBAPP_NAME)
-            WEBAPP_NAME="$2"
+        --WA_NAME)
+            WA_NAME="$2"
             shift 2
             ;;
         --USE_CASE_BASE_PATH)
@@ -52,15 +52,15 @@ source .env
 . .env
 set -e # fail on error
 
-REGISTRY_ENDPOINT="$REGISTRY_NAME.azurecr.io"
+REGISTRY_ENDPOINT="$DOCKER_IMAGE_REGISTRY.azurecr.io"
 echo "Build ID: $build_id"
 echo "Container registry endpoint: $REGISTRY_ENDPOINT"
-echo "Webapp subscription ID: $WEBAPP_SUBSCRIPTION_ID"
-echo "Webapp rg name: $WEBAPP_RG_NAME"
-echo "App name: $WEBAPP_NAME"
+echo "Webapp subscription ID: $WA_AZURE_SUBSCRIPTION_ID"
+echo "Webapp rg name: $WA_RESOURCE_GROUP_NAME"
+echo "App name: $WA_NAME"
 
 # Set the Web App subscription
-az account set --subscription "$WEBAPP_SUBSCRIPTION_ID"
+az account set --subscription "$WA_AZURE_SUBSCRIPTION_ID"
 
 # read values from deployment_config.json related to `webapp_endpoint`
 env_name=$DEPLOY_ENVIRONMENT
@@ -79,7 +79,7 @@ fi
 read -r -a connection_names <<< "$(echo "$con_object" | jq -r '.CONNECTION_NAMES | join(" ")')"
 
 # create/update Web App config settings
-az webapp config appsettings set --resource-group "$WEBAPP_RG_NAME" --name "$WEBAPP_NAME" \
+az webapp config appsettings set --resource-group "$WA_RESOURCE_GROUP_NAME" --name "$WA_NAME" \
     --settings WEBSITES_PORT=8080
 
 for name in "${connection_names[@]}"; do
@@ -91,8 +91,8 @@ for name in "${connection_names[@]}"; do
     api_key=${!api_key_env_name}
 
     az webapp config appsettings set \
-        --resource-group $WEBAPP_RG_NAME \
-        --name $WEBAPP_NAME \
+        --resource-group $WA_RESOURCE_GROUP_NAME \
+        --name $WA_NAME \
         --settings ${api_base_env_name}=${api_base} ${api_key_env_name}=${api_key}
 done
 
@@ -103,20 +103,20 @@ for pair in "${env_output[@]}"; do
     key=$(echo "$key" | tr '[:lower:]' '[:upper:]')
     pair="$key=$value"
     az webapp config appsettings set \
-        --resource-group "$WEBAPP_RG_NAME" \
-        --name "$WEBAPP_NAME" \
+        --resource-group "$WA_RESOURCE_GROUP_NAME" \
+        --name "$WA_NAME" \
         --settings "$key"="$value"
 done
 
 az webapp config appsettings set \
-        --resource-group "$WEBAPP_RG_NAME" \
-        --name "$WEBAPP_NAME" \
+        --resource-group "$WA_RESOURCE_GROUP_NAME" \
+        --name "$WA_NAME" \
         --settings PROMPTFLOW_SERVING_ENGINE=fastapi
 
 # Configure the Web App to use container registry with service principal credentials
-az webapp config container set --name "$WEBAPP_NAME" --resource-group "$WEBAPP_RG_NAME" --docker-custom-image-name "$REGISTRY_ENDPOINT"/"$USE_CASE_BASE_PATH"/"$STANDARD_FLOW"_"$DEPLOY_ENVIRONMENT":"$build_id" --docker-registry-server-url https://"$REGISTRY_ENDPOINT"
+az webapp config container set --name "$WA_NAME" --resource-group "$WA_RESOURCE_GROUP_NAME" --docker-custom-image-name "$REGISTRY_ENDPOINT"/"$USE_CASE_BASE_PATH"/"$STANDARD_FLOW"_"$DEPLOY_ENVIRONMENT":"$build_id" --docker-registry-server-url https://"$REGISTRY_ENDPOINT"
 
 # Restart the Web App to apply changes
-az webapp restart --name "$WEBAPP_NAME" --resource-group "$WEBAPP_RG_NAME"
+az webapp restart --name "$WA_NAME" --resource-group "$WA_RESOURCE_GROUP_NAME"
 
 echo "Deployment completed successfully."

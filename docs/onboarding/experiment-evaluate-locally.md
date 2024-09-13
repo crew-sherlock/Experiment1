@@ -70,7 +70,7 @@ The file [config.py](https://github.com/gsk-tech/AIGA/blob/main/llmops/config.py
 Set the trace configuration for the experiment. The trace configuration is used to log the experiment execution and evaluation results.
 
 ```bash
-pf config set trace.destination=azureml://subscriptions/$AZURE_SUBSCRIPTION_ID/resourceGroups/$RESOURCE_GROUP_NAME/providers/Microsoft.MachineLearningServices/workspaces/$WORKSPACE_NAME
+pf config set trace.destination=azureml://subscriptions/$AML_AZURE_SUBSCRIPTION_ID/resourceGroups/$AML_RESOURCE_GROUP_NAME/providers/Microsoft.MachineLearningServices/workspaces/$AML_WORKSPACE_NAME
 ```
 
 ## Prepare the experiment
@@ -94,7 +94,7 @@ Use the following command to register the dataset:
 
 ```bash
 poetry run python -m llmops.common.register_data_asset \
-            --subscription_id $AZURE_SUBSCRIPTION_ID \
+            --subscription_id $AML_AZURE_SUBSCRIPTION_ID \
             --base_path $USE_CASE_BASE_PATH \
             --env_name dev
 ```
@@ -109,7 +109,7 @@ Use the following command to execute the flows:
 
 export BUILD_ID=<A_UNIQUE_IDENTIFIER>
 poetry run python -m llmops.common.prompt_pipeline \
-            --subscription_id $AZURE_SUBSCRIPTION_ID \
+            --subscription_id $AML_AZURE_SUBSCRIPTION_ID \
             --build_id $BUILD_ID \
             --base_path $USE_CASE_BASE_PATH \
             --env_name dev \
@@ -131,7 +131,7 @@ Use the following command to execute the evaluation:
 RUN_NAME=$(<run_id.txt)
 
 poetry run python -m llmops.common.prompt_eval \
-            --subscription_id $AZURE_SUBSCRIPTION_ID \
+            --subscription_id $AML_AZURE_SUBSCRIPTION_ID \
             --build_id $BUILD_ID \
             --base_path $USE_CASE_BASE_PATH \
             --env_name dev \

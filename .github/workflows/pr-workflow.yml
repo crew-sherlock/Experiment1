@@ -39,6 +39,5 @@ jobs:
     uses: ./.github/workflows/validate-docker.yml
     secrets: inherit
     with:
-      compose-folder: "docker"
-      validation-url: "http://localhost:8080/health"
-    
+      compose_folder: "docker"
+      validation_url: "http://localhost:8080/health"    

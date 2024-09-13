@@ -60,6 +60,7 @@ jobs:
         run: |
           export subscriptionId=$(az account show --query id -o tsv)
           echo "SUBSCRIPTION_ID=$subscriptionId" >> $GITHUB_OUTPUT
+          echo "AML_AZURE_SUBSCRIPTION_ID=$subscriptionId" >> $GITHUB_OUTPUT
       - name: copy to inference
         run: |
           cp -r src promptflow/inference
@@ -76,11 +77,11 @@ jobs:
           step_name: "Register flow as model in AzureML"
           script_parameter: |
             python -m llmops.common.deployment.register_model \
-            --subscription_id ${{ env.AZURE_SUBSCRIPTION_ID }} \
+            --subscription_id ${{ env.AML_AZURE_SUBSCRIPTION_ID }} \
             --base_path ${{ vars.PROMPTFLOW_BASE_PATH }} \
             --output_file "model_version.txt" \
             --build_id ${{ github.run_id }} \
-            --env_name ${{ vars.TMP_ENV }} \
+            --env_name ${{ vars.TMP_ENV }}
 
       #=====================================
       # Reads model_version.txt file. Assigns it to variable MODEL_VERSION
@@ -102,12 +103,12 @@ jobs:
         if: ${{ vars.DEPLOYMENT_TARGET == 'aml' || vars.DEPLOYMENT_TARGET == 'both' }}
         uses: ./.github/actions/deploy-aml
         with:
-          AZURE_SUBSCRIPTION_ID: ${{ env.AZURE_SUBSCRIPTION_ID }}
+          AML_AZURE_SUBSCRIPTION_ID: ${{ env.AML_AZURE_SUBSCRIPTION_ID }}
           use_case_base_path: ${{ vars.PROMPTFLOW_BASE_PATH }}
           MODEL_VERSION: ${{ env.MODEL_VERSION }}
           DEPLOY_ENVIRONMENT: ${{ vars.TMP_ENV }}
-          RESOURCE_GROUP_NAME: ${{ env.RESOURCE_GROUP_NAME }}
-          WORKSPACE_NAME: ${{ env.WORKSPACE_NAME }}
+          AML_RESOURCE_GROUP_NAME: ${{ env.AML_RESOURCE_GROUP_NAME }}
+          AML_WORKSPACE_NAME: ${{ env.AML_WORKSPACE_NAME }}
           KEY_VAULT_NAME: ${{ vars.KEY_VAULT_NAME }}
 
       #=====================================
@@ -141,8 +142,8 @@ jobs:
         with:
           USE_CASE_BASE_PATH: ${{ vars.PROMPTFLOW_BASE_PATH }}
           DEPLOY_ENVIRONMENT: ${{ vars.TMP_ENV }}
-          REGISTRY_NAME: ${{ env.REGISTRY_NAME }}
-          REGISTRY_SECRET: ${{ env.REGISTRY_SECRET }}
-          WEBAPP_SUBSCRIPTION_ID: ${{ env.WEBAPP_SUBSCRIPTION_ID }}
-          WEBAPP_RG_NAME: ${{ env.WEBAPP_RG_NAME }}
-          WEBAPP_NAME: ${{ env.WEBAPP_NAME }}
+          DOCKER_IMAGE_REGISTRY: ${{ env.DOCKER_IMAGE_REGISTRY }}
+          DOCKER_IMAGE_REGISTRY_SECRET: ${{ env.DOCKER_IMAGE_REGISTRY_SECRET }}
+          WA_AZURE_SUBSCRIPTION_ID: ${{ env.WA_AZURE_SUBSCRIPTION_ID }}
+          WA_RESOURCE_GROUP_NAME: ${{ env.WA_RESOURCE_GROUP_NAME }}
+          WA_NAME: ${{ env.WA_NAME }}

@@ -8,29 +8,32 @@ and keys ahead of time.
 
 The following secrets are required to be provisioned in the Key Vault:
 
-| Secret Name                           | Description                                             |
-|---------------------------------------|---------------------------------------------------------|
-| AOAI_API_BASE                         | The base URL for the Azure OpenAI Service               |
-| AOAI_API_KEY                          | The API key for the Azure OpenAI Service                |
-| AOAI_API_VERSION                      | The version of the Azure OpenAI Service                 |
-| EMBEDDING_MODEL_DEPLOYMENT_NAME       | The name of the Azure OpenAI deployment for embeddings  |
-| SEARCH_SERVICE_NAME                   | The base URL for the Azure AI Search Service            |
-| AI_DOC_INTELLIGENCE_SERVICE           | The base URL for the Azure AI Document Intelligence     |
-| AI_DOC_INTELLIGENCE_KEY               | The API key for the Azure AI Document Intelligence      |
-| APPLICATIONINSIGHTS_CONNECTION_STRING | The connection string for Azure Application Insights    |
-| AZURE_SUBSCRIPTION_ID                 | The Azure subscription ID                               |
-| AZURE_TENANT_ID                       | The Azure tenant ID                                     |
-| SERVICE_PRINCIPAL_ID                  | The Azure service principal ID                          |
-| SERVICE_PRINCIPAL_PASSWORD            | The Azure service principal password                    |
-| REGISTRY_NAME                         | The name of the container registry                      |
-| REGISTRY_SECRET                       | The access key for the container registry               |
-| RESOURCE_GROUP_NAME                   | The name of the Azure resource group                    |
-| WORKSPACE_NAME                        | The name of the Azure Machine Learning workspace        |
-| WEBAPP_SUBSCRIPTION_ID                | The name of the web app service subscription ID         |
-| WEBAPP_RG_NAME                        | The name of the web app service resource group          |
-| WEBAPP_NAME                           | The name of the web app service                         |
-| AZ_SQL_SERVER                         | The name of the SQL server in azure                  |
-| AZ_SQL_DATABASE                       | The name of the SQL database in azure                |
+| Secret Name                           | Description                                            | Team to provision |
+|---------------------------------------|--------------------------------------------------------|-------------------|
+| AI-DOC-INTELLIGENCE-SERVICE           | The base URL for the Azure AI Document Intelligence    | CO                |
+| AI-DOC-INTELLIGENCE-KEY               | The API key for the Azure AI Document Intelligence     | CO                |
+| AML-AZURE-SUBSCRIPTION-ID             | The Azure subscription ID where AML workspace is       | CO                |
+| AML-WORKSPACE-NAME                    | The name of the Azure Machine Learning workspace       | CO                |
+| AML-RESOURCE-GROUP-NAME               | The name of the Azure resource group where AML is      | CO                |
+| AOAI-API-BASE                         | The base URL for the Azure OpenAI Service              | CO                |
+| AOAI-API-KEY                          | The API key for the Azure OpenAI Service               | CO                |
+| AOAI-API-VERSION                      | The version of the Azure OpenAI Service                | CO                |
+| APPLICATIONINSIGHTS-CONNECTION-STRING | The connection string for Azure Application Insights   | PSC               |
+| AZ-SQL-SERVER                         | The name of the SQL server in azure                    | CO                |
+| AZ-SQL-DATABASE                       | The name of the SQL database in azure                  | CO                |
+| AZURE-CLIENT-ID                       | The client Id of the Service Principal                 | Manual (Hosting)  |
+| AZURE-CLIENT-SECRET                   | The Secret of the Service Principal                    | Manual (Hosting)  |
+| AZURE_TENANT_ID                       | The Azure tenant ID                                    | Manual (Hosting)  |
+| DOCKER-IMAGE-REGISTRY                 | The name of the container registry                     | PSC               |
+| DOCKER-IMAGE-REGISTRY-SECRET          | The access key for the container registry              | PSC               |
+| EMBEDDING-MODEL-DEPLOYMENT-NAME       | The name of the Azure OpenAI deployment for embeddings | CO                |
+| PROMPT-FLOW-KONG-API-GATEWAY-ENDPOINT | The token generation API base URL for the Kong Gateway (pink federated generation) | CO |
+| PROMPT-FLOW-KONG-CLIENT-ID            | The Secret for the  Kong Gateway                       | CO                |
+| PROMPT-FLOW-KONG-CLIENT-SECRET        | The Client Id of the Pink Federated service            | CO                |
+| SEARCH-SERVICE-NAME                   | The base URL for the Azure AI Search Service           | CO                |
+| WA-AZURE-SUBSCRIPTION-ID              | The name of the web app service subscription ID        | PSC               |
+| WA-RESOURCE-GROUP-NAME                | The name of the web app service resource group         | PSC               |
+| WA-NAME                               | The name of the web app service                        | PSC               |
 
 > **Note**: Secrets loaded from Azure Key Vault will supersede any GitHub Actions
 > variables and secrets with the same name.

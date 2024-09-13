@@ -64,7 +64,7 @@ jobs:
           step_name: "Execute bulk run evaluations"
           script_parameter: |
             python -m llmops.common.prompt_eval \
-            --subscription_id ${{ env.AZURE_SUBSCRIPTION_ID }} \
+            --subscription_id ${{ env.AML_AZURE_SUBSCRIPTION_ID }} \
             --build_id ${{ github.run_id }} \
             --base_path ${{ vars.PROMPTFLOW_BASE_PATH }} \
             --env_name ${{ vars.TMP_ENV }} \
