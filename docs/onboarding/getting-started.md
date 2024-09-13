@@ -7,14 +7,48 @@ This guide contains the steps to set up a new project using the AIGA Starter and
 ## Prerequisites
 
 Before you start working with AIGA, ensure you have:
+Before you start working with AIGA, ensure you have:
 
 | Entity | System (to request) | Description | Assignment Group | Required for |
 | -------- | ---- | ----------- | ---------- | ---------- |
-| Business Application CIID | [CMDB](https://gsk.service-now.com/home?id=sc_cat_item&table=sc_cat_item&sys_id=fb257b2b1b7a7d104ab887b8e34bcb95) | In order to create a new instance of AIGA, you need a business application CIID. This will be the umbrella for the application service CIID. | ESM-Platform-CMDB-L2 | Infrastructure request |
-| Application service CIID | [CMDB](https://gsk.service-now.com/home?id=sc_cat_item&table=sc_cat_item&sys_id=a02468771bbb31904ab887b8e34bcb3a) | For each environment, you need an instance of an application service. | ESM-Platform-CMDB-L2 | Infrastructure request |
-| Resource Group + Service principal | [Hosting portal](https://myhosting.gsk.com/cloud-onboarding/azure-resource-groups/overview) | In order to have the service principal and resources associated with the project (outside the DevKit), you need to request a resource group on Azure and a service principal. This step requires an operational CIID.| | Infrastructure request |
+| Business Application CIID | [CMDB](https://gsk.service-now.com/home?id=sc_cat_item&table=sc_cat_item&sys_id=fb257b2b1b7a7d104ab887b8e34bcb95) | In order to create a new instance of AIGA, you need a business application CIID. This will be the umbrella for the application service CIID. This CIID will allow you to track the costs, to associate all the relevant infrastructure services and also to maintain and support your application. It is required through the E2E lifecycle of the project. | ESM-Platform-CMDB-L2  | Infrastructure request |
+| Application service CIID | [CMDB](https://gsk.service-now.com/home?id=sc_cat_item&table=sc_cat_item&sys_id=a02468771bbb31904ab887b8e34bcb3a) | For each environment, you need an instance of an application service that is operational. | ESM-Platform-CMDB-L2 | Resource Group Creation, Infrastructure request |
+| Resource Group + Service principal | [Hosting portal](https://myhosting.gsk.com/cloud-onboarding/azure-resource-groups/overview) | In order to have the service principal and resources associated with the project (outside the DevKit), you need to request a resource group on Azure and a service principal. The Resource group is provisioned with the key vault and the service principal. These 2 things are required for the AIGA starter to create an AIGA project from the AIGA template. | | Infrastructure request, AIGA starter |
 | AD Group | [Sailpoint](https://myapps.gsk.com/identityiq/workitem/workItems.jsf#/workItems) | In order to give access to the developers access to the infrastructure, you need an AD group RW for dev. Make sure that you create a ticket to link the AD group to the RG by requesting a [Tech Service](https://servicenow.gsk.com/home?id=sc_cat_item&sys_id=0e6a06bcdb5ce4506233d25cd3961932) assigned to *SCDT - DA Platform Product Support Service*. In the description request *RG reader* and *Key vault contributor*| | Infrastructure request |
 | AIGA Users team | [GitHub](https://github.com/orgs/gsk-tech/teams/aiga-users) | In order to be able to work with the AIGA Starter (i.e. trigger the Start AIGA Project Action) you would need to be in the gsk-tech GitHub team AIGA Users that is authorised to the repository.| | AIGA Starter |
+
+## Steps to set up a new project
+
+1. **Request to be added to the AIGA Users team**: Go to the [GitHub team](https://github.com/orgs/gsk-tech/teams/aiga-users) and request to be added to the team by selecting the "Request to join" button. This will allow you to trigger the "Create AIGA Project" workflow in the AIGA Starter repository.
+
+1. **Request a new project**: Go to GitHub Actions of [AIGA-starter](https://github.com/gsk-tech/AIGA-Starter) and run the "Create AIGA Project" workflow with chosen parameters (you need a service principal and a key vault). This will create a new repository and infrastructure artefacts based on the AIGA reference architecture. AIGA gets all its environment variables from the key vault.
+
+1. **Submit ARB1**: Fill in the accountability report. In order to be compliant, you need to fill the accountability report and get it approved, before starting an AI project. Check out our [tips](/docs/design/ai-evaluation.md) on how to fill in the accountability report.
+
+1. **Submit infrastructure requests**: Verify the Excel infrastructure request forms and submit them within the GenAI Dev Kit request form and via a [Tech service request](https://servicenow.gsk.com/home?id=sc_cat_item&sys_id=0e6a06bcdb5ce4506233d25cd3961932) for the PSC team  assigned to *SCDT - DA Platform Product Support Service*.
+
+1. **Approval from EA**: You might need approval from EA to get started, especially if you have a higher risk or CSI data in your project.
+
+1. **Request a Devkit**: You will need to request a [DevKit](https://servicenow.gsk.com/home?id=sc_cat_item&table=sc_cat_item&sys_id=17c151861bc98254269687b8e34bcb40) to get the part of the resources provisioned (see the architecture pattern for more information on which resources are provisioned through the DevKit). Fill in the information in the Devkit according to your architecture pattern needs.
+![devkit](./assets/devkit.png)
+While filling the devkit, don't forget to add your key vault and service principal.
+Attach the following [file](/docs/design/assets/devkit_roles.yaml) to your devkit, that is the system access plan.
+
+The Code orange team will fill in the [secrets and environment variables](/docs/onboarding/github-secrets.md) directly in the keyvault and AIGA is setup to capture them in the CI and CD pipelines automatically.
+
+1. **Submit infrastructure requests**: Verify the Excel infrastructure request forms and submit via a [Tech service request](https://servicenow.gsk.com/home?id=sc_cat_item&sys_id=0e6a06bcdb5ce4506233d25cd3961932) for the PSC team  assigned to *SCDT - DA Platform Product Support Service*.
+
+1. **Set up your AIGA Project**: Configure your AIGA Project repository by following the instructions in the [developer guide](/docs/contributing/developer-guide.md).
+
+1. **Customize your project**: Now you are all set to start working on your project. Once all your infrastructure is setup, you can focus on your project specificities. Check the guide on the [lifecycle of a GenAI project](/docs/design/ai-evaluation.md) to help you.
+
+1. **Evaluate your GenAI application**: Once your repository is fully configured, you can follow the [evaluation user guide](/docs/onboarding/experiment-evaluate-locally.md) to evaluate iteratively your application and refine your flows and pipelines.
+
+1. **Deploy your flows**: Once you are happy with your inference prompt flow's performance, you can deploy it to App Service or Azure Machine Learning (AML) endpoint using the CI/CD workflows provided in the AIGA Project repository. More information on making a decision between App Service and AML can be found in the [deployment guide](./deployment.md).
+
+1. **Deploy your Document processing pipelines**: Once you are happy with your document processing pipelines, you can deploy it to Azure Machine Learning (AML) the CI/CD workflows provided in the AIGA Project repository (*TBD: WHEN READY*).
+
+![User flow](../assets/user-flow-final.drawio.svg)
 
 ## The included artefacts
 
@@ -23,7 +57,6 @@ Once you request a new project using the AIGA Starter, the following artefacts w
 - **Infrastructure artefacts based on AIGA [reference architecture](../design/reference-architecture.md)**: A set of infrastructure artefacts including architecture documentation that can be used for ARB1, pre-filled Excel infrastructure request forms, and instructions on how to fill out the GenAI Dev Kit request form.
 
     > *TBD: will we be able to offer samples of other necessary documentation e.g. URS, smart control assessment, accountability report?*
-
 - **AIGA Project Repository**: A clone of the AIGA Template repository, which will include a document loading AML pipeline, QA generation script, example prompt flows for common use cases for inference and evaluation, tools for deploying your prompt flows (CI/CD) to App Service or Azure Machine Learning (AML) endpoint, and documentation. The pipelines and prompt flows are designed to be modular so that you can easily customise them and experiment with different configurations while also providing an end-to-end path to productionising your Gen AI project.
 
     The included components are:
@@ -31,30 +64,6 @@ Once you request a new project using the AIGA Starter, the following artefacts w
     ![Prompt flow components in AIGA](../assets/aiga-prompt-flow-components.drawio.svg)
 
 We also recommend the following artefact for RAG projects that need in depth experimentation on chunking, indexing, and search strategies:
-
-- *(Optional)* **RAG Experimentation Repository**: A clone of the RAG Experiment Accelerator repository, which includes tools for running experiments and evaluations of search queries and quality of response from OpenAI. This will help you decide on the configuration of your search index, chunking strategy, and search strategy by allowing you to test the performance of different Search and OpenAI related hyperparameters, compare the effectiveness of various search strategies. The repository will output a configuration file that can be transformed into a search index configuration file for the AIGA Project repository.
-
-## Steps to set up a new project
-
-1. **Request to be added to the AIGA Users team**: Go to the [GitHub team](https://github.com/orgs/gsk-tech/teams/aiga-users) and request to be added to the team by selecting the "Request to join" button. This will allow you to trigger the "Create AIGA Project" workflow in the AIGA Starter repository.
-
-1. **Request a new project**: Go to GitHub Actions of [AIGA-starter](https://github.com/gsk-tech/AIGA-Starter) and run the "Create AIGA Project" workflow with chosen parameters (e.g. project name, CIID, infrastructure configuration). This will create a new repository and infrastructure artefacts based on the AIGA reference architecture.
-
-1. **Submit ARB1**: You will need to go through the ARB1 process to get approval for your project. You should use the reference architecture documentation generated by the AIGA Starter to help you with this process. Example AIGA ARB template including the reference architecture can be found [here](https://myteams.gsk.com/:p:/r/sites/GenAIAccelerator/Shared%20Documents/General/Architecture%20+%20Mandatory%20Documents/Architecture%20Review%20Board%20-%20Presentation%20Template%20V0.2.pptx?d=w0247cd50adb54fc2a56c3291ee60deb7&csf=1&web=1&e=aT7K0j).
-
-1. **Submit infrastructure requests**: Verify the Excel infrastructure request forms and submit them within the GenAI Dev Kit request form and via a [Tech service request](https://servicenow.gsk.com/home?id=sc_cat_item&sys_id=0e6a06bcdb5ce4506233d25cd3961932) for the PSC team  assigned to *SCDT - DA Platform Product Support Service*.
-
-1. *(Optional)* **Get started with the RAG Experimentation project**: If you are running a RAG project and need in depth experimentation on search strategies, clone the RAG Experiment Accelerator and get started following the instructions in the accelerator's README.
-
-1. **Set up your AIGA Project**: Configure your AIGA Project repository by following the instructions in the onboarding guide (*TBD: INSERT LINK WHEN READY*). You should customise the document loading pipeline and inference and evaluation prompt flows to suit your project requirements - this includes configuring your search index, generating your golden dataset, and fine tuning your prompt within the inference flow. Find the best configuration by experimenting with different search strategies and leverage the evaluation flow to measure the performance of your configuration.
-
-1. **Evaluate your GenAI application**: Once your repository is fully configured, you can follow the evaluation user flow (*TBD: INSERT LINK WHEN READY*) to evaluate iteratively your application and refine your flows and pipelines.
-
-1. **Deploy your flows**: Once you are happy with your inference prompt flow's performance, you can deploy it to App Service or Azure Machine Learning (AML) endpoint using the CI/CD workflows provided in the AIGA Project repository. More information on making a decision between App Service and AML can be found in the [deployment guide](./deployment.md).
-
-1. **Deploy your Document processing pipelines**: Once you are happy with your document processing pipelines, you can deploy it to Azure Machine Learning (AML) the CI/CD workflows provided in the AIGA Project repository (*TBD: WHEN READY*).
-
-![User flow](../assets/user-flow-final.drawio.svg)
 
 ## Personas
 

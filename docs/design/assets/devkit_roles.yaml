@@ -1,0 +1,24 @@
+service:
+  - name: Azure ML Service
+    roles:
+      - AzureML Data Scientist Azure
+      - ML Compute Operator
+  - name: Storage Blob Container
+    roles:
+      - Storage Blob Data Contributor
+  - name: AI search
+    roles:
+      - AI Search Contributor
+      - Search Index Data Contributor
+  - name: AI content safety
+    roles:
+      - Cognitive Services User
+  - name: AI language service
+    roles:
+      - Cognitive Service Language Writer
+  - name: AI translator
+    roles:
+      - Cognitive Services User
+  - name: AI doc intelligence
+    roles:
+      - Cognitive Services User
