@@ -13,7 +13,6 @@ In AIGA folder, run the following commands (with the service principal)
 - Checks that we can use PF on AML to run an experiment
 
 ```bash
-poetry run python -m validation_scripts.create_connection
 poetry run python -m validation_scripts.pf_aml
 poetry run python -m validation_scripts.mlflow_aml
 ```

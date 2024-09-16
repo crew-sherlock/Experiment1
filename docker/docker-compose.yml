@@ -9,13 +9,16 @@ services:
       platforms:
         - linux/amd64
     environment:
-      - AOAI_API_BASE=${AOAI_API_BASE}
-      - AOAI_API_KEY=${AOAI_API_KEY}
       - AZURE_TENANT_ID=${AZURE_TENANT_ID}
       - AZURE_CLIENT_ID=${AZURE_CLIENT_ID}
       - AZURE_CLIENT_SECRET=${AZURE_CLIENT_SECRET}
       - AZ_SQL_DATABASE=${AZ_SQL_DATABASE}
       - AZ_SQL_SERVER=${AZ_SQL_SERVER}
+      - PING_FED_URL=${PING_FED_URL}
+      - KGW_CLIENT_SECRET=${KGW_CLIENT_SECRET}
+      - KGW_CLIENT_ID=${KGW_CLIENT_ID}
+      - KGW_ENDPOINT=${KGW_ENDPOINT}
+      - SEARCH_SERVICE_NAME=${SEARCH_SERVICE_NAME}
     ports:
       - "8080:8080"
   docs:

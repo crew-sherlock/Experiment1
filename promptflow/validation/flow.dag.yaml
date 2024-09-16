@@ -16,6 +16,9 @@ inputs:
     type: string
     default: what is BERT?
     is_chat_input: true
+  api_version:
+    type: string
+    default: 2024-02-15-preview
 outputs:
   answer:
     type: string
@@ -27,64 +30,62 @@ outputs:
     is_chat_output: false
 nodes:
 - name: rewrite_question
-  type: llm
+  type: prompt
   source:
     type: code
     path: prompts/rewrite_question_prompt.jinja2
   inputs:
-    deployment_name: ${inputs.deployment_name}
-    temperature: 1
-    top_p: 1
-    max_tokens: 16
-    response_format:
-      type: text
     chat_history: ${inputs.chat_history}
     question: ${inputs.question}
-  provider: AzureOpenAI
-  connection: aoai
-  api: chat
-  module: promptflow.tools.aoai
-  use_variants: false
+- name: llm_call
+  type: python
+  source:
+    type: code
+    path: src/tools/llm/chat.py
+  inputs:
+    prompt: ${rewrite_question.output}
+    deployment_name: ${inputs.deployment_name}
+    api_version: ${inputs.api_version}
 - name: generate_response
-  type: llm
+  type: prompt
   source:
     type: code
     path: generate_response_prompt.jinja2
   inputs:
-    deployment_name: ${inputs.deployment_name}
-    temperature: 0
-    top_p: 1
-    max_tokens: 1000
-    response_format:
-      type: text
-    presence_penalty: 0
-    frequency_penalty: 0
     question: ${rewrite_question.output}
-    context: ${rewrite_question.output}
     chat_history: ${inputs.chat_history}
-  provider: AzureOpenAI
-  connection: aoai
-  api: chat
-  module: promptflow.tools.aoai
-  use_variants: false
+    content: ${llm_call.output}
+- name: llm_call2
+  type: python
+  source:
+    type: code
+    path: src/tools/llm/chat.py
+  inputs:
+    prompt: ${generate_response.output}
+    deployment_name: ${inputs.deployment_name}
+    api_version: ${inputs.api_version}
 - name: groundedness
-  type: llm
+  type: prompt
   source:
     type: code
     path: prompts/metrics/gpt_groundedness_prompt.jinja2
   inputs:
-    question: ${rewrite_question.output}
-    context: ${generate_response.output}
-    answer: ${generate_response.output}
-    deployment_name: gpt-4o-2024-05-13
-    response_format:
-      type: text
-  connection: aoai
-  api: chat
+    question: ${llm_call2.output}
+    context: ${llm_call.output}
+    answer: ${llm_call.output}
+- name: llm_call3
+  type: python
+  source:
+    type: code
+    path: src/tools/llm/chat.py
+  inputs:
+    prompt: ${groundedness.output}
+    deployment_name: ${inputs.deployment_name}
+    api_version: ${inputs.api_version}
 - name: parse_groundedness
   type: python
   source:
     type: code
     path: src/tools/metrics/parse_llm_evaluation_score.py
   inputs:
-    llm_evaluation_score: ${groundedness.output}
+    llm_evaluation_score: ${llm_call3.output}

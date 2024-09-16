@@ -55,7 +55,6 @@ jobs:
       # Uses each RUN ID as input to run evaluation against
       # Loads appropriate evaluation data from Azure ML data asset
       # Reads appropriate field values from experiment.yaml or experiment.<env>.yaml
-      # Prompt Flow connections should pre-exist
       # used automatic (serverless) runtime by default
       #=====================================
       - name: Execute bulk run evaluations

@@ -50,7 +50,6 @@ jobs:
       # Execute a RUN for each unique variant combination (keeping default variant id for other nodes)
       # Loads appropriate experiment data from Azure ML data asset
       # Reads appropriate field values from experiment.yaml or experiment.<env>.yaml
-      # Prompt Flow connections should pre-exist
       # used automatic (serverless) runtime by default
       #=====================================
       - name: Promptflow E2E Test

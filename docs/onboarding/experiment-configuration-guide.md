@@ -61,35 +61,6 @@ datasets:
 
 - If the dataset is local, it will be uploaded to Azure ML.
 
-## Connections
-
-```yaml
-connections:
-- name: <connection_0_name>
-  connection_type: <connection_type>
-  api_base: <api_base>
-  api_version: <api_version>
-  api_key: ${api_key}
-  api_type: <api_type>
-
-- name: <connection_1_name>
-  connection_type: <connection_type>
-  api_base: <api_base>
-  api_version: <api_version>
-  api_key: ${api_key}
-  api_type: <api_type>
-```
-
-### Description
-
-- **connections**: Defines the connections used in the experiment, typically to authenticate API calls made by the Prompt Flow flows.
-  - **name**: A unique name for referencing the connection.
-  - **connection_type**: The type of connection. The supported type is `AzureOpenAIConnection`.
-  - **api_base**: The endpoint of the API.
-  - **api_version**: The version of the API.
-  - **api_key**: The API key used for authentication.
-  - **api_type**: Specifies the type of API, which determines the required authentication.
-
 ## Evaluators
 
 ```yaml

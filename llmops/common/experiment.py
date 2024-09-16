@@ -16,7 +16,7 @@ The module contains the following functions:
 
 import os
 import yaml
-from typing import Any, List, Optional, Tuple, Dict
+from typing import Any, List, Optional, Tuple
 
 from azure.ai.ml import MLClient
 
@@ -148,30 +148,6 @@ class MappedDataset:
         )
 
 
-class Connection:
-    """
-    Defines a Connection class.
-
-    :param name: Name of the evaluation flow.
-    :type name: str
-    :param path: Path to the evaluation flow. Default value is "flows".
-    :type path: str
-    :param datasets: List of mapped datasets used for the evaluator flow.
-    :type datasets: List[MappedDataset]
-    """
-
-    def __init__(
-        self,
-        name: str,
-        connection_type: str,
-        connection_properties: Dict[str, Any]
-    ):
-        """Initialize Evaluator object."""
-        self.name = name
-        self.connection_type = connection_type
-        self.connection_properties: Dict[str, Any] = connection_properties
-
-
 class Evaluator:
     """
     Defines a prompt flow evaluator flow.
@@ -281,7 +257,6 @@ class Experiment:
         datasets: list[MappedDataset],
         evaluators: list[Evaluator],
         runtime: Optional[str],
-        connections: list[Connection]
     ):
         """Initialize Experiment object."""
         self.base_path = base_path
@@ -289,7 +264,6 @@ class Experiment:
         self.flow = flow or name
         self.datasets = datasets
         self.evaluators = evaluators
-        self.connections = connections
         self.runtime = runtime
         self._flow_detail: Optional[FlowDetail] = None
 
@@ -580,11 +554,6 @@ def _load_base_experiment(
     if raw_evaluators is not None and len(raw_evaluators) > 0:
         evaluators = _create_evaluators(raw_evaluators, datasets, base_path)
 
-    raw_connections: list[dict] = exp_config.get("connections")
-    connections: list[Connection] = []
-    if raw_connections is not None and len(raw_connections) > 0:
-        connections = _create_connections(raw_connections, base_path)
-
     runtime = exp_config.get("runtime")
 
     # Create experiment
@@ -595,51 +564,7 @@ def _load_base_experiment(
         datasets=mappings,
         evaluators=evaluators,
         runtime=runtime,
-        connections=connections
     )
-
-
-def _create_connections(
-    raw_connections: list[dict],
-    base_path: Optional[str]
-) -> list[Evaluator]:
-    """
-    Create evaluators from a list of evaluator dictionaries.
-
-    A dictionary of existing datasets,
-    and the path to the evaluator flow.
-    :param raw_evaluators: List of dictionaries containing the description of
-        the experiment evaluators.
-    :type raw_evaluators: list[dict]
-    :param datasets: Dictionary from dataset name to Dataset object.
-    :type datasets: dict[str, Dataset]
-    :param base_path: Path to the evaluator flow directory containing
-        the yaml description. Default value is the current working directory.
-    :type base_path: Optional[str]
-    :return: List of evaluators.
-    :rtype: list[Evaluator]
-    """
-    connections: list[Connection] = []
-    for raw_connection in raw_connections:
-        connection_name = None
-        connection_type = None
-        connection_properties = {}
-
-        for name, value in raw_connection.items():
-            if name == "name":
-                connection_name = raw_connection["name"]
-            elif name == "connection_type":
-                connection_type = raw_connection["connection_type"]
-            else:
-                connection_properties[name] = value
-
-        connection = Connection(
-            name=connection_name,
-            connection_type=connection_type,
-            connection_properties=connection_properties
-        )
-        connections.append(connection)
-    return connections
 
 
 def _apply_overlay(
@@ -680,15 +605,6 @@ def _apply_overlay(
             )
         else:
             experiment.evaluators = []
-
-    if "connections" in overlay_config:
-        overlay_raw_connections: list[dict] = overlay_config["connections"]
-        if overlay_raw_connections:
-            experiment.connections = _create_connections(
-                overlay_raw_connections, base_path
-            )
-        else:
-            experiment.connections = []
 
     if "runtime" in overlay_config:
         experiment.runtime = overlay_config["runtime"]

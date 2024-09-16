@@ -111,20 +111,6 @@ jobs:
           AML_WORKSPACE_NAME: ${{ env.AML_WORKSPACE_NAME }}
           KEY_VAULT_NAME: ${{ vars.KEY_VAULT_NAME }}
 
-      #=====================================
-      # Creates local pf connections when deployment type is webapp
-      # Uses secret CONNECTION_DETAILS for creating connections
-      #=====================================
-      - name: Create local PF Connections
-        if: ${{ vars.DEPLOYMENT_TARGET == 'webapp' || vars.DEPLOYMENT_TARGET == 'both' }}
-        uses: ./.github/actions/execute-script
-        with:
-          step_name: "Create local PF connections"
-          script_parameter: |
-            python -m llmops.common.prompt_local_connections \
-              --env_name ${{ vars.TMP_ENV }} \
-              --base_path ${{ vars.PROMPTFLOW_BASE_PATH }} \
-
       - name: Read .env file
         id: env_vars
         run: |

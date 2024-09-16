@@ -12,8 +12,13 @@ from src.tools.retrieval.retrieve_from_ai_search import retrieve_from_ai_search
 ])
 def test_retrieve_from_ai_search_returns_empty_array_when_inputs_are_empty(
     query,
-    index_name
+    index_name,
+    monkeypatch: pytest.MonkeyPatch
 ):
+    env_var_key = "SEARCH_SERVICE_NAME"
+    env_var_val = "test_value"
+
+    monkeypatch.setenv(env_var_key, env_var_val)
     result = retrieve_from_ai_search(query, index_name, "https://127.0.0.1:8080")
 
     assert result == []

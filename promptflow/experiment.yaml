@@ -1,14 +1,6 @@
 name: chat_with_pdf
 flow: inference
 
-connections:
-- name: aoai
-  connection_type: AzureOpenAIConnection
-  api_base: ${api_base}
-  api_version: 2023-05-15
-  api_key: ${api_key}
-  api_type: azure
-
 datasets:
 - name: chat_with_pdf
   source: data/bert-paper-qna-1-line.jsonl
@@ -17,7 +9,6 @@ datasets:
     question: "${data.question}"
     chat_history: "${data.chat_history}"
     deployment_name: "${data.CHAT_MODEL_DEPLOYMENT_NAME}"
-    ai_search_endpoint: "${data.ai_search_endpoint}"
 
 evaluators:
 - name: chat_with_pdf_evaluation_flow

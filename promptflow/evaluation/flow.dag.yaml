@@ -387,6 +387,12 @@ inputs:
       b.core.windows.net/fileupload-my-product-info/product_info_1.md\",\"metad\
       ata\":{\"chunking\":\"orignal document size=981. Scores=4.0350547Org
       Highlight count=74.\"},\"chunk_id\":\"0\"}]}"
+  deployment_name:
+    type: string
+    default: gpt-4o-2024-05-13
+  api_version:
+    type: string
+    default: 2024-02-15-preview
 outputs:
   gpt_relevance:
     type: string
@@ -407,92 +413,40 @@ nodes:
     selected_metrics: ${inputs.metrics}
   use_variants: false
   aggregation: false
-- name: gpt_relevance
-  type: llm
-  source:
-    type: code
-    path: prompts/metrics/gpt_relevance_prompt.jinja2
-  inputs:
-    deployment_name: gpt-4o-2024-05-13
-    temperature: 0
-    top_p: 1
-    max_tokens: 1000
-    presence_penalty: 0
-    frequency_penalty: 0
-    question: ${inputs.question}
-    answer: ${inputs.answer}
-    context: ${inputs.documents}
-  connection: aoai
-  api: chat
-  activate:
-    when: ${select_metrics.output.gpt_relevance}
-    is: true
-  use_variants: false
-- name: parse_gpt_relevance
-  type: python
-  source:
-    type: code
-    path: src/tools/metrics/parse_llm_evaluation_score.py
-  inputs:
-    llm_evaluation_score: ${gpt_relevance.output}
-  use_variants: false
-- name: gpt_groundedness
-  type: llm
-  source:
-    type: code
-    path: prompts/metrics/gpt_groundedness_prompt.jinja2
-  inputs:
-    deployment_name: gpt-4o-2024-05-13
-    temperature: 0
-    top_p: 1
-    max_tokens: 1000
-    presence_penalty: 0
-    frequency_penalty: 0
-    context: ${inputs.documents}
-    answer: ${inputs.answer}
-    question: ${inputs.question}
-  connection: aoai
-  api: chat
-  activate:
-    when: ${select_metrics.output.gpt_groundedness}
-    is: true
-  use_variants: false
 - name: parse_gpt_groundedness
   type: python
   source:
     type: code
     path: src/tools/metrics/parse_llm_evaluation_score.py
   inputs:
-    llm_evaluation_score: ${gpt_groundedness.output}
-  use_variants: false
+    llm_evaluation_score: ${llm_gpt_groundedness.output}
 - name: gpt_retrieval_score
-  type: llm
+  type: prompt
   source:
     type: code
     path: prompts/metrics/gpt_retrieval_score_prompt.jinja2
   inputs:
-    deployment_name: gpt-4o-2024-05-13
-    temperature: 0
-    top_p: 1
-    max_tokens: 1000
-    presence_penalty: 0
-    frequency_penalty: 0
     context: ${inputs.documents}
     question: ${inputs.question}
-  connection: aoai
-  api: chat
   activate:
     when: ${select_metrics.output.gpt_retrieval_score}
     is: true
-  use_variants: false
+- name: llm_gpt_retrieval_score
+  type: python
+  source:
+    type: code
+    path: src/tools/llm/chat.py
+  inputs:
+    prompt: ${gpt_retrieval_score.output}
+    deployment_name: ${inputs.deployment_name}
+    api_version: ${inputs.api_version}
 - name: parse_gpt_retrieval_score
   type: python
   source:
     type: code
     path: src/tools/metrics/parse_llm_evaluation_score.py
   inputs:
-    llm_evaluation_score: ${gpt_retrieval_score.output}
-  use_variants: false
+    llm_evaluation_score: ${llm_gpt_retrieval_score.output}
 - name: concat_scores
   type: python
   source:
@@ -502,7 +456,6 @@ nodes:
     gpt_relevance: ${parse_gpt_relevance.output}
     gpt_groundedness: ${parse_gpt_groundedness.output}
     gpt_retrieval_score: ${parse_gpt_retrieval_score.output}
-  use_variants: false
 - name: aggregate_variants_results
   type: python
   source:
@@ -512,4 +465,52 @@ nodes:
     metrics: ${inputs.metrics}
     scores: ${concat_scores.output}
   aggregation: true
-  use_variants: false
+- name: gpt_relevance
+  type: prompt
+  source:
+    type: code
+    path: prompts/metrics/gpt_relevance_prompt.jinja2
+  inputs:
+    question: ${inputs.question}
+    context: ${inputs.documents}
+    answer: ${inputs.answer}
+  activate:
+    when: ${select_metrics.output.gpt_relevance}
+    is: true
+- name: llm_gpt_relevance
+  type: python
+  source:
+    type: code
+    path: src/tools/llm/chat.py
+  inputs:
+    prompt: ${gpt_relevance.output}
+    deployment_name: ${inputs.deployment_name}
+    api_version: ${inputs.api_version}
+- name: gpt_groundedness
+  type: prompt
+  source:
+    type: code
+    path: prompts/metrics/gpt_groundedness_prompt.jinja2
+  inputs:
+    context: ${inputs.documents}
+    answer: ${inputs.answer}
+    question: ${inputs.question}
+  activate:
+    when: ${select_metrics.output.gpt_groundedness}
+    is: true
+- name: parse_gpt_relevance
+  type: python
+  source:
+    type: code
+    path: src/tools/metrics/parse_llm_evaluation_score.py
+  inputs:
+    llm_evaluation_score: ${llm_gpt_relevance.output}
+- name: llm_gpt_groundedness
+  type: python
+  source:
+    type: code
+    path: src/tools/llm/chat.py
+  inputs:
+    prompt: ${gpt_groundedness.output}
+    deployment_name: ${inputs.deployment_name}
+    api_version: ${inputs.api_version}

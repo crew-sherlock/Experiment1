@@ -76,25 +76,10 @@ if [ -e "$env_var_file_path" ]; then
     IFS=' ' read -r -a env_output <<< $(poetry run python llmops/common/deployment/generate_env_vars.py "$env_var_file_path" "false")
 fi
 
-read -r -a connection_names <<< "$(echo "$con_object" | jq -r '.CONNECTION_NAMES | join(" ")')"
 
 # create/update Web App config settings
 az webapp config appsettings set --resource-group "$WA_RESOURCE_GROUP_NAME" --name "$WA_NAME" \
     --settings WEBSITES_PORT=8080
-
-for name in "${connection_names[@]}"; do
-    uppercase_name=$(echo "$name" | tr '[:lower:]' '[:upper:]')
-
-    api_base_env_name="${uppercase_name}_API_BASE"
-    api_base=${!api_base_env_name}
-    api_key_env_name="${uppercase_name}_API_KEY"
-    api_key=${!api_key_env_name}
-
-    az webapp config appsettings set \
-        --resource-group $WA_RESOURCE_GROUP_NAME \
-        --name $WA_NAME \
-        --settings ${api_base_env_name}=${api_base} ${api_key_env_name}=${api_key}
-done
 
 for pair in "${env_output[@]}"; do
     echo "Key-value pair: $pair"

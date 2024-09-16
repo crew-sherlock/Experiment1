@@ -16,96 +16,86 @@ inputs:
     type: string
     default: what is BERT?
     is_chat_input: true
-  ai_search_endpoint:
+  api_version:
     type: string
+    default: 2024-02-15-preview
 outputs:
   answer:
     type: string
-    reference: ${generate_response.output}
+    reference: ${call_llm2.output}
     is_chat_output: true
   groundedness_score:
-    type: int
-    reference: ${parse_groundedness.output}
-    is_chat_output: false
+    type: string
+    reference: ${parse_groundedness.output.score}
+  groundedness_reason:
+    type: string
+    reference: ${parse_groundedness.output.reason}
 nodes:
-- name: rewrite_question
-  type: llm
-  source:
-    type: code
-    path: prompts/rewrite_question_prompt.jinja2
-  inputs:
-    deployment_name: ${inputs.deployment_name}
-    temperature: 1
-    top_p: 1
-    max_tokens: 16
-    response_format:
-      type: text
-    chat_history: ${inputs.chat_history}
-    question: ${inputs.question}
-  provider: AzureOpenAI
-  connection: aoai
-  api: chat
-  module: promptflow.tools.aoai
-  use_variants: false
-- name: retrieve_sql_data
+- name: call_llm
   type: python
   source:
     type: code
-    path: src/tools/retrieval/retrieve_sql_data.py
-  inputs:
-    query: "SELECT ? FROM ?"
-    params:
-        - '*'
-        - '[AIGA].[TestTable]'
-- name: generate_response
-  type: llm
-  source:
-    type: code
-    path: generate_response_prompt.jinja2
+    path: src/tools/llm/chat.py
   inputs:
     deployment_name: ${inputs.deployment_name}
-    temperature: 0
-    top_p: 1
-    max_tokens: 1000
-    response_format:
-      type: text
-    presence_penalty: 0
-    frequency_penalty: 0
-    question: ${rewrite_question.output}
-    context: ${retrieve_from_ai_search.output}
-    chat_history: ${inputs.chat_history}
-  provider: AzureOpenAI
-  connection: aoai
-  api: chat
-  module: promptflow.tools.aoai
-  use_variants: false
+    prompt: ${rewrite_question.output}
+    api_version: ${inputs.api_version}
+- name: call_llm2
+  type: python
+  source:
+    type: code
+    path: src/tools/llm/chat.py
+  inputs:
+    prompt: ${generate_response.output}
+    deployment_name: ${inputs.deployment_name}
+    api_version: ${inputs.api_version}
 - name: groundedness
-  type: llm
+  type: prompt
   source:
     type: code
     path: prompts/metrics/gpt_groundedness_prompt.jinja2
   inputs:
-    question: ${rewrite_question.output}
+    question: ${inputs.question}
+    answer: ${call_llm2.output}
     context: ${retrieve_from_ai_search.output}
-    answer: ${generate_response.output}
-    deployment_name: gpt-4o-2024-05-13
-    response_format:
-      type: text
-  connection: aoai
-  api: chat
+- name: call_llm3
+  type: python
+  source:
+    type: code
+    path: src/tools/llm/chat.py
+  inputs:
+    deployment_name: ${inputs.deployment_name}
+    prompt: ${groundedness.output}
+    api_version: ${inputs.api_version}
 - name: parse_groundedness
   type: python
   source:
     type: code
     path: src/tools/metrics/parse_llm_evaluation_score.py
   inputs:
-    llm_evaluation_score: ${groundedness.output}
+    llm_evaluation_score: ${call_llm3.output}
 - name: retrieve_from_ai_search
   type: python
   source:
     type: code
     path: src/tools/retrieval/retrieve_from_ai_search.py
   inputs:
-    query: ${rewrite_question.output}
+    query: ${call_llm.output}
     index_name: loc-pp-ds-gd
-    service_endpoint: ${inputs.ai_search_endpoint}
+- name: rewrite_question
+  type: prompt
+  source:
+    type: code
+    path: prompts/rewrite_question_prompt.jinja2
+  inputs:
+    question: ${inputs.question}
+    chat_history: ${inputs.chat_history}
+- name: generate_response
+  type: prompt
+  source:
+    type: code
+    path: generate_response_prompt.jinja2
+  inputs:
+    question: ${call_llm.output}
+    context: ${retrieve_from_ai_search.output}
+    chat_history: ${inputs.chat_history}

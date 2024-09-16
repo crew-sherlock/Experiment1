@@ -78,13 +78,18 @@ pf config set trace.destination=azureml://subscriptions/$AML_AZURE_SUBSCRIPTION_
 The next steps read appropriate field values from experiment.yaml or experiment.[env].yaml that are located in the promptflow directory that is indicated by the USE_CASE_BASE_PATH environment variable (e.g. promptflow directory).
 
 Read the [Experiment Configuration Guide](../onboarding/experiment-configuration-guide.md) for more information on how to structure the YAML file for configuring an experiment and prepare the experiment configuration as per your requirements.
+
 Set the base path for the directory where the experiment definitions are located. for example see the folder 'promptflow' in the root of the project.
 
 ```bash
 export USE_CASE_BASE_PATH=<USE_CASE_BASE_PATH>
 ```
 
-> Note that Prompt Flow connections should pre-exist and AML automatic (serverless) runtime is used by default.
+Make sure to source your `.env` file and that you have all the right values added.
+
+```bash
+source .env
+```
 
 ## Register a dataset
 

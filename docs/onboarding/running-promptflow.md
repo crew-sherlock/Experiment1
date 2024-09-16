@@ -57,19 +57,11 @@ source .venv/bin/activate
 .venv\Scripts\activate.bat
 ```
 
-Create PromptFlow Connections ([reference](https://microsoft.github.io/promptflow/how-to-guides/manage-connections.html#create-a-connection)). From the `inference` directory:
+Source your `.env` file.
 
 ```bash
-pf connection create -f connections/aoai.yaml --set api_key=<open-ai-api-key> --set api_base=<open-ai-api-base>
+source .env
 ```
-
-You will also need to create a connection in the Prompt Flow extension, matching the name of the Azure OpenAI resource connection defined in the flow configuration, e.g. 'aoai':
-
-![alt text](./assets/prompt-flow-extension-conn.png)
-
-This will create a new file:
-
-![alt text](./assets/openai-conn-fillout.png)
 
 ## Run standard flow
 
