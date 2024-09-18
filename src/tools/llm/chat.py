@@ -14,23 +14,17 @@ from src.tools.common import _try_get_env_var
 
 class AzureOpenAI2(ToolProvider):
 
-    def __init__(self, api_version: str):
-
+    def __init__(self, api_version: str, deployment_name: str):
         bearer_token = BearerAuth().bearer_token
         self.azure_endpoint = _try_get_env_var("KGW_ENDPOINT")
         self.api_version = api_version
+        self.deployment_name = deployment_name
         self._client = AzureOpenAI(
             azure_endpoint=self.azure_endpoint,
-            api_key=bearer_token,
-            api_version=self.api_version
-            )
-
-    # def calculate_cache_string_for_completion(
-    #    self,
-    #    **kwargs,
-    # ) -> str:
-    #    d.update({**kwargs})
-    #    return json.dumps(d)
+            azure_ad_token=bearer_token,
+            api_version=self.api_version,
+            azure_deployment=self.deployment_name,
+        )
 
     @handle_openai_error()
     def chat(
@@ -126,7 +120,7 @@ def chat(
 ):
     # chat model is not available in azure openai, so need to set the environment
     # variable.
-    return AzureOpenAI2(api_version).chat(
+    return AzureOpenAI2(api_version, deployment_name).chat(
         prompt=prompt,
         deployment_name=deployment_name,
         temperature=temperature,
