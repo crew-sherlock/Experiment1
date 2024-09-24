@@ -90,3 +90,12 @@ def create_data_asset(query: str):
   print(f"Data asset {data_asset_name} created successfully.")
 
 ```
+
+### [Azure AI Translator](https://github.com/gsk-tech/AIGA/blob/src/tools/AIservices/ai_translation.py)
+
+The ai_translation tool allows you to translate the language of your input or output any node in the flow, this uses Azure AI Translation service
+to convert from one language to another.
+The list of supported languages are mentioned [here](https://learn.microsoft.com/en-us/azure/ai-services/translator/language-support#translation)
+The tool is currently running as part of the promptflow inference and defined in
+[flow.dag.yaml](https://github.com/gsk-tech/AIGA/blob/main/promptflow/inference/flow.dag.yaml):
+![ai_translator](assets/translator_promptflow.png)
