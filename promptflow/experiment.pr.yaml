@@ -1,8 +1,8 @@
 name: inference
 
 datasets:
-- name: chat_with_pdf_pr
-  source: data/bert-paper-qna-1-line.jsonl
+- name: aiga_pr
+  source: data/test-file.jsonl
   description: "This dataset is for pr validation only."
   mappings:
     question: "${data.question}"

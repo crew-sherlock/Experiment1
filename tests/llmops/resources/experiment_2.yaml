@@ -3,7 +3,7 @@ flow: exp_flow
 
 datasets:
 - name: ds1
-  source: ./data/data.jsonl
+  source: ./data/golden-dataset.jsonl
   description: ds1_description
   mappings:
     ds1_input: "ds1_mapping"

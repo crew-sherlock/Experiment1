@@ -33,7 +33,7 @@ pf = PFClientAzure(
             resource_group_name=resource_group_name
         )
 
-data_path = "data/data.jsonl"
+data_path = "data/golden-dataset.jsonl"
 env_vars = resolve_env_vars("promptflow")
 flow_path = "promptflow/validation"
 runtime_resources = ({"instance_type": "Standard_E4ds_v4"})

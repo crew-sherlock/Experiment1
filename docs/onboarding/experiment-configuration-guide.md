@@ -43,7 +43,7 @@ datasets:
   mappings:
     <flow_input_name>: "${data.<column_name>}"
 - name: <dataset_1_name>
-  source: ./path/to/data.jsonl
+  source: ./path/to/golden-dataset.jsonl
   description: "dataset description"
   mappings:
     <flow_input_name>: "${data.<column_name>}"
@@ -74,7 +74,7 @@ evaluators:
 - name: <evaluator_1_name>
   datasets:
   - name: <dataset_x_name> # Note that "dataset_x_name" is a new dataset
-    source: azureml:<dataset_name>:<dataset_version> # or ./path/to/data.jsonl
+    source: azureml:<dataset_name>:<dataset_version> # or ./path/to/golden-dataset.jsonl
     reference: <dataset_0_name> # Note that new datasets in the evaluation block must reference an already existing dataset
     mappings:
       flow_input_0_name: "${data.<column_name>}"

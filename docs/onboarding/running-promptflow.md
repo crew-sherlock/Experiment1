@@ -111,7 +111,7 @@ pf flow test --flow promptflow/evaluation
 To create a flow run with multi line data and selected metrics, you can use the following command:
 
 ```bash
-pf run create --flow . --data ./data.jsonl --column-mapping question='${data.question}' answer='${data.answer}' documents='${data.documents}' metrics='gpt_groundedness' --stream
+pf run create --flow . --data ./golden-dataset.jsonl --column-mapping question='${data.question}' answer='${data.answer}' documents='${data.documents}' metrics='gpt_groundedness' --stream
 ```
 
 For more information on how to deploy this please see [llmops.md](llmops.md).

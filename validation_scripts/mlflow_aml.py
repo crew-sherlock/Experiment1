@@ -27,7 +27,7 @@ ml_client = MLClient(
             credential=credential,
         )
 # registering a dataset
-local_data_path = 'data/bert-paper-qna-1-line.jsonl'
+local_data_path = 'data/test-file.jsonl'
 name = "validation_resources"
 flow_path = "promptflow/inference"
 

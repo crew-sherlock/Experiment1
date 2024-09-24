@@ -24,7 +24,7 @@ def _set_required_env_vars():
 
 def test_register_data_asset():
     """Test register_data_asset."""
-    data_path = str(CWD_PATH / "data/data.jsonl")
+    data_path = str(CWD_PATH / "data/golden-dataset.jsonl")
 
     data_hash = generate_file_hash(data_path)
     with patch(
@@ -60,7 +60,7 @@ def test_register_data_asset():
 
 def test_register_existing_data_asset():
     """Test register_data_asset with an existing data asset."""
-    data_path = str(CWD_PATH / "data/data.jsonl")
+    data_path = str(CWD_PATH / "data/golden-dataset.jsonl")
     data_hash = generate_file_hash(data_path)
     with patch(
         "llmops.common.register_data_asset.MLClient"

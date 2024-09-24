@@ -1,9 +1,9 @@
-name: chat_with_pdf
+name: aiga_experiment
 flow: inference
 
 datasets:
-- name: chat_with_pdf
-  source: data/bert-paper-qna-1-line.jsonl
+- name: aiga
+  source: data/test-file.jsonl
   description: "This dataset is for prompt experiments."
   mappings:
     question: "${data.question}"
@@ -11,12 +11,12 @@ datasets:
     deployment_name: "${data.CHAT_MODEL_DEPLOYMENT_NAME}"
 
 evaluators:
-- name: chat_with_pdf_evaluation_flow
+- name: aiga_evaluators
   flow: evaluation
   datasets:
-  - name: chat_with_pdf_test
-    reference: chat_with_pdf
-    source: data/data.jsonl
+  - name: aiga_test
+    reference: aiga
+    source: data/golden-dataset.jsonl
     description: "This dataset is for evaluating flows."
     mappings:
       groundtruth: "${data.groundtruth}"
