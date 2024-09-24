@@ -6,13 +6,18 @@ on:
       AZURE_CREDENTIALS:
         description: "service principal auth to Azure"
         required: true
+    inputs:
+      environment:
+        description: "The environment to run the workflow with (playground, dev, uat, prod)"
+        type: string
+        required: true
 
 jobs:
+  
   run-workflow:
     name: prompt flow bulk run
     runs-on: ubuntu-latest
-    environment: ${{ vars.TMP_ENV }}
-
+    environment: ${{ inputs.environment }}
     steps:
       - name: Checkout Actions
         uses: actions/checkout@v4
@@ -42,7 +47,7 @@ jobs:
             python -m llmops.common.register_data_asset \
             --subscription_id ${{ env.AML_AZURE_SUBSCRIPTION_ID }} \
             --base_path ${{ vars.PROMPTFLOW_BASE_PATH }} \
-            --env_name ${{ vars.TMP_ENV }}
+            --env_name ${{ inputs.environment }}
 
       #=====================================
       # Executes Standard flow for a scenario
@@ -61,7 +66,7 @@ jobs:
             --subscription_id ${{ env.AML_AZURE_SUBSCRIPTION_ID }} \
             --build_id ${{ github.run_id }} \
             --base_path ${{ vars.PROMPTFLOW_BASE_PATH }} \
-            --env_name ${{ vars.TMP_ENV }} \
+            --env_name ${{ inputs.environment }} \
             --output_file run_id.txt
 
       - name: Upload run_id.txt artifact

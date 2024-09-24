@@ -10,8 +10,11 @@ on:
       validation_url:
         type: string
         description: "URL to validate the Docker image."
-        default: "http://localhost:8080"
-        required: false
+        required: true
+      environment:
+        description: "The environment to run the workflow with (playground, dev, uat, prod)"
+        type: string
+        required: true
     secrets:
       AZURE_CREDENTIALS:
         description: "service principal authentication to Azure"
@@ -20,7 +23,7 @@ jobs:
   validate-docker:
     name: validate docker compose
     runs-on: ubuntu-latest
-    environment: ${{ vars.TMP_ENV }}
+    environment: ${{ inputs.environment }}
 
     steps:
       - name: Checkout

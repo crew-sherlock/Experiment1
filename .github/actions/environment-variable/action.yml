@@ -1,0 +1,37 @@
+name: environment-variable
+
+description: Reads the environment input or defaults to the repository's default if it is empty.
+
+inputs:
+  environment:
+    description: "The environment to run the workflow with (playground, dev, uat, prod)"
+    required: true
+  default_environment:
+    description: "The default environment to use if the environment input is empty."
+    required: true
+outputs:
+  environment:
+    description: "The environment to run the workflow with (playground, dev, uat, prod)"
+    value: ${{ steps.setup.outputs.environment }}
+runs:
+  using: composite
+  steps:
+    - id: setup
+      name: Setup Environment environment variable
+      shell: bash
+      run: |
+          # Default value
+          DEFAULT_VALUE=$DEFAULT_ENVIRONMENT
+
+          if [ -z "$INPUT_ENVIRONMENT" ]; then
+            export ENVIRONMENT=$DEFAULT_VALUE
+            echo "ENVIRONMENT was empty. Setting it to the default value: $DEFAULT_VALUE"
+          else
+            export ENVIRONMENT=$INPUT_ENVIRONMENT
+            echo "ENVIRONMENT is already set to: $INPUT_ENVIRONMENT"
+          fi
+          echo env is: $ENVIRONMENT
+          echo "environment=${ENVIRONMENT}" >> $GITHUB_OUTPUT
+      env:
+        DEFAULT_ENVIRONMENT: ${{ inputs.default_environment }}
+        INPUT_ENVIRONMENT: ${{ inputs.environment }}

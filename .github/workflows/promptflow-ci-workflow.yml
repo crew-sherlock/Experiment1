@@ -2,7 +2,16 @@ name: promptflow-ci-workflow
 
 on:
   workflow_dispatch:
-
+    inputs:
+      environment:
+        type: string
+        description: "The environment to run the workflow with (playground, dev, uat, prod)"
+        required: false
+      deployment:
+        type: boolean
+        description: "Set to true to deploy the code (CD) after the workflow is completed."
+        required: false
+        default: false
   push:
     branches:
       - main
@@ -36,18 +45,52 @@ jobs:
           cacheFrom: ghcr.io/gsk-tech/aiga
           push: always
 
+  setup-env:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Actions
+        uses: actions/checkout@v4
+      - id: setup
+        name: Set up Environment variable
+        uses: ./.github/actions/environment-variable
+        with:
+          environment: ${{ inputs.environment }}
+          default_environment: ${{ vars.DEFAULT_ENVIRONMENT }}
+    outputs:
+      environment: ${{ steps.setup.outputs.environment }}
+      
   run-workflow:
+    needs: [setup-env]
     uses: ./.github/workflows/run-workflow.yml
     secrets: inherit
+    with:
+      environment: ${{ needs.setup-env.outputs.environment }}
 
   evaluate-workflow:
-    needs: run-workflow
+    needs: [setup-env, run-workflow]
     uses: ./.github/workflows/evaluate-workflow.yml
     secrets: inherit
+    with:
+      environment: ${{ needs.setup-env.outputs.environment }}
 
   validate-docker:
+    needs: setup-env
     uses: ./.github/workflows/validate-docker.yml
     secrets: inherit
     with:
       compose_folder: "docker"
       validation_url: "http://localhost:8080/health"
+      environment: ${{ needs.setup-env.outputs.environment }}
+
+  cd:
+    if: ${{ (github.event_name == 'workflow_dispatch' && inputs.deployment) || (github.event_name == 'push' && github.ref == 'refs/heads/main') }}
+    name: CD
+    needs: [setup-env, run-workflow, evaluate-workflow, validate-docker]
+    
+    uses: ./.github/workflows/reusable-cd-workflow.yml
+    secrets: inherit
+    with:
+      environment: ${{ needs.setup-env.outputs.environment }}
+      checkout_sha_ref: ${{ github.sha }}
+
+

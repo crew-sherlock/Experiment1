@@ -2,6 +2,11 @@ name: evaluation-workflow
 
 on:
   workflow_call:
+    inputs:
+      environment:
+        description: "The environment to run the workflow with (playground, dev, uat, prod)"
+        type: string
+        required: true
     secrets:
       AZURE_CREDENTIALS:
         description: "service principal authentication to Azure"
@@ -12,7 +17,7 @@ jobs:
     name: prompt flow experiment and evaluation job
     runs-on: ubuntu-latest
     environment:
-      name: ${{ vars.TMP_ENV }}
+      name: ${{ inputs.environment }}
 
     steps:
       - name: Checkout Actions
@@ -66,7 +71,7 @@ jobs:
             --subscription_id ${{ env.AML_AZURE_SUBSCRIPTION_ID }} \
             --build_id ${{ github.run_id }} \
             --base_path ${{ vars.PROMPTFLOW_BASE_PATH }} \
-            --env_name ${{ vars.TMP_ENV }} \
+            --env_name ${{ inputs.environment }} \
             --run_id "$RUN_NAME"
 
       #=====================================
