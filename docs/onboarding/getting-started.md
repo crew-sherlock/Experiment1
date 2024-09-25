@@ -25,9 +25,9 @@ Before you start working with AIGA, ensure you have:
 
 1. **Submit ARB1**: Fill in the accountability report. In order to be compliant, you need to fill the accountability report and get it approved, before starting an AI project. Check out our [tips](/docs/design/ai-evaluation.md) on how to fill in the accountability report.
 
-1. **Submit infrastructure requests**: Verify the Excel infrastructure request forms and submit them within the GenAI Dev Kit request form and via a [Tech service request](https://servicenow.gsk.com/home?id=sc_cat_item&sys_id=0e6a06bcdb5ce4506233d25cd3961932) for the PSC team  assigned to *SCDT - DA Platform Product Support Service*.
+1. **Submit infrastructure requests**: Verify the Excel infrastructure request forms and submit them within the GenAI Dev Kit request form and via a [Tech service request](https://servicenow.gsk.com/home?id=sc_cat_item&sys_id=0e6a06bcdb5ce4506233d25cd3961932) for the PSC team  assigned to *SCDT - DA Platform Product Support Service*. Use the [template](/docs/design/assets/Infrastructure%20Request%20Form%20AIGA%20v0.1.xlsx) and only update the yellow boxes with your AD group and service principal.
 
-1. **Approval from EA**: You might need approval from EA to get started, especially if you have a higher risk or CSI data in your project.
+1. **Approval from EA**: You need [approval from EA](https://myconnect.gsk.com/:w:/r/sites/modern-enterprisearchitecture/_layouts/15/Doc.aspx?sourcedoc=%7B8F9134AD-D7BD-4324-A27D-31D0B2F81FC4%7D&file=EA%20Generative%20AI%20Use%20Case%20Process%20&%20Operating%20Model.docx=&action=default&mobileredirect=true) to get started, especially if you have a higher risk or CSI data in your project.
 
 1. **Request a Devkit**: You will need to request a [DevKit](https://servicenow.gsk.com/home?id=sc_cat_item&table=sc_cat_item&sys_id=17c151861bc98254269687b8e34bcb40) to get the part of the resources provisioned (see the architecture pattern for more information on which resources are provisioned through the DevKit). Fill in the information in the Devkit according to your architecture pattern needs.
 ![devkit](./assets/devkit.png)
@@ -36,7 +36,9 @@ Attach the following [file](/docs/design/assets/devkit_roles.yaml) to your devki
 
 The Code orange team will fill in the [secrets and environment variables](/docs/onboarding/github-secrets.md) directly in the keyvault and AIGA is setup to capture them in the CI and CD pipelines automatically.
 
-1. **Submit infrastructure requests**: Verify the Excel infrastructure request forms and submit via a [Tech service request](https://servicenow.gsk.com/home?id=sc_cat_item&sys_id=0e6a06bcdb5ce4506233d25cd3961932) for the PSC team  assigned to *SCDT - DA Platform Product Support Service*.
+1. **Submit infrastructure requests**: Verify the Excel infrastructure request forms and submit via a [Tech service request](https://servicenow.gsk.com/home?id=sc_cat_item&sys_id=0e6a06bcdb5ce4506233d25cd3961932) for the PSC team  assigned to *SCDT - DA Platforms--Service*.
+
+![request](/docs/onboarding/assets/requestInfrastructure.png)
 
 1. **Set up your AIGA Project**: Configure your AIGA Project repository by following the instructions in the [developer guide](/docs/contributing/developer-guide.md).
 
