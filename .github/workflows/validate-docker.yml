@@ -63,7 +63,7 @@ jobs:
           for ((i=1; i<=RETRIES; i++)); do
               echo "Attempt $i: Checking ${{ inputs.validation_url }}..."
               STATUS_CODE=$(curl -o /dev/null -s -w "%{http_code}" "${{ inputs.validation_url }}")
-              
+
               if [ "$STATUS_CODE" -eq 200 ]; then
                   echo "Success: $URL returned status code 200."
                   exit 0

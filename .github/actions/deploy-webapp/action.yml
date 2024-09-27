@@ -12,8 +12,11 @@ inputs:
   DOCKER_IMAGE_REGISTRY:
     description: "Container registry name"
     required: true
-  DOCKER_IMAGE_REGISTRY_SECRET:
-    description: "Container registry secret"
+  AZURE_CLIENT_ID:
+    description: "Service principal client ID"
+    required: true
+  AZURE_CLIENT_SECRET:
+    description: "Service principal secret"
     required: true
   WA_AZURE_SUBSCRIPTION_ID:
     description: "Web application subscription ID"
@@ -32,9 +35,8 @@ runs:
       uses: docker/login-action@v3
       with:
         registry: ${{ inputs.DOCKER_IMAGE_REGISTRY }}.azurecr.io
-        username: ${{ inputs.DOCKER_IMAGE_REGISTRY }}
-        password: ${{ inputs.DOCKER_IMAGE_REGISTRY_SECRET }}
-
+        username: ${{ inputs.AZURE_CLIENT_ID }}
+        password: ${{ inputs.AZURE_CLIENT_SECRET }}
     - name: build docker image
       shell: bash
       run: |
