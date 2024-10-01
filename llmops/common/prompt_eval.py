@@ -21,9 +21,11 @@ import json
 import os
 import pandas as pd
 from dotenv import load_dotenv
-from typing import Optional
+from typing import Optional, List
 import inspect
 import importlib
+from azure.ai.ml.entities import Data as AMLData
+from azure.ai.ml.constants import AssetTypes as AMLAssetTypes
 
 from azure.identity import DefaultAzureCredential
 
@@ -165,14 +167,14 @@ def prepare_and_execute(
             else:
                 run_data_name = os.path.sep.join(run_data_id.split(
                     os.path.sep)[-2:]
-                    )
+                                                 )
                 print(run_data_name)
                 for ds in experiment.datasets:
                     print(ds.dataset.source)
                     if ds.dataset.source == run_data_name:
                         run_dataset = experiment.get_dataset(
                             ds.dataset.name
-                            )
+                        )
                         break
                     else:
                         run_dataset = None
@@ -190,8 +192,8 @@ def prepare_and_execute(
 
             for dataset_mapping in dataset_mapping_list:
                 logger.info(
-                        f"Preparing evaluation of run {flow_run} "
-                        f"using dataset {dataset_mapping.dataset.name}"
+                    f"Preparing evaluation of run {flow_run} "
+                    f"using dataset {dataset_mapping.dataset.name}"
                 )
                 column_mapping = dataset_mapping.mappings
                 dataset = dataset_mapping.dataset
@@ -199,7 +201,7 @@ def prepare_and_execute(
                     dataset.get_local_source()
                     if EXECUTION_TYPE == "LOCAL"
                     else dataset.get_remote_source(pf.ml_client)
-                    )
+                )
 
                 evaluator_executed = True
                 # Create run object
@@ -214,7 +216,7 @@ def prepare_and_execute(
 
                 timestamp = datetime.datetime.now().strftime(
                     "%Y%m%d_%H%M%S"
-                    )
+                )
                 run_name = f"{experiment_name}_eval_{timestamp}"
                 runtime_resources = (
                     None
@@ -311,6 +313,7 @@ def prepare_and_execute(
                 logger.info(df_result.head(10))
 
         if evaluator_executed and report_dir:
+
             if not os.path.exists(report_dir):
                 os.makedirs(report_dir)
 
@@ -323,10 +326,10 @@ def prepare_and_execute(
 
             combined_results_df.to_csv(
                 f"{report_dir}/{run_dataset.name}_result.csv"
-                )
+            )
             combined_metrics_df.to_csv(
                 f"{report_dir}/{run_dataset.name}_metrics.csv"
-                )
+            )
 
             styled_df = combined_results_df.to_html(index=False)
 
@@ -363,26 +366,25 @@ def prepare_and_execute(
                     import sys
                     dependent_modules_dir = os.path.join(
                         experiment.base_path, experiment.flow
-                        )
+                    )
                     sys.path.append(dependent_modules_dir)
 
                     service_module = importlib.import_module(
                         module_path
-                        )
+                    )
 
                     module_names = dir(service_module)
 
                     # Filter names to get functions defined in module
                     function_names = [
                         name for name in module_names
-                        if inspect.isfunction
-                        (
+                        if inspect.isfunction(
                             getattr(
                                 service_module,
                                 name
-                                )
                             )
-                        ]
+                        )
+                    ]
 
                     for function_name in function_names:
                         if (
@@ -391,11 +393,11 @@ def prepare_and_execute(
                             service_function = getattr(
                                 service_module,
                                 function_name
-                                )
+                            )
                             for ds in evaluator.datasets:
                                 timestamp = datetime.datetime.now().strftime(
                                     "%Y%m%d_%H%M%S"
-                                    )
+                                )
                                 if EXECUTION_TYPE == "LOCAL":
                                     result = service_function(
                                         f"{experiment_name}_eval_{timestamp}",
@@ -440,6 +442,9 @@ def prepare_and_execute(
         final_results_df.to_csv(f"{report_dir}/{experiment_name}_result.csv")
         final_metrics_df.to_csv(f"{report_dir}/{experiment_name}_metrics.csv")
 
+        _register_final_results(ml_client,
+                                [f"{report_dir}/{experiment_name}_result.csv"])
+
         styled_df = final_results_df.to_html(index=False)
         with open(
             f"{report_dir}/{experiment_name}_result.html", "w"
@@ -451,6 +456,23 @@ def prepare_and_execute(
             f"{report_dir}/{experiment_name}_metrics.html", "w"
         ) as f_metrics:
             f_metrics.write(html_table_metrics)
+
+
+def _register_final_results(ml_client, paths: List[str]):
+    if EXECUTION_TYPE == "AZURE":
+        for path in paths:
+            assert os.path.exists(
+                path), f"File {paths} does not exist."
+
+            result_data_asset = AMLData(
+                path=path,
+                type=AMLAssetTypes.URI_FILE,
+                description="Experiment result data",
+                name=f"{path.split('/')[1]}_result_data",
+            )
+
+            ml_client.data.create_or_update(
+                result_data_asset)
 
 
 def main():

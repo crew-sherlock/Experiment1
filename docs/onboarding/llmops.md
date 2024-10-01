@@ -51,6 +51,7 @@ The Github CD workflow contains the following steps:
 - Upload the sampled production log dataset
 - Execute the evaluation flow on the production log dataset
 - Generate the evaluation report
+- [Register evaluation report in AML](register-data-assets.md)
 
 ## Deployment configuration
 
