@@ -43,3 +43,31 @@ Principal [here](https://learn.microsoft.com/en-us/azure/machine-learning/how-to
 ### Additional Access
 
 - **Secret** (get, list) on the environment's Azure Key Vault
+
+### AIGA Azure resources required permissions
+
+This document is to describe the resources we have been defining and using so far with
+managed identity, service principal and AD token.
+Each resource is used by one or more resources and requires a specific permission in
+order to work in Azure.
+
+| Access To                    | Access From                    | Access Method                        | Permission Level (In Azure)                                                                                                                                                  |
+|------------------------------|--------------------------------|--------------------------------------|------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Ingestion: SQL Server        | AzureML                        | Service Principal                    | Read and Write                                                                                                                                                               |
+| SQL Server (Application)     | AzureML                        | Service Principal                    | Read and Write                                                                                                                                                               |
+| Azure AI Search              | AzureML                        | Service Principal                    | AI Search Contributor                                                                                                                                                        |
+| Azure AI Search Indexing     | AzureML                        | Service Principal                    | Search Index Data Contributor                                                                                                                                                |
+| Keyvault                     | AzureML                        | Service Principal                    | RGContributor + Key Vault Contributor                                                                                                                                        |
+| All Resources                | Azure Monitor                  | Managed Identity / Service Principal | NA                                                                                                                                                                           |
+| All Resources                | Application Insights           | Managed Identity / Service Principal |                                                                                                                                                                              |
+| Azure ML Inference Endpoints | HTTP Request                   | AD Token                             | [AzureML Data Scientist](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-authenticate-online-endpoint?view=azureml-api-2&tabs=azure-cli#use-a-built-in-role) |
+| AzureML End Point            | Github Actions                 | Service Principal                    | [AzureML Data Scientist](https://learn.microsoft.com/en-us/azure/machine-learning/how-to-authenticate-online-endpoint?view=azureml-api-2&tabs=azure-cli#use-a-built-in-role) |
+| AzureML Workspace            | Github Actions                 | Service Principal                    | AzureML Compute Operator                                                                                                                                                     |
+| Azure Web Apps               | Github Actions                 | Service Principal                    | Contributor                                                                                                                                                                  |
+| AI Search                    | Azure WebApps                  | Service Principal                    | Search Index Reader / Contributor                                                                                                                                            |
+| Keyvault                     | Azure WebApps                  | Managed Identity / Service Principal | RGContributor + Key Vault Contributor                                                                                                                                        |
+| Azure Container Registry     | Github Actions                 | Service Principal                    | Contributor                                                                                                                                                                  |
+| Azure Container Registry     | WebApp and Webapp service plan | Service Principal                    | Reader                                                                                                                                                                       |
+| Azure Container Registry     | AzureML                        | Service Principal                    | Contributor                                                                                                                                                                  |
+| Azure AI Search              | AzureML + Prompt Flow          | API Key                              | AI Search Contributor                                                                                                                                                        |
+| ML Registry                  | AzureML                        | Managed Identity                     | Contributor                                                                                                                                                                  |

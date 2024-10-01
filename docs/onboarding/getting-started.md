@@ -37,6 +37,11 @@ Attach the following [file](/docs/design/assets/devkit_roles.yaml) to your devki
 The Code orange team will fill in the [secrets and environment variables](/docs/onboarding/github-secrets.md) directly in the keyvault and AIGA is setup to capture them in the CI and CD pipelines automatically.
 
 1. **Submit infrastructure requests**: Verify the Excel infrastructure request forms and submit via a [Tech service request](https://servicenow.gsk.com/home?id=sc_cat_item&sys_id=0e6a06bcdb5ce4506233d25cd3961932) for the PSC team  assigned to *SCDT - DA Platforms--Service*.
+   1. *Setup permissions for the infrastructure**:
+         [See this page](getting-started.md) to request and set up all required permissions for the
+         service principle/managed identity/AD token, so the resources will be able to
+         communicate properly.
+![request](https://github.com/gsk-tech/AIGA/blob/main/docs/onboarding/assets/requestInfrastructure.png)
 
 ![request](/docs/onboarding/assets/requestInfrastructure.png)
 
