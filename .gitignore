@@ -284,7 +284,6 @@ $RECYCLE.BIN/
 promptflow/*/src
 promptflow/*/prompts
 run_id.txt
-promptflow/environment/env.yaml
 
 # created reports
 reports/*
