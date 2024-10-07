@@ -6,7 +6,7 @@ ARG FLOW_NAME=inference
 
 WORKDIR /
 
-COPY ./$USE_CASE_BASE_PATH/inference/requirements.txt /flow/requirements.txt
+COPY ./$USE_CASE_BASE_PATH/$FLOW_NAME/requirements.txt /flow/requirements.txt
 
 # gcc is for build psutil in MacOS
 RUN apt-get update && apt-get install -y runit gcc
