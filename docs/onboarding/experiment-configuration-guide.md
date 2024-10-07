@@ -3,6 +3,7 @@
 This guide explains how to structure the YAML file for configuring an experiment.
 Each section of the YAML file is described with the necessary details to help you build it from scratch.
 A [sample YAML](https://github.com/gsk-tech/AIGA/blob/main/promptflow/experiment.yaml) file is provided as part of the template for your reference.
+Note that the AML experiment name is derived from the name of the folder that contains the specific flows (i.e. `[PROJECT NAME]_inference`).
 
 ## Experiment Name
 
@@ -13,8 +14,7 @@ name: <experiment_name>
 ### Description
 
 - **name**: Defines the experiment name which serves two purposes:
-  1. It is used as the experiment name for Azure ML jobs, unless overridden by the `flow_name` parameter below.
-  1. Is is used as the RUN name for the experiment.
+  1. It is used as the RUN name for Azure ML jobs, unless overridden by the `flow_name` parameter below.
   1. It becomes the model name when registered in Azure ML.
 
 ## Flow Definition

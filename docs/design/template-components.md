@@ -39,9 +39,11 @@ The Inference Flow supports `chat_history`, `chat_input` and `chat_output`. It c
 
 The Inference Flows sends all traces to Azure Application Insights for monitoring and logging, as well as metrics for groundedness, relevance, and retrieval (metrics that do not require ground truth).
 
+> Note: This flow is renamed for each specific AIGA project to the format `[PROJECT_NAME]_inference`
+
 **Repository location:**
 
-- DAG Flow: `promptflow/inference`
+- DAG Flow: `promptflow/inference` (or `promptflow/[PROJECT_NAME]_inference` for a specific project)
 - PromptFlow Tools: `src/tools`
 - Python Utilities: `src/utils`
 
@@ -53,9 +55,11 @@ The Evaluation Flow is used to evaluate the quality of the Inference Flow. It ru
 
 The Evaluation Flow leverages MLFlow to track experimentation. It is designed to publish each experiment and their respective metrics in [Azure Machine Learning](https://learn.microsoft.com/en-us/azure/machine-learning/concept-mlflow).
 
+> Note: This flow is renamed for each specific AIGA project to the format `[PROJECT_NAME]_evaluation`
+
 **Repository location:**
 
-- DAG Flow: `promptflow/evaluation`
+- DAG Flow: `promptflow/evaluation` (or `promptflow/[PROJECT_NAME]_evaluation` for a specific project)
 - PromptFlow Tools: `src/tools/evaluation`
 
 AIGA triggers the evaluation flow from the CI workflow, as documented [here](../onboarding/github-actions.md).

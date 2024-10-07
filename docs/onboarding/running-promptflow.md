@@ -70,9 +70,17 @@ The flow uses the configuration in [flow.dag.yaml](https://github.com/gsk-tech/A
 
 To run it, we will use [this pdf](https://arxiv.org/pdf/1810.04805.pdf) as an example:
 
+When running the AIGA template:
+
 ```bash
 pf flow test --flow promptflow/inference --inputs question="What is the name of the new language representation model introduced in the document?"
 ```
+
+When running an AIGA project (where `PROJECT NAME` is the name of the github repository):
+
+```bash
+pf flow test --flow promptflow/[PROJECT NAME]_inference --inputs question="What is the name of the new language representation model introduced in the document?"
+
 
 ## Run evaluation flow
 

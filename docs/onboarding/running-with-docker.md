@@ -59,7 +59,7 @@ As you extend the capabilities of the PromptFlow application, it may be required
 
     > **Note**: The `docker-promptflow` image should be listed in the output.
 
-1. By default, the build process will package `./promptflow/inference` into the Docker image. Build arguments can be used to specify a different directory:
+1. By default, the build process will package `./promptflow/[PROJECT NAME]_inference` into the Docker image (where PROJECT NAME is the name of the github repository). Build arguments can be used to specify a different directory:
 
     ```bash
     docker compose build \
@@ -67,10 +67,10 @@ As you extend the capabilities of the PromptFlow application, it may be required
         --build-arg FLOW_NAME=use-case-flow
     ```
 
-    example for the evaluation:
+    example for the evaluation (where `PROJECT NAME` is the name of the github repository):
 
    ```bash
-    docker compose -f docker/docker-compose.yml build --build-arg USE_CASE_BASE_PATH=promptflow --build-arg FLOW_NAME=evaluation promptflow
+    docker compose -f docker/docker-compose.yml build --build-arg USE_CASE_BASE_PATH=promptflow --build-arg FLOW_NAME=[PROJECT NAME]_evaluation promptflow
     ```
 
 1. Once the image is built, it can be tagged with a different name. For example:
