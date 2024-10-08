@@ -32,7 +32,7 @@ Before you start working with AIGA, ensure you have:
 1. **Request a Devkit**: You will need to request a [DevKit](https://servicenow.gsk.com/home?id=sc_cat_item&table=sc_cat_item&sys_id=17c151861bc98254269687b8e34bcb40) to get the part of the resources provisioned (see the architecture pattern for more information on which resources are provisioned through the DevKit). Fill in the information in the Devkit according to your architecture pattern needs.
 ![devkit](./assets/devkit.png)
 While filling the devkit, don't forget to add your key vault and service principal.
-Attach the following [file](/docs/design/assets/devkit_roles.yaml) to your devkit, that is the system access plan.
+Attach the following [file](/docs/design/assets/devkit_roles.yaml) to your devkit, that is the system access plan and add extra information for tagging of the resources.
 
 The Code orange team will fill in the [secrets and environment variables](/docs/onboarding/github-secrets.md) directly in the keyvault and AIGA is setup to capture them in the CI and CD pipelines automatically.
 
@@ -42,8 +42,6 @@ The Code orange team will fill in the [secrets and environment variables](/docs/
          service principle/managed identity/AD token, so the resources will be able to
          communicate properly.
 ![request](https://github.com/gsk-tech/AIGA/blob/main/docs/onboarding/assets/requestInfrastructure.png)
-
-![request](/docs/onboarding/assets/requestInfrastructure.png)
 
 1. **Set up your AIGA Project**: Configure your AIGA Project repository by following the instructions in the [developer guide](/docs/contributing/developer-guide.md).
 
@@ -55,36 +53,38 @@ The Code orange team will fill in the [secrets and environment variables](/docs/
 
 1. **Deploy your Document processing pipelines**: Once you are happy with your document processing pipelines, you can deploy it to Azure Machine Learning (AML) the CI/CD workflows provided in the AIGA Project repository (*TBD: WHEN READY*).
 
-![User flow](../assets/user-flow-final.drawio.svg)
-
 ## The included artefacts
 
-Once you request a new project using the AIGA Starter, the following artefacts will be generated:
+Once you have followed the above steps, the following artefacts will be provisioned by Code Orange and PSC tech teams:
 
 - **Infrastructure artefacts based on AIGA [reference architecture](../design/reference-architecture.md)**: A set of infrastructure artefacts including architecture documentation that can be used for ARB1, pre-filled Excel infrastructure request forms, and instructions on how to fill out the GenAI Dev Kit request form.
 
-    > *TBD: will we be able to offer samples of other necessary documentation e.g. URS, smart control assessment, accountability report?*
+Once you request a new project using the AIGA Starter, the following artefacts will be generated:
+
 - **AIGA Project Repository**: A clone of the AIGA Template repository, which will include a document loading AML pipeline, QA generation script, example prompt flows for common use cases for inference and evaluation, tools for deploying your prompt flows (CI/CD) to App Service or Azure Machine Learning (AML) endpoint, and documentation. The pipelines and prompt flows are designed to be modular so that you can easily customise them and experiment with different configurations while also providing an end-to-end path to productionising your Gen AI project.
 
     The included components are:
 
     ![Prompt flow components in AIGA](../assets/aiga-prompt-flow-components.drawio.svg)
 
-We also recommend the following artefact for RAG projects that need in depth experimentation on chunking, indexing, and search strategies:
-
 ## Personas
 
 The following personas are involved in the AIGA project setup:
 
-1. **Product Manager and Gen AI Engineer**: Use AIGA Reference Architecture to design the product architecture and go through ARB1. Use AIGA Request to request the provisioning of a Code Orange Gen AI Dev Kit and other infrastructure required for the project.
+1. **Product Manager and End Users**: Use AIGA to scope and define the project objectives and success criteria, as well as requirements.
 
-1. **Gen AI Engineer**: Use the AIGA Starter to instantiate a project repository from the AIGA Template.
+1. **Architects and Gen AI Engineer**:
+Use AIGA Reference Architecture to design the product architecture and go through ARB1. Use AIGA Request to request the provisioning of a Code Orange Gen AI Dev Kit and other infrastructure required for the project.
 
-1. **Data Scientist**: Use the AIGA Project repository (and optionally the RAG Experimentation repository) to experiment, build and industrialise their Gen AI Project.
+1. **Data Scientist, Gen AI Engineers and End Users (SME)**: Use the AIGA Project repository to experiment, build and evaluate their GenAI application and fine tune is to their expectations.
+
+1. **Gen AI Engineer**: Use the AIGA Starter to instantiate a project repository from the AIGA Template and industrialise their Gen AI Project.
 
 1. **Product Manager**: Use the project documentation to go through ARB2 during industrialization and supervise MLOps gates into production.
 
-1. **End User**: Use the deployed Gen AI application to evaluate their GenAI application and fine their expectations.
+1. **L3 Support**: Maintains the Application based on SME's feedback and migration plans.
+
+![User flow](/docs/onboarding/assets/AIGAFlow.svg)
 
 ## Roles and Access
 

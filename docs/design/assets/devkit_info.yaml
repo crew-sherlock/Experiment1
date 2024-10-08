@@ -22,3 +22,31 @@ service:
   - name: AI doc intelligence
     roles:
       - Cognitive Services User
+  - name: BusinessOwner
+    value: eo123694
+  - name: TechnicalOwner
+    value: vm391985
+  - name: LineOfBusiness
+    value: psc
+  - name: BusinessUnit
+    value: psc
+  - name: Node
+    value: psc
+  - name: Environment
+    value:
+        - dev
+        - uat
+        - prod
+  - name: Data Domain Name
+    value:
+        - Manufacturing & Engineering
+        - Quality & MSAT
+        - Supply Chain
+  - name: Data Domain Owner
+    value:
+  - name: ApplicationName
+    value:
+  - name: UseCase
+    value:
+  - name: ParentCIID
+    value:
