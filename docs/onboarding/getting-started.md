@@ -11,7 +11,7 @@ Before you start working with AIGA, ensure you have:
 
 | Entity  | Description |
 | -------- | ---- |
-| Resource Group + Service principal  | These 2 things are required for the AIGA starter to create an AIGA project from the AIGA template. |
+| Resource Group + Service principal  | These 2 things are required for the AIGA starter to create an AIGA project from the AIGA template. The service principal should have 'Contributor' permissions on the resource group level. |
 | AIGA Users team | In order to be able to work with the AIGA Starter (i.e. trigger the Start AIGA Project Action) you would need to be in the GitHub team [AIGA Users](https://github.com/orgs/commercial-software-engineering/teams/aiga-users) that is authorised to the repository.|
 
 ## Steps to set up a new project
