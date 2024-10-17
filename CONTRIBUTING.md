@@ -1,7 +1,7 @@
 # Contributing to AI Generation Accelerator
 
 Thank you for your interest in contributing to the AI Generation Accelerator (AIGA). We welcome contributions from the community across GSK.
-
+ 
 ## How to Contribute
 
 To contribute to the AIGA, please follow the steps below:
