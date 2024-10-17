@@ -22,7 +22,7 @@ We have created the [AIGA Starter](https://github.com/commercial-software-engine
 
 ## AIGA Reference Architecture
 
-A high-level repeatable blueprint for building the infrastructure of a Generative AI applications. The architecture and components described will be pre-approved as an *Architecture Pattern* within you organisation to expedite review-board approval for new projects.
+A high-level repeatable blueprint for building the infrastructure of a Generative AI applications. The architecture and components described will be pre-approved as an *Architecture Pattern* within your organisation to expedite review-board approval for new projects.
 
 ## AIGA Template
 
