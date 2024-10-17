@@ -31,7 +31,6 @@ nav:
     - Running with Docker: onboarding/running-with-docker.md
     - Running Evaluation locally: onboarding/experiment-evaluate-locally.md
     - Deployment: onboarding/deployment.md
-    - Models: onboarding/models.md
     - GitHub:
       - GitHub Actions: onboarding/github-actions.md
       - GitHub Variables: onboarding/github-variables.md
