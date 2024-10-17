@@ -20,7 +20,7 @@ After setting up your environment, you can [Validate your set up](#validating-yo
 1. Clone the repository
 
     ```bash
-    git clone https://github.com/gsk-tech/AIGA.git
+    git clone https://github.com/commercial-software-engineering/AIGA.git
     cd AIGA
     ```
 
@@ -43,7 +43,7 @@ After setting up your environment, you can [Validate your set up](#validating-yo
 1. Clone the repository and open in VS Code
 
     ```bash
-    git clone https://github.com/gsk-tech/AIGA.git
+    git clone https://github.com/commercial-software-engineering/AIGA.git
     cd AIGA
     code .
     ```

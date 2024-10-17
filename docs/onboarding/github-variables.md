@@ -18,4 +18,4 @@ Environment Variables are used within AIGA to control which resources are used b
 
 The following Environment Variables are required as a pre-requisite for AIGA:
 
-- `KEY_VAULT_NAME` - should point to the Azure Key Vault associated with Code Orange GenAI Dev Kit.
+- `KEY_VAULT_NAME` - should point to the Azure Key Vault associated with the environment.

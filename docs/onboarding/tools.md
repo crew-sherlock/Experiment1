@@ -7,17 +7,17 @@ refining your AI models without getting bogged down in repetitive coding tasks.
 
 ## Available Tools
 
-### [Retrieve SQL data](https://github.com/gsk-tech/AIGA/blob/main/src/tools/retrieval/retrieve_sql_data.py)
+### [Retrieve SQL data](https://github.com/commercial-software-engineering/AIGA/blob/main/src/tools/retrieval/retrieve_sql_data.py)
 
 The retrieve_sql_data tool allows you to execute SQL queries directly from your AML
 pipeline and retrieve the results in a structured format. This tool is particularly
 useful for scenarios where you need to fetch data from SQL databases for further
 processing within your machine learning workflows.
 The tool is currently running as part of the promptflow inference and defined in
-[flow.dag.yaml](https://github.com/gsk-tech/AIGA/blob/main/promptflow/inference/flow.dag.yaml):
+[flow.dag.yaml](https://github.com/commercial-software-engineering/AIGA/blob/main/promptflow/inference/flow.dag.yaml):
 ![retrieve_sql_data](assets/sql_promptflow.png)
 
-The tools using [query_sql.py](https://github.com/gsk-tech/AIGA/blob/main/src/tools/sql/query_sql.py) class which can be
+The tools using [query_sql.py](https://github.com/commercial-software-engineering/AIGA/blob/main/src/tools/sql/query_sql.py) class which can be
 reused in other scenarios to create connection and query SQL in case needed.
 
 > NOTE: The retrieve SQL data tool has a direct connection to your SQL but there is
@@ -91,11 +91,11 @@ def create_data_asset(query: str):
 
 ```
 
-### [Azure AI Translator](https://github.com/gsk-tech/AIGA/blob/src/tools/AIservices/ai_translation.py)
+### [Azure AI Translator](https://github.com/commercial-software-engineering/AIGA/blob/src/tools/AIservices/ai_translation.py)
 
 The ai_translation tool allows you to translate the language of your input or output any node in the flow, this uses Azure AI Translation service
 to convert from one language to another.
 The list of supported languages are mentioned [here](https://learn.microsoft.com/en-us/azure/ai-services/translator/language-support#translation)
 The tool is currently running as part of the promptflow inference and defined in
-[flow.dag.yaml](https://github.com/gsk-tech/AIGA/blob/main/promptflow/inference/flow.dag.yaml):
+[flow.dag.yaml](https://github.com/commercial-software-engineering/AIGA/blob/main/promptflow/inference/flow.dag.yaml):
 ![ai_translator](assets/translator_promptflow.png)

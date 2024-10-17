@@ -96,7 +96,7 @@ and [Azure App Service pricing](https://azure.microsoft.com/en-us/pricing/detail
 
 ### Configuration
 
-To configure the type of deployment set the `DEPLOYMENT_TARGET` variable. See [GitHub Variables](./github-variables.md) for more information. Please ensure that the [deployment_config.json](https://github.com/gsk-tech/AIGA/blob/main/config/deployment_config.json) file is updated with the correct configuration.
+To configure the type of deployment set the `DEPLOYMENT_TARGET` variable. See [GitHub Variables](./github-variables.md) for more information. Please ensure that the [deployment_config.json](https://github.com/commercial-software-engineering/AIGA/blob/main/config/deployment_config.json) file is updated with the correct configuration.
 
 ### Additional Resources
 

@@ -43,7 +43,7 @@ nav:
         - LLMOps CI/CD: onboarding/llmops.md
         - Experiment YAML Structure Guide: onboarding/experiment-configuration-guide.md
 
-copyright: "&copy; GSK"
+copyright: "&copy; Microsoft"
 
 markdown_extensions:
 
@@ -60,4 +60,4 @@ markdown_extensions:
 extra:
   social:
     - icon: fontawesome/brands/github
-      link: https://github.com/gsk-tech
+      link: https://github.com/commercial-software-engineering

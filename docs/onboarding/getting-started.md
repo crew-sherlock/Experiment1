@@ -9,39 +9,16 @@ This guide contains the steps to set up a new project using the AIGA Starter and
 Before you start working with AIGA, ensure you have:
 Before you start working with AIGA, ensure you have:
 
-| Entity | System (to request) | Description | Assignment Group | Required for |
-| -------- | ---- | ----------- | ---------- | ---------- |
-| Business Application CIID | [CMDB](https://gsk.service-now.com/home?id=sc_cat_item&table=sc_cat_item&sys_id=fb257b2b1b7a7d104ab887b8e34bcb95) | In order to create a new instance of AIGA, you need a business application CIID. This will be the umbrella for the application service CIID. This CIID will allow you to track the costs, to associate all the relevant infrastructure services and also to maintain and support your application. It is required through the E2E lifecycle of the project. | ESM-Platform-CMDB-L2  | Infrastructure request |
-| Application service CIID | [CMDB](https://gsk.service-now.com/home?id=sc_cat_item&table=sc_cat_item&sys_id=a02468771bbb31904ab887b8e34bcb3a) | For each environment, you need an instance of an application service that is operational. | ESM-Platform-CMDB-L2 | Resource Group Creation, Infrastructure request |
-| Resource Group + Service principal | [Hosting portal](https://myhosting.gsk.com/cloud-onboarding/azure-resource-groups/overview) | In order to have the service principal and resources associated with the project (outside the DevKit), you need to request a resource group on Azure and a service principal. The Resource group is provisioned with the key vault and the service principal. These 2 things are required for the AIGA starter to create an AIGA project from the AIGA template. | | Infrastructure request, AIGA starter |
-| AD Group | [Sailpoint](https://myapps.gsk.com/identityiq/workitem/workItems.jsf#/workItems) | In order to give access to the developers access to the infrastructure, you need an AD group RW for dev. Make sure that you create a ticket to link the AD group to the RG by requesting a [Tech Service](https://servicenow.gsk.com/home?id=sc_cat_item&sys_id=0e6a06bcdb5ce4506233d25cd3961932) assigned to *SCDT - DA Platform Product Support Service*. In the description request *RG reader* and *Key vault contributor*| | Infrastructure request |
-| AIGA Users team | [GitHub](https://github.com/orgs/gsk-tech/teams/aiga-users) | In order to be able to work with the AIGA Starter (i.e. trigger the Start AIGA Project Action) you would need to be in the gsk-tech GitHub team AIGA Users that is authorised to the repository.| | AIGA Starter |
+| Entity  | Description |
+| -------- | ---- |
+| Resource Group + Service principal  | These 2 things are required for the AIGA starter to create an AIGA project from the AIGA template. |
+| AIGA Users team | In order to be able to work with the AIGA Starter (i.e. trigger the Start AIGA Project Action) you would need to be in the GitHub team [AIGA Users](https://github.com/orgs/commercial-software-engineering/teams/aiga-users) that is authorised to the repository.|
 
 ## Steps to set up a new project
 
-1. **Request to be added to the AIGA Users team**: Go to the [GitHub team](https://github.com/orgs/gsk-tech/teams/aiga-users) and request to be added to the team by selecting the "Request to join" button. This will allow you to trigger the "Create AIGA Project" workflow in the AIGA Starter repository.
+1. **Request to be added to the AIGA Users team**: Go to the [GitHub team](https://github.com/orgs/commercial-software-engineering/teams/aiga-users) and request to be added to the team by selecting the "Request to join" button. This will allow you to trigger the "Create AIGA Project" workflow in the AIGA Starter repository.
 
-1. **Request a new project**: Go to GitHub Actions of [AIGA-starter](https://github.com/gsk-tech/AIGA-Starter) and run the "Create AIGA Project" workflow with chosen parameters (you need a service principal and a key vault). This will create a new repository and infrastructure artefacts based on the AIGA reference architecture. AIGA gets all its environment variables from the key vault.
-
-1. **Submit ARB1**: Fill in the accountability report. In order to be compliant, you need to fill the accountability report and get it approved, before starting an AI project. Check out our [tips](/docs/design/ai-evaluation.md) on how to fill in the accountability report.
-
-1. **Submit infrastructure requests**: Verify the Excel infrastructure request forms and submit them within the GenAI Dev Kit request form and via a [Tech service request](https://servicenow.gsk.com/home?id=sc_cat_item&sys_id=0e6a06bcdb5ce4506233d25cd3961932) for the PSC team  assigned to *SCDT - DA Platform Product Support Service*. Use the [template](/docs/design/assets/Infrastructure%20Request%20Form%20AIGA%20v0.1.xlsx) and only update the yellow boxes with your AD group and service principal.
-
-1. **Approval from EA**: You need [approval from EA](https://myconnect.gsk.com/:w:/r/sites/modern-enterprisearchitecture/_layouts/15/Doc.aspx?sourcedoc=%7B8F9134AD-D7BD-4324-A27D-31D0B2F81FC4%7D&file=EA%20Generative%20AI%20Use%20Case%20Process%20&%20Operating%20Model.docx=&action=default&mobileredirect=true) to get started, especially if you have a higher risk or CSI data in your project.
-
-1. **Request a Devkit**: You will need to request a [DevKit](https://servicenow.gsk.com/home?id=sc_cat_item&table=sc_cat_item&sys_id=17c151861bc98254269687b8e34bcb40) to get the part of the resources provisioned (see the architecture pattern for more information on which resources are provisioned through the DevKit). Fill in the information in the Devkit according to your architecture pattern needs.
-![devkit](./assets/devkit.png)
-While filling the devkit, don't forget to add your key vault and service principal.
-Attach the following [file](/docs/design/assets/devkit_roles.yaml) to your devkit, that is the system access plan and add extra information for tagging of the resources.
-
-The Code orange team will fill in the [secrets and environment variables](/docs/onboarding/github-secrets.md) directly in the keyvault and AIGA is setup to capture them in the CI and CD pipelines automatically.
-
-1. **Submit infrastructure requests**: Verify the Excel infrastructure request forms and submit via a [Tech service request](https://servicenow.gsk.com/home?id=sc_cat_item&sys_id=0e6a06bcdb5ce4506233d25cd3961932) for the PSC team  assigned to *SCDT - DA Platforms--Service*.
-   1. *Setup permissions for the infrastructure**:
-         [See this page](getting-started.md) to request and set up all required permissions for the
-         service principle/managed identity/AD token, so the resources will be able to
-         communicate properly.
-![request](https://github.com/gsk-tech/AIGA/blob/main/docs/onboarding/assets/requestInfrastructure.png)
+1. **Request a new project**: Go to GitHub Actions of [AIGA-starter](https://github.com/commercial-software-engineering/AIGA-Starter) and run the "Create AIGA Project" workflow with chosen parameters (you need a service principal and a key vault). This will create a new repository and infrastructure artefacts based on the AIGA reference architecture. AIGA gets all its environment variables from the key vault.
 
 1. **Set up your AIGA Project**: Configure your AIGA Project repository by following the instructions in the [developer guide](/docs/contributing/developer-guide.md).
 
@@ -55,9 +32,9 @@ The Code orange team will fill in the [secrets and environment variables](/docs/
 
 ## The included artefacts
 
-Once you have followed the above steps, the following artefacts will be provisioned by Code Orange and PSC tech teams:
+Once you have followed the above steps, the following artefacts will be provisioned :
 
-- **Infrastructure artefacts based on AIGA [reference architecture](../design/reference-architecture.md)**: A set of infrastructure artefacts including architecture documentation that can be used for ARB1, pre-filled Excel infrastructure request forms, and instructions on how to fill out the GenAI Dev Kit request form.
+- **Infrastructure artefacts based on AIGA [reference architecture](../design/reference-architecture.md)**: A set of infrastructure artefacts including architecture documentation that can be used for review board, and IaC.
 
 Once you request a new project using the AIGA Starter, the following artefacts will be generated:
 
@@ -74,13 +51,13 @@ The following personas are involved in the AIGA project setup:
 1. **Product Manager and End Users**: Use AIGA to scope and define the project objectives and success criteria, as well as requirements.
 
 1. **Architects and Gen AI Engineer**:
-Use AIGA Reference Architecture to design the product architecture and go through ARB1. Use AIGA Request to request the provisioning of a Code Orange Gen AI Dev Kit and other infrastructure required for the project.
+Use AIGA Reference Architecture to design the product architecture and go through review board.
 
 1. **Data Scientist, Gen AI Engineers and End Users (SME)**: Use the AIGA Project repository to experiment, build and evaluate their GenAI application and fine tune is to their expectations.
 
 1. **Gen AI Engineer**: Use the AIGA Starter to instantiate a project repository from the AIGA Template and industrialise their Gen AI Project.
 
-1. **Product Manager**: Use the project documentation to go through ARB2 during industrialization and supervise MLOps gates into production.
+1. **Product Manager**: Use the project documentation to go through review board during industrialization and supervise MLOps gates into production.
 
 1. **L3 Support**: Maintains the Application based on SME's feedback and migration plans.
 
@@ -97,7 +74,7 @@ Maintainers have full access to their repositories and are able to manage code, 
 - **AIGA Maintainer**: Maintains the AIGA repository.
 - **AIGA Starter Maintainer**: Maintains the AIGA-Starter repository.
 
-> Add a maintainer to the repository by adding them to the [AIGA Collaborators list](https://github.com/gsk-tech/AIGA/settings/access) or to [AIGA-Starter Collaborators list](https://github.com/gsk-tech/AIGA-Starter/settings/access) with an admin role.
+> Add a maintainer to the repository by adding them to the [AIGA Collaborators list](https://github.com/commercial-software-engineering/AIGA/settings/access) or to [AIGA-Starter Collaborators list](https://github.com/commercial-software-engineering/AIGA-Starter/settings/access) with an admin role.
 
 ### Contributors
 
@@ -106,7 +83,7 @@ Contributors have access to their repositories and are able to contribute to the
 - **AIGA Contributor**: Contributes to the AIGA repository.
 - **AIGA Starter Contributor**: Contributes to the AIGA-Starter repository.
 
-> Add a contributor to the repository by adding them to the [AIGA Collaborators list](https://github.com/gsk-tech/AIGA/settings/access) or to [AIGA-Starter Collaborators list](https://github.com/gsk-tech/AIGA-Starter/settings/access) with a write role.
+> Add a contributor to the repository by adding them to the [AIGA Collaborators list](https://github.com/commercial-software-engineering/AIGA/settings/access) or to [AIGA-Starter Collaborators list](https://github.com/commercial-software-engineering/AIGA-Starter/settings/access) with a write role.
 
 ### Users
 
@@ -114,4 +91,4 @@ Users can trigger actions and use the AIGA-Starter repository. This includes:
 
 - **AIGA Starter User**: Triggers actions and uses the AIGA-Starter repository.
 
-> Add an AIGA Starter User by adding them to the [AIGA-Users team](https://github.com/orgs/gsk-tech/teams/aiga-users)
+> Add an AIGA Starter User by adding them to the [AIGA-Users team](https://github.com/orgs/commercial-software-engineering/teams/aiga-users)

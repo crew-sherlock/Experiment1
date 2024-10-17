@@ -3,8 +3,8 @@
 ## Context
 
 An AIGA reference architecture is a blueprint for the design and implementation of a Gen AI product.
-It is a set of Azure services and components and their interactions that are used to build a Gen AI product, mapped to a Code Orange Gen AI Dev Kit.
-The reference architecture is a starting point for designing and implementing a Gen AI product and is pre-approved by the GSC Architecture team to facilitate the acceleration of Gen AI product development through ARB1 and ARB2.
+It is a set of Azure services and components and their interactions that are used to build a Gen AI product.
+The reference architecture is a starting point for designing and implementing a Gen AI product and is pre-approved by the Architecture team to facilitate the acceleration of Gen AI product development through the review boards.
 
 The reference architecture for a Gen AI product is based on the [Microsoft baseline architecture for GenAI products](https://learn.microsoft.com/en-us/azure/architecture/ai-ml/architecture/baseline-openai-e2e-chat) and extends it to generalise it for any Gen AI product.
 
@@ -18,11 +18,7 @@ The following are two reference architectures for a Gen AI product that differ o
 
 ### Components
 
-``` fenced
-Note that the background colour of the components indicates the service node they belong to, orange background refers to Code Orange Node and grey background refers to PSC Tech Node.
-```
-
-- **ADLS Azure Storage and Azure SQL (Code Orange ADLS):** Used for input data including doc-Store (ADLS), doc-store metadata (ADLS) and job metadata (SQL) originating from GSC data sources through the Code Orange data pipeline. These depend on interface CI ID S238623023 (SCDT D&A Data Replication Framework (ADF))
+- **ADLS Azure Storage and Azure SQL:** Used for input data including doc-Store (ADLS), doc-store metadata (ADLS) and job metadata (SQL) originating from data sources through the data pipeline.
 
 - **Azure Storage (Persistence):** Used as an AML Datastore for storing datasets and *optionally* for caching of intermediate artifacts.
 
@@ -52,7 +48,7 @@ Note that the background colour of the components indicates the service node the
 
 ### Data Flow
 
-- Interface: Data is ingested into ADLS Azure Storage (doc-store and doc-store metadata) and Azure SQL (job metadata) (Code Orange ADLS) from GSC data sources through the Code Orange data pipeline.
+- Interface: Data is ingested into ADLS Azure Storage (doc-store and doc-store metadata) and Azure SQL (job metadata) from data sources through the data pipeline.
 
 1. Data is either batch or trigger-based processed in Azure Machine Learning Compute Instance.
 

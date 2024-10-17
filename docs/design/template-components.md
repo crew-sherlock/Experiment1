@@ -27,7 +27,7 @@ Each of these scenarios will leverage a shared Python module to minimise code du
 
 This implementation is designed to be modular and extensible, allowing developers to easily add new steps and components to the process.
 
-> Data Ingestion into Azure Storage is out of scope for the AIGA Template. For real-time, the application layer is responsible for uploading documents to Azure Blob Storage. For batch, the central ingestion teams (in Code Orange and PCS) is responsible for ingesting documents into the foundation layer.
+> Data Ingestion into Azure Storage is out of scope for the AIGA Template. For real-time, the application layer is responsible for uploading documents to Azure Blob Storage.
 
 **Repository location:** `src/document-loading`
 

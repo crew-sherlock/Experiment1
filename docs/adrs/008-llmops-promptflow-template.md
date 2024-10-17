@@ -112,7 +112,7 @@ Can be removed:
 
 To be done:
 
-- Replace Math Coding example with example using flowchart and matrices developed by Virginie's GSK team.
+- Have example using flowchart and matrices.
 - Docs folder needs to be organized with relevant content for us.
 - Create concrete use-case/example from existing templates.
 - Add tests to the specific example.
@@ -120,12 +120,10 @@ To be done:
 - The script to deploy the flow on AML endpoint is not working, need to verify it.
 - Replace Anaconda with Poetry.
 - Match the examples structure to the AIGA repository structure.
-- Update examples with changes that Virginie and GSK team already made to make them GSK ready.
+- Update examples with changes.
 - Verify the existing monitoring and logging which exists in the examples and that they match our [Observability ADR](007-observability-prompt-flow.md).
 - Examples were missing on helpers such as SQL helper blob helper etc. They should be used across evaluations.
   - We need to understand how we are going to manage and maintain those helpers in internal or external, a lib? package? etc.
-
-> Note: there is a GSK example for an experiment: MSAT-Quality-LOC-PPR-Promptflow see develop branch -> src
 
 ## Consequences
 
