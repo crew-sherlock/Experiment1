@@ -41,8 +41,8 @@ jobs:
       - name: Pre-build image for DevContainer
         uses: devcontainers/ci@v0.3
         with:
-          imageName: ghcr.io/gsk-tech/aiga
-          cacheFrom: ghcr.io/gsk-tech/aiga
+          imageName: ghcr.io/commercial-software-engineering/aiga
+          cacheFrom: ghcr.io/commercial-software-engineering/aiga
           push: always
 
   setup-env:
