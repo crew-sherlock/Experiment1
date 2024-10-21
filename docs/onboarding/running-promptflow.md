@@ -130,5 +130,9 @@ These are the models currently used in this repo
 
 | Model | Model deployment name | Provider | Version | Environment |
 | ----- | --------------------- | -------- | ------- | ----------- |
+| text-embedding-ada-002 | psc-msat-us6-text-embedding-ada-002-01 | OpenAI | 2 | dev |
+| gpt-4o | gpt-4o-2024-05-13 | OpenAI | 5/13/2024 | dev |
+| text-embedding-3-large | text-embedding-3-large | OpenAI | 1 | dev |
+| text-embedding-3-small | text-embedding-3-small | OpenAI | 1 | dev |
 
 Make sure you change the models' deployment names.

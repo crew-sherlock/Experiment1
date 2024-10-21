@@ -80,7 +80,8 @@
         "Op's",
         "Entra",
         "concat",
-        "CQAs"
+        "CQAs",
+        "msat"
     ],
     "version": "0.2"
 }
