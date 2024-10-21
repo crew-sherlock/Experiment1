@@ -68,12 +68,12 @@ The following are two reference architectures for a Gen AI product that differ o
 
 ## Multi-Environment Deployment
 
-The following diagram shows the deployment of the reference architecture across different environments (dev, uat, prod)
+The following diagram shows the deployment of the reference architecture across different environments (dev, test, prod)
 
 ![Image of Multiple Environment Deployment](assets/AIGA%20Multiple%20environment.svg)
 
 ### Shared Services
 
-- **Azure Container Registry:** A single Azure Container Registry is provisioned with AIGA reference architecture, and configuration is updated to use it for the Azure Machine Learning workspaces in all stages (Dev, UAT, Prod).
+- **Azure Container Registry:** A single Azure Container Registry is provisioned with AIGA reference architecture, and configuration is updated to use it for the Azure Machine Learning workspaces in all stages (Dev, Test, Prod).
 
-- **GitHub Actions:** GitHub Actions is used for CI/CD across the different stages (Dev, UAT, Prod).
+- **GitHub Actions:** GitHub Actions is used for CI/CD across the different stages (Dev, Test, Prod).

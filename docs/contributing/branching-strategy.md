@@ -27,7 +27,7 @@ There will be the `main` branch which everyone will checkout from for features/b
 The first approach can also be used for an AIGA project, but in the case the team is too large and the deployments are becoming too complex to follow, there is another option for an AIGA project.
 An AIGA Project will be deployed and operated in the different environments:
 
-Dev -> Test (UAT) -> Prod
+Dev -> Test -> Prod
 
 Taken from the second link:
 ![Branches purpose](../assets/branches_purpose.png)
