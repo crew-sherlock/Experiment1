@@ -4,7 +4,7 @@ title: "JIT Request"
 labels: ["jit"]
 assignees:
   - gimsvc_microsoft
-  -
+  - 
 body:
   - type: markdown
     attributes:
@@ -24,7 +24,5 @@ body:
       label: Duration (hours)
       description: How long do you need access for? The duration you select is in hours.
       options:
-        - 12
-        - 24
-        - 48
-        - 72
+        - 1
+        - 2
