@@ -13,7 +13,7 @@ resource: repository
 configuration:
   jitAccess:
     enabled: true
-    maxHours: 24
+    maxHours: 72
     approvers:
       role: write
     requestors:
