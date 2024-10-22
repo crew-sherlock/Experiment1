@@ -24,16 +24,12 @@ There will be the `main` branch which everyone will checkout from for features/b
 
 ## AIGA Project
 
-The first approach can also be used for an AIGA project, but in the case the team is too large and the deployments are becoming too complex to follow, there is another option for an AIGA project to use which is GSK aligned.
+The first approach can also be used for an AIGA project, but in the case the team is too large and the deployments are becoming too complex to follow, there is another option for an AIGA project.
 An AIGA Project will be deployed and operated in the different environments:
 
-Dev -> Test (UAT) -> Prod
-
-In line with [GSK standards](https://my-gsk.atlassian.net/wiki/spaces/RTE/pages/55346648/Branching+strategy), an AIGA Project repo will use a more feature-rich branching strategy. This strategy is also used in [GSK projects](https://my-gsk.atlassian.net/wiki/spaces/DVA/pages/26478692/Branching+Strategy+-+DVA+ODV+Hydra).
+Dev -> Test -> Prod
 
 Taken from the second link:
-
-![GSK Branching strategy](../assets/gsk_branching_strategy.png)
 ![Branches purpose](../assets/branches_purpose.png)
 
 At the core, the development model is inspired by existing approaches. The central repo holds two key branches with an infinite lifetime:

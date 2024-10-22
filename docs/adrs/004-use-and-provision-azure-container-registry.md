@@ -12,9 +12,9 @@ Azure Machine Learning workspace can be provisioned with an Azure Container Regi
 
 ## Decision
 
-We will provision an Azure Container Registry per AIGA environment, for the three environments (dev, uat, prod), and will use the single registry across all services (e.g. app services, functions, AML).
-This will allow for better management of the container images used across the services and will allow for better control of the images used in an AIGA environment across the different stages (Dev, UAT, Prod) and the AIGA services cost.
+We will provision an Azure Container Registry per AIGA environment, for the three environments (dev, test, prod), and will use the single registry across all services (e.g. app services, functions, AML).
+This will allow for better management of the container images used across the services and will allow for better control of the images used in an AIGA environment across the different stages (Dev, Test, Prod) and the AIGA services cost.
 
 ## Consequences
 
-A single Azure Container Registry is provisioned with AIGA reference architecture, and configuration is updated to use it for the Azure Machine Learning workspaces in all stages (Dev, UAT, Prod) and all the other AIGA services that are using containers.
+A single Azure Container Registry is provisioned with AIGA reference architecture, and configuration is updated to use it for the Azure Machine Learning workspaces in all stages (Dev, Test, Prod) and all the other AIGA services that are using containers.

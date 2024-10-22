@@ -6,10 +6,10 @@ This guide will walk you through running a full E2E experiment and evaluation fl
 
 ### Environment variables
 
-Create a copy of the file [.env.example](https://github.com/gsk-tech/AIGA/blob/main/config/.env.example) as a .env file in the root.
+Create a copy of the file [.env.example](https://github.com/commercial-software-engineering/AIGA/blob/main/config/.env.example) as a .env file in the root.
 Fill all the params in the .env file.
 
-To run the environment, you can either use VSCode and the dev container supplied [in here](https://github.com/gsk-tech/AIGA/tree/main/.devcontainer)
+To run the environment, you can either use VSCode and the dev container supplied [in here](https://github.com/commercial-software-engineering/AIGA/tree/main/.devcontainer)
 or
 install the environment [using poetry](https://python-poetry.org/docs/#installation) by running:
 
@@ -63,7 +63,7 @@ az login --use-device-code
 ### Local or Remote Execution
 
 Choose the execution mode by setting the EXECUTION_TYPE variable for the LLMOPS package.
-The file [config.py](https://github.com/gsk-tech/AIGA/blob/main/llmops/config.py), located in the 'llmops' directory, has a single variable called EXECUTION_TYPE that can be set to either 'LOCAL' or 'AZURE'. The default value is 'AZURE'.
+The file [config.py](https://github.com/commercial-software-engineering/AIGA/blob/main/llmops/config.py), located in the 'llmops' directory, has a single variable called EXECUTION_TYPE that can be set to either 'LOCAL' or 'AZURE'. The default value is 'AZURE'.
 
 ### Set trace configuration
 

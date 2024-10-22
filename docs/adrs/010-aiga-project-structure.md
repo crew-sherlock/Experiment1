@@ -83,7 +83,7 @@ We would suggest starting with two repositories:
 - Template repository - Artefact which forms the basis of an AIGA project.
 - Starter repository - Artefacts related to the wizard and starting with the AIGA project.
 
-Each repository should have [Branch protection](https://my-gsk.atlassian.net/wiki/spaces/TECHSR/pages/207456276/How+to+apply+branch+protection+in+GitHub).
+Each repository should have [Branch protection](https://docs.github.com/en/repositories/configuring-branches-and-merges-in-your-repository/managing-protected-branches/managing-a-branch-protection-rule).
 
 ## Action items
 

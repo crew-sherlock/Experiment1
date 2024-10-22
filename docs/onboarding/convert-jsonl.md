@@ -2,7 +2,7 @@
 
 ## Purpose
 
-The primary purpose of the [script](https://github.com/gsk-tech/AIGA/blob/main/llmops/common/jsonl_converter.py) is to:
+The primary purpose of the [script](https://github.com/commercial-software-engineering/AIGA/blob/main/llmops/common/jsonl_converter.py) is to:
 
 1. Enable users to easily convert JSONL data to a more user-friendly Excel format for sharing it with business users.
 2. Allow users to convert Excel data back into JSONL format so that we can input the same for promptflow evaluation.
@@ -11,7 +11,7 @@ The primary purpose of the [script](https://github.com/gsk-tech/AIGA/blob/main/l
 
 1. Test Case Collection: The business provides the test cases in an Excel file.
 2. Data Transformation: We transform the Excel file into a .jsonl file format.
-3. Pipeline Application: The transformed .jsonl file is processed through the [prompt pipeline](https://github.com/gsk-tech/AIGA/blob/main/llmops/common/prompt_pipeline.py).
+3. Pipeline Application: The transformed .jsonl file is processed through the [prompt pipeline](https://github.com/commercial-software-engineering/AIGA/blob/main/llmops/common/prompt_pipeline.py).
 4. Output Generation: The pipeline generates an AI output, which is saved as ai-generated.csv in the report folder.
 5. Business Review: The ai-generated.csv is shared with the business for review.
 6. Feedback Integration: Once the business rates all entries as 4 or 5, we transform the ai-generated.csv back into a .jsonl file.

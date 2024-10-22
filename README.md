@@ -1,8 +1,8 @@
 # AI Generation Accelerator (AIGA)
 
-![Release Status](https://github.com/gsk-tech/AIGA/actions/workflows/create-release.yml/badge.svg?branch=main)
-![Promptflow CI Status](https://github.com/gsk-tech/AIGA/actions/workflows/promptflow-ci-workflow.yml/badge.svg?branch=main)
-![Promptflow CD Status](https://github.com/gsk-tech/AIGA/actions/workflows/promptflow-cd-workflow.yml/badge.svg?branch=main)
+![Release Status](https://github.com/commercial-software-engineering/AIGA/actions/workflows/create-release.yml/badge.svg?branch=main)
+![Promptflow CI Status](https://github.com/commercial-software-engineering/AIGA/actions/workflows/promptflow-ci-workflow.yml/badge.svg?branch=main)
+![Promptflow CD Status](https://github.com/commercial-software-engineering/AIGA/actions/workflows/promptflow-cd-workflow.yml/badge.svg?branch=main)
 
 The **AI Generation Accelerator (AIGA)** provides a repeatable framework for building standardised LLM applications. It is intended to accelerate the delivery of value by:
 
@@ -16,13 +16,13 @@ The AI Generation Accelerator (AIGA) will comprise a collection of artefacts, pr
 
 ## Set up guide for AIGA
 
-We have created the [AIGA Starter](https://github.com/gsk-tech/AIGA-Starter) to help you set up a new project using the AIGA template. The AIGA Starter will generate the necessary artefacts to get you started with your Generative AI project - this includes pre-approved architecture and code repositories. If you are looking to get started, check out the [setup guide](./docs/onboarding/setup-guide.md).
+We have created the [AIGA Starter](https://github.com/commercial-software-engineering/AIGA-Starter) to help you set up a new project using the AIGA template. The AIGA Starter will generate the necessary artefacts to get you started with your Generative AI project - this includes pre-approved architecture and code repositories. If you are looking to get started, check out the [setup guide](./docs/onboarding/setup-guide.md).
 
 ## AIGA Components
 
 ## AIGA Reference Architecture
 
-A high-level repeatable blueprint for building the infrastructure of a Generative AI applications. The architecture and components described will be pre-approved as an *Architecture Pattern* within GSC (Global Supply Chain) to expedite ARB approval for new projects.
+A high-level repeatable blueprint for building the infrastructure of a Generative AI applications. The architecture and components described will be pre-approved as an *Architecture Pattern* within your organisation to expedite review-board approval for new projects.
 
 ## AIGA Template
 
@@ -33,18 +33,18 @@ A Git repository template designed to bootstrap and facilitate building, evaluat
 - The template will contain documentation artefacts:
   - **Contribution Guides** [*(CONTRIBUTING.md)*](./CONTRIBUTING.md) - To support the contribution of code, documentation, and other artefacts to the **template**.
   - **Getting Started Guides** - To support the project team get up and running with their *AIGA Project*.
-  - **Project Documentation** - To support the project lifecycle, along with artefacts to expedite ARB approval and infrastructure requests.
+  - **Project Documentation** - To support the project lifecycle, along with artefacts to expedite review-board approval and infrastructure provisioning.
 - The template will include [workspace settings](https://code.visualstudio.com/docs/getstarted/settings#_workspace-settings) for VSCode, support for [Dev Containers](https://code.visualstudio.com/docs/devcontainers/containers), and [pipelines](https://learn.microsoft.com/en-us/azure/devops/pipelines/get-started/what-is-azure-pipelines) for CI/CD.
 
 The template structure is defined in [ADR-002](./adrs/002-code-repository-structure.md).
 
-### [AIGA Starter](https://github.com/gsk-tech/AIGA-Starter)
+### [AIGA Starter](https://github.com/commercial-software-engineering/AIGA-Starter)
 
 A tool, or collection of processes, that will capture key project information and orchestrate the creation of an *AIGA Project*, based on an *AIGA Template*.
 
 ### AIGA Project
 
-A project-specific instance created by the *AIGA Starter*. An *AIGA Project* is scoped to a project and has a one-to-one relationship with a *CIID*. It encapsulates a project-owned repository, along with the necessary code, automation, and documentation to support the project. Once created the *AIGA Project* will be owned by the product team.
+A project-specific instance created by the *AIGA Starter*. An *AIGA Project* is scoped to a project. It encapsulates a project-owned repository, along with the necessary code, automation, and documentation to support the project. Once created the *AIGA Project* will be owned by the product team.
 
 #### Environments
 

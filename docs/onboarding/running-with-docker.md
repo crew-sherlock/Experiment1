@@ -6,13 +6,13 @@ AIGA provides support to run PromptFlow inference flows in a Docker container. T
 
 As you extend the capabilities of the PromptFlow application, it may be required to update some key Docker files. The following files are notable components of the Docker configuration:
 
-- [Dockerfile](https://github.com/gsk-tech/AIGA/blob/main/docker/Dockerfile): Contains the instructions to build the Docker image for the PromptFlow application.
+- [Dockerfile](https://github.com/commercial-software-engineering/AIGA/blob/main/docker/Dockerfile): Contains the instructions to build the Docker image for the PromptFlow application.
   - New dependencies can be added to the `Dockerfile` to support additional use cases.
   - Additional resources/assets can be copied into the Docker image.
-- [docker-compose.yml](https://github.com/gsk-tech/AIGA/blob/main/docker/docker-compose.yml): Defines the services, networks, and volumes for the PromptFlow application stack.
+- [docker-compose.yml](https://github.com/commercial-software-engineering/AIGA/blob/main/docker/docker-compose.yml): Defines the services, networks, and volumes for the PromptFlow application stack.
   - Default build arguments can be specified in the `docker-compose.yml` file.
   - Runtime environment variables can be defined in the `docker-compose.yml` file.
-- [run](https://github.com/gsk-tech/AIGA/blob/main/docker/runit/promptflow-serve/run): The `run` script is used to start the PromptFlow application in the Docker container.
+- [run](https://github.com/commercial-software-engineering/AIGA/blob/main/docker/runit/promptflow-serve/run): The `run` script is used to start the PromptFlow application in the Docker container.
   - Additional PromptFlow connections can be added to the `run` script.
 
 ## Prerequisites

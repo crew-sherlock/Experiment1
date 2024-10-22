@@ -6,10 +6,10 @@ Follow these steps to set up and run the `aml_pipeline.py` script. This script s
 
 1. **Create a `.env` file**:
    - Create a `.env` file in your project root directory.
-   - Populate it with the necessary values as specified in the [`.env.example`](https://github.com/gsk-tech/AIGA/blob/main/config/.env.example) file.
+   - Populate it with the necessary values as specified in the [`.env.example`](https://github.com/commercial-software-engineering/AIGA/blob/main/config/.env.example) file.
 
 1. **Modify the `.aml_pipeline_config.json` file**:
-   - Modify the [`.aml_pipeline_config.json`](https://github.com/gsk-tech/AIGA/blob/main/src/document_loading/aml_pipeline_config.json) file located in the `src/document_loading` folder.
+   - Modify the [`.aml_pipeline_config.json`](https://github.com/commercial-software-engineering/AIGA/blob/main/src/document_loading/aml_pipeline_config.json) file located in the `src/document_loading` folder.
 
    ```json
    {

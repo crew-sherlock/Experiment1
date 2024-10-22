@@ -10,7 +10,7 @@ An AIGA Project can configure the behaviour of the repository workflows by setti
 
 - `DEPLOYMENT_TARGET` - The Azure service to target for inference deployment - "aml", "webapp" or "both"
 - `PROMPTFLOW_BASE_PATH` - The base path for the PromptFlow directory. E.g. "promptflow"
-- `DEFAULT_ENVIRONMENT` - The default environment that the repository targets. **Note:** This variable is used in continuously running workflows such as PR, CI, CD and typically is set to the playground environment. It is overridden when running the pipelines manually to target a specific environment (i.e. `dev`, `uat`, `prod`), by setting the `environment` variable.
+- `DEFAULT_ENVIRONMENT` - The default environment that the repository targets. **Note:** This variable is used in continuously running workflows such as PR, CI, CD and typically is set to the playground environment. It is overridden when running the pipelines manually to target a specific environment (i.e. `dev`, `test`, `prod`), by setting the `environment` variable.
 
 ## Environment Variables
 
@@ -18,4 +18,4 @@ Environment Variables are used within AIGA to control which resources are used b
 
 The following Environment Variables are required as a pre-requisite for AIGA:
 
-- `KEY_VAULT_NAME` - should point to the Azure Key Vault associated with Code Orange GenAI Dev Kit.
+- `KEY_VAULT_NAME` - should point to the Azure Key Vault associated with the environment.

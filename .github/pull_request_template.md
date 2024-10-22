@@ -28,7 +28,7 @@
 * Get the code
 
 ```cmd
-git clone https://github.com/gsk-tech/AIGA.git
+git clone https://github.com/commercial-software-engineering/AIGA.git
 cd AIGA
 pip install poetry poetry-plugin-export
 make setup

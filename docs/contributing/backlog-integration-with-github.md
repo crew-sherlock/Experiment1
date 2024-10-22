@@ -9,7 +9,7 @@ Once you connect your Azure Boards project with a GitHub repository, you can lin
 ## Getting your AzDo board set up with github
 
 - In your project board (you need to be an administrator), go to Project settings.
-- Click on Github connections > New connection > Connect to your github account > Select the GitHub organisation *gsk-tech*.
+- Click on Github connections > New connection > Connect to your github account > Select the GitHub organisation *commercial-software-engineering*.
 - Choose one or more repositories to be linked with your project.
 
 ## Action items / Quick guidelines for development

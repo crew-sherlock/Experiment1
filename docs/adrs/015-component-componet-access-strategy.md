@@ -14,8 +14,8 @@ act as an input for automated infra provisioning.
 
 ## Decision
 
-Below are the list of access details that are reviewed and accepted by SCDT D&A
-Architecture Team, PSC Platform Team and Code Orange Team. The following access details
+Below are the list of access details that are reviewed and accepted by the
+Architecture and Infrastructure Teams. The following access details
 would be captured as standard access mechanism during the infra provisioning which will
 reduce the discussions on the access provisioning.
 

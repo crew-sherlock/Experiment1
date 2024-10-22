@@ -14,7 +14,7 @@ The orchestration would involve, but is not be limited to:
 
 - Creating a new repository
 - Setting up the necessary CI/CD pipelines
-- Submitting the necessary requests for infrastructure provisioning
+- Infrastructure provisioning
 - Configuring access to the necessary services
 - Producing documentation
 
@@ -24,7 +24,7 @@ This ADR is intended to capture the options available and the decision made for 
 
 > **Note:** The following options do not address the specifics of the *Starter* tool, but rather options for the underlying process for creating an *AIGA Project*. It is also possible that a combination of these options could be used.
 
-1. **Manual**: The *Starter* could document a set of instructions for creating an *AIGA Project* manually. These instructions could be distributed across multiple teams in Global Supply Chain, and could be integrated into existing processes. However, this would be error-prone and time-consuming. The process could be triggered via a ServiceNow ticket.
+1. **Manual**: The *Starter* could document a set of instructions for creating an *AIGA Project* manually. These instructions could be distributed across multiple teams in the organisation, and could be integrated into existing processes. However, this would be error-prone and time-consuming. The process could be triggered via a ServiceNow ticket.
 
     ![Manual](../assets/starter/manual.svg)
 
@@ -77,7 +77,7 @@ This decision was made based on the following factors:
 
 The following consequences are expected as a result of this decision:
 
-- GitHub Actions are limited to "Allow enterprise, and select non-enterprise, actions and reusable workflows" in the GSK organisation.
+- GitHub Actions are limited to "Allow enterprise, and select non-enterprise, actions and reusable workflows" in the organisation.
 - Although unlikely, it may be necessary to develop custom actions to support the creation of an *AIGA Project*.
 - *AIGA Project* requests will require the requester to have 'contribute' permissions on the `AIGA-Starter` repository.
 - Consideration should be made for portability of the orchestration, and where possible, avoid locking into GitHub Actions specific features.

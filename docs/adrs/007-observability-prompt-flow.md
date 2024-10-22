@@ -20,7 +20,7 @@ The key areas to be addressed within this ADR are as follows:
 
 The ultimate output of this initiative is to have a robust observability framework in place, leveraging Application Insights (App Insights), monitoring frameworks (e.g. MLFlow, OpenTelemetry), and other relevant technologies to provide a clear and actionable view of the system's health and performance.
 
-Code Orange is strongly recommending the use of MLFlow registration for model and experiment for projects using the CO infra across all platforms (AML, Databricks, Domino), for an enterprise-wide tracing of the models being deployed. This however does not preclude the use of OpenTelemetry and App Insights for observability in Prompt Flow. If any metrics are to be captured in MLFlow, this will require additional development effort to integrate MLFlow with OpenTelemetry and App Insights. For the initial implementation, we will focus on using OpenTelemetry and App Insights for observability and MLFlow for model registration and experiment tracking.
+MLFlow can be used for registration for model and experiment for projects using the the infra across all platforms, for an enterprise-wide tracing of the models being deployed. This however does not preclude the use of OpenTelemetry and App Insights for observability in Prompt Flow. If any metrics are to be captured in MLFlow, this will require additional development effort to integrate MLFlow with OpenTelemetry and App Insights. For the initial implementation, we will focus on using OpenTelemetry and App Insights for observability and MLFlow for model registration and experiment tracking.
 
 ## Decisions
 

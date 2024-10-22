@@ -4,7 +4,7 @@ on:
   workflow_call:
     inputs:
       environment:
-        description: "The environment to run the workflow with (playground, dev, uat, prod)"
+        description: "The environment to run the workflow with (playground, dev, test, prod)"
         type: string
         required: true
     secrets:

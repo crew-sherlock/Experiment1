@@ -23,7 +23,7 @@ The requirements for the processing component are as follows:
 1. Embeddings: The system should be able to vectorise documents chunks, or any other relevant information from the document, into embeddings using pre-trained embedding models. The strategy for creating embeddings should be configurable and use integrated vectorisation within Azure AI Search. It should allow for use of Azure OpenAI embedding models as well as custom embedding models.*
 1. Indexing: The system should be able to store the documents and their embeddings in an index, specifically Azure AI Search. The schema index should include the fields from metadata and the properties of each field e.g. searchable, filterable, retrievable etc. Schema should be codified in a  configuration file, index should be rebuilt when the schema is updated.
 1. Authentication: The system should use the service principal to authenticate to Azure AI Search and token-based authentication to the LLM Gateway.
-1. Index Versioning: The system should be able to rebuild the index when the blob is updated - this includes when a document is added, removed or updated. This feature ensures that the index is always up-to-date with the source data. The code for the removal functionality has been implemented in a [previous project](https://github.com/gsk-tech/MSAT-Quality-LOC-PPR/blob/develop/backend/app/api/internals/filestrategy.py) and can be reused.
+1. Index Versioning: The system should be able to rebuild the index when the blob is updated - this includes when a document is added, removed or updated. This feature ensures that the index is always up-to-date with the source data.
 1. Traceability: The system should be able to register the processed documents list and the methods used for processing them. Moreover, it should keep track of any unsuccessfully processed documents and the reasons for failure. This is for traceability and reproducibility purposes.
 1. Evaluation: Once the index is rebuilt, it should trigger the evaluation pipeline and use the golden dataset to evaluate the quality of the embeddings.
 1. Extensibility: The system should be able to easily add new steps and components to the process. This includes the ability to add new skills to the pipeline e.g. translation, summarisation, key word extraction.*
@@ -58,5 +58,3 @@ MVP will NOT include (marked with * above):
 ## Additional Resources
 
 The following AML pipeline code can be used as a reference:
-
-- [GSC-GenAI-curriculum repository](https://github.com/gsk-tech/GSC-GenAI-curriculum/tree/vqd_metadata) and [walkthrough](https://mydrive.gsk.com/personal/virginie_x_marelli_gsk_com/_layouts/15/stream.aspx?id=%2Fpersonal%2Fvirginie%5Fx%5Fmarelli%5Fgsk%5Fcom%2FDocuments%2FRecordings%2FVQD%20pipeline%20%2D%20technical%20deep%20dive%2D20240731%5F090142%2DMeeting%20Recording%2Emp4&referrer=StreamWebApp%2EWeb&referrerScenario=AddressBarCopied%2Eview%2E907a232f%2Da02d%2D402a%2Da2cb%2Dae620e8dd1d6) for the VQD pipeline.
