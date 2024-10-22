@@ -15,6 +15,6 @@ configuration:
   - member: martynam
     role: Maintain
   - member: shiranrubin
-    role: Write
+    role: Maintain
   - member: virahnwalia
     role: Maintain
