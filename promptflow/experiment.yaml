@@ -1,5 +1,5 @@
 name: aiga_experiment
-flow: inference
+flow: Experiment1_inference
 
 datasets:
 - name: aiga
@@ -12,7 +12,7 @@ datasets:
 
 evaluators:
 - name: aiga_evaluators
-  flow: evaluation
+  flow: Experiment1_evaluation
   datasets:
   - name: aiga_test
     reference: aiga
